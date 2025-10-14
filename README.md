@@ -1,5 +1,5 @@
 # 👗 Elite Couture — Tienda de Moda
-### Proyecto Académico Android
+## Proyecto Académico Android
 
 **Elite Couture** es una aplicación móvil académica desarrollada para Android, que simula el funcionamiento de una tienda de ropa moderna.  
 El proyecto tiene como objetivo aplicar principios de desarrollo móvil nativo con **Android SDK y Gradle**, integrando posteriormente funciones de **registro, login y gestión CRUD de productos**.
@@ -90,5 +90,3 @@ MIT — libre para uso educativo.
 ---
 
 > *“Elite Couture no es solo moda, es el arte de compilar estilo.”*
-
-```
