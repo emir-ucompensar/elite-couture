@@ -1,0 +1,24 @@
+# Android / Gradle
+.gradle/
+build/
+*/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VSCode
+.vscode/
+
+# Local config
+local.properties
+.DS_Store
+
+# Logs / APKs
+*.log
+*.apk
+*.aab
+release/
