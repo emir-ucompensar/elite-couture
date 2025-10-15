@@ -143,8 +143,9 @@
         android:textAllCaps="false"
         android:textSize="16sp"
         android:layout_marginTop="32dp"
-        android:backgroundTint="@color/color_primary"
+        android:backgroundTint="@color/button_primary"
         android:textColor="@color/text_primary_light"
+        app:rippleColor="@color/button_primary_pressed"
         app:cornerRadius="8dp" />
 
     <!-- Separador "o" -->

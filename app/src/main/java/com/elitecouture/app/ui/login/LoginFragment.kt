@@ -66,11 +66,8 @@ class LoginFragment : Fragment() {
         }
 
         registerTab.setOnClickListener {
-            // Cambiar colores para indicar tab seleccionado
-            registerTab.setTextColor(resources.getColor(R.color.color_primary, null))
-            loginTab.setTextColor(resources.getColor(R.color.text_hint, null))
-            // Aquí podrías mostrar el formulario de registro
-            Toast.makeText(context, "Cambiando a registro...", Toast.LENGTH_SHORT).show()
+            // Navegar al fragmento de registro
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         loginTab.setOnClickListener {

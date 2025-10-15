@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--    PALETA PRINCIPAL   -->
-    <color name="color_primary">#AE1239</color>         <!-- Rojo principal para botones y elementos principales -->
-    <color name="color_primary_light">#E65C7B</color>   <!-- Rojo claro para hover y estados activos -->
-    <color name="color_primary_dark">#8C0E2E</color>    <!-- Rojo oscuro para estados presionados -->
+    <color name="color_primary">#560E2D</color>         <!-- Rojo principal para elementos principales -->
+    <color name="color_primary_light">#E65C7B</color>   <!-- Rojo claro para estados activos -->
+    <color name="color_primary_dark">#3F0D23</color>    <!-- Rojo oscuro para estados presionados -->
+    
+    <!--    PALETA DE BOTONES   -->
+    <color name="button_primary">#B4213B</color>        <!-- Color principal para botones CTA -->
+    <color name="button_primary_pressed">#931C31</color><!-- Estado presionado de botones -->
+    <color name="button_primary_disabled">#D88D9A</color><!-- Estado deshabilitado de botones -->
     
     <!--    PALETA DE ACENTOS   -->
     <color name="accent_red">#D81B60</color>           <!-- Acento rojo para elementos destacados -->
