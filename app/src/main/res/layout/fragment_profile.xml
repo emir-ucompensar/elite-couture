@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Contenido -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Sección de Información Personal -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/surface_light"
+                android:padding="16dp"
+                android:elevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Información Personal"
+                        android:textColor="@color/text_primary_dark"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/edit_profile_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@android:drawable/ic_menu_edit"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:tint="@color/color_primary"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+                <!-- Campos de información -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sofia"
+                        android:textColor="@color/text_primary_dark"
+                        android:textSize="16sp"
+                        android:layout_marginTop="4dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apellido"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/profile_lastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Martinez"
+                        android:textColor="@color/text_primary_dark"
+                        android:textSize="16sp"
+                        android:layout_marginTop="4dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Correo electrónico"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/profile_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="sofia.martinez@email.com"
+                        android:textColor="@color/text_primary_dark"
+                        android:textSize="16sp"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Sección de Acciones Rápidas -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/surface_light"
+                android:padding="16dp"
+                android:layout_marginTop="24dp"
+                android:elevation="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Acciones Rápidas"
+                    android:textColor="@color/text_primary_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Botones de acciones -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/favorites_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mis Favoritos"
+                        android:textAlignment="textStart"
+                        android:paddingVertical="12dp"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        app:icon="@android:drawable/btn_star"
+                        app:iconTint="@color/color_primary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/purchase_history_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Historial de Compras"
+                        android:textAlignment="textStart"
+                        android:paddingVertical="12dp"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        app:icon="@android:drawable/ic_menu_recent_history"
+                        app:iconTint="@color/color_primary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Configuración"
+                        android:textAlignment="textStart"
+                        android:paddingVertical="12dp"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        app:icon="@android:drawable/ic_menu_manage"
+                        app:iconTint="@color/color_primary" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Botones de acción principales -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/save_changes_button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Guardar cambios"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/button_primary"
+                android:textColor="@color/text_primary_light"
+                app:cornerRadius="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logout_button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Cerrar sesión"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:layout_marginTop="12dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="@color/color_error"
+                app:cornerRadius="8dp"
+                android:textColor="@color/color_error" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

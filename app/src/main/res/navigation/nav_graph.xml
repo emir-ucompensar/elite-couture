@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.elitecouture.app.ui.login.LoginFragment"
-        android:label="Login"
+        android:label="Inicio"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_storeFragment"
@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.elitecouture.app.ui.register.RegisterFragment"
-        android:label="Register"
+        android:label="Registro"
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_storeFragment"
@@ -42,7 +42,23 @@
     <fragment
         android:id="@+id/storeFragment"
         android:name="com.elitecouture.app.ui.store.StoreFragment"
-        android:label="Store"
-        tools:layout="@layout/fragment_store" />
+        android:label="Tienda"
+        tools:layout="@layout/fragment_store">
+        <action
+            android:id="@+id/action_storeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.elitecouture.app.ui.profile.ProfileFragment"
+        android:label="Mi perfil"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/storeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>
