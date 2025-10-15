@@ -1,5 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-    <color name="red">#FF0000</color>
+    <!--    PALETA PRINCIPAL   -->
+    <color name="color_primary">#B71C1C</color>         <!-- Rojo vino principal (fondo splash, botones primarios) -->
+    <color name="color_primary_light">#FFCDD2</color>   <!-- Rojo claro (detalles, backgrounds suaves) -->
+    <color name="color_primary_dark">#7F0000</color>    <!-- Rojo oscuro (enfoques, sombras, estados presionados) -->
+
+    <!--     COLORES DE TEXTO  -->
+    <color name="text_primary_light">#FFFFFF</color>    <!-- Texto sobre fondos oscuros -->
+    <color name="text_primary_dark">#000000</color>     <!-- Texto sobre fondos claros -->
+    <color name="text_secondary_light">#E0E0E0</color>  <!-- Texto secundario en modo oscuro -->
+    <color name="text_secondary_dark">#424242</color>   <!-- Texto secundario sobre fondo claro -->
+
+    <!--   COLORES DE INTERFAZ -->
+    <color name="background_light">#FAFAFA</color>      <!-- Fondo base de pantallas claras -->
+    <color name="background_dark">#121212</color>       <!-- Fondo base de modo oscuro -->
+    <color name="divider">#BDBDBD</color>               <!-- Líneas divisorias y bordes suaves -->
+    <color name="surface_light">#FFFFFF</color>         <!-- Tarjetas, paneles, contenedores claros -->
+    <color name="surface_dark">#1E1E1E</color>          <!-- Tarjetas, paneles, contenedores oscuros -->
+
+    <!--   ESTADOS Y ACCENTOS  -->
+    <color name="color_success">#4CAF50</color>         <!-- Verde éxito -->
+    <color name="color_warning">#FFC107</color>         <!-- Amarillo advertencia -->
+    <color name="color_error">#F44336</color>           <!-- Rojo error -->
+    <color name="color_info">#2196F3</color>            <!-- Azul informativo -->
+
 </resources>

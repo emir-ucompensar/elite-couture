@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#B71C1C"
+    android:background="@color/color_primary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp">
 
-    <!-- Logo centrado -->
+    <!-- Logotipo principal -->
     <ImageView
         android:id="@+id/splash_logo"
         android:src="@drawable/ic_launcher_foreground"
@@ -17,15 +17,17 @@
         android:contentDescription="@string/app_name"
         android:layout_marginBottom="40dp" />
 
-    <!-- Texto opcional -->
+    <!-- Nombre de la app -->
     <TextView
-        android:id="@+id/splash_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Elite Couture"
-        android:textSize="24sp"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary_light"
+        android:layout_marginBottom="50dp"
+        android:letterSpacing="0.05"
+        android:fontFamily="sans-serif-medium" />
 
     <!-- Barra de carga -->
     <ProgressBar
@@ -34,18 +36,19 @@
         android:layout_width="200dp"
         android:layout_height="6dp"
         android:indeterminate="true"
-        android:indeterminateTint="#FFFFFF"
-        android:backgroundTint="#FFCDD2"
+        android:indeterminateTint="@color/text_primary_light"
+        android:backgroundTint="@color/color_primary_light"
         android:layout_gravity="center" />
 
-    <!-- Texto de carga -->
+    <!-- Texto de estado -->
     <TextView
         android:id="@+id/splash_loading_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cargando recursos"
         android:textSize="16sp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary_light"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif" />
+
 </LinearLayout>
