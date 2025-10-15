@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--    PALETA PRINCIPAL   -->
-    <color name="color_primary">#B71C1C</color>         <!-- Rojo vino principal (fondo splash, botones primarios) -->
-    <color name="color_primary_light">#FFCDD2</color>   <!-- Rojo claro (detalles, backgrounds suaves) -->
-    <color name="color_primary_dark">#7F0000</color>    <!-- Rojo oscuro (enfoques, sombras, estados presionados) -->
+    <color name="color_primary">#AE1239</color>         <!-- Rojo principal para botones y elementos principales -->
+    <color name="color_primary_light">#E65C7B</color>   <!-- Rojo claro para hover y estados activos -->
+    <color name="color_primary_dark">#8C0E2E</color>    <!-- Rojo oscuro para estados presionados -->
+    
+    <!--    PALETA DE ACENTOS   -->
+    <color name="accent_red">#D81B60</color>           <!-- Acento rojo para elementos destacados -->
+    <color name="accent_red_light">#FF5C8D</color>     <!-- Acento rojo claro para hover -->
+    <color name="brand_color">#C4183C</color>          <!-- Color específico para la marca -->
 
     <!--     COLORES DE TEXTO  -->
     <color name="text_primary_light">#FFFFFF</color>    <!-- Texto sobre fondos oscuros -->
     <color name="text_primary_dark">#000000</color>     <!-- Texto sobre fondos claros -->
     <color name="text_secondary_light">#E0E0E0</color>  <!-- Texto secundario en modo oscuro -->
     <color name="text_secondary_dark">#424242</color>   <!-- Texto secundario sobre fondo claro -->
+    <color name="text_hint">#9E9E9E</color>             <!-- Texto de hint y placeholders -->    
 
     <!--   COLORES DE INTERFAZ -->
     <color name="background_light">#FAFAFA</color>      <!-- Fondo base de pantallas claras -->
     <color name="background_dark">#121212</color>       <!-- Fondo base de modo oscuro -->
+    <color name="background_primary">@color/color_primary</color> <!-- Fondo de splash y elementos destacados -->
     <color name="divider">#BDBDBD</color>               <!-- Líneas divisorias y bordes suaves -->
     <color name="surface_light">#FFFFFF</color>         <!-- Tarjetas, paneles, contenedores claros -->
     <color name="surface_dark">#1E1E1E</color>          <!-- Tarjetas, paneles, contenedores oscuros -->
@@ -24,4 +31,6 @@
     <color name="color_error">#F44336</color>           <!-- Rojo error -->
     <color name="color_info">#2196F3</color>            <!-- Azul informativo -->
 
+    <!--   LOGO E ICONOS  -->
+    <color name="red_700">#741717</color>
 </resources>

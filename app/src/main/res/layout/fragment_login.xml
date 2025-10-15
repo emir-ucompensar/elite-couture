@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+    <!-- Logo y título -->
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Elite Couture Logo" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Elite Couture"
+        android:textSize="32sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"
+        android:textColor="@color/brand_color"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido a Elite Couture,\ndonde puedes armar tu outfit online"
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary_dark"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:lineSpacingExtra="4dp"
+        android:alpha="0.7" />
+
+    <!-- Pestañas de inicio de sesión/registro -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="24dp">
+
+        <TextView
+            android:id="@+id/login_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Iniciar Sesión"
+            android:textColor="@color/accent_red"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/register_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Registrarme"
+            android:textColor="@color/text_hint"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground" />
+    </LinearLayout>
+
+    <!-- Formulario -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo electrónico"
+        app:boxStrokeColor="@color/color_primary"
+        app:hintTextColor="@color/text_hint"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:boxStrokeWidth="1dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusBottomEnd="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textSize="16sp"
+            android:paddingVertical="16dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:layout_marginTop="16dp"
+        app:boxStrokeColor="@color/color_primary"
+        app:hintTextColor="@color/text_hint"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/text_hint"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:boxStrokeWidth="1dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusBottomEnd="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textSize="16sp"
+            android:paddingVertical="16dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Has olvidado tu contraseña?"
+        android:textColor="@color/accent_red_light"
+        android:textSize="14sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:padding="8dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Iniciar Sesión"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/color_primary"
+        android:textColor="@color/text_primary_light"
+        app:cornerRadius="8dp" />
+
+    <!-- Separador "o" -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="16dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#E0E0E0"
+            android:alpha="0.5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="o"
+            android:textColor="@color/text_hint"
+            android:layout_marginHorizontal="16dp"
+            android:alpha="0.5" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#E0E0E0"
+            android:alpha="0.5" />
+    </LinearLayout>
+
+    <!-- Botones de redes sociales -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/google_login"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Sign in with Google"
+        android:textColor="#5F6368"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:layout_marginTop="24dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:icon="@drawable/ic_google"
+        app:iconSize="24dp"
+        app:iconPadding="12dp"
+        app:iconTint="@null"
+        app:iconGravity="textStart"
+        app:strokeColor="#DADCE0"
+        app:strokeWidth="1dp"
+        app:cornerRadius="8dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/apple_login"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Sign in with Apple"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#000000"
+        app:icon="@drawable/ic_apple"
+        app:iconSize="24dp"
+        app:iconPadding="12dp"
+        app:iconTint="@android:color/white"
+        app:iconGravity="textStart"
+        app:cornerRadius="8dp" />
+
+    </LinearLayout>
+</ScrollView>

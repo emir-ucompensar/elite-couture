@@ -1,5 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your theme here -->
+        <!-- Colores primarios -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryVariant">@color/color_primary_dark</item>
+        <item name="colorOnPrimary">@color/text_primary_light</item>
+        
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/color_primary</item>
+        <item name="colorSecondaryVariant">@color/color_primary_dark</item>
+        <item name="colorOnSecondary">@color/text_primary_light</item>
+        
+        <!-- Barra de estado -->
+        <item name="android:statusBarColor">@color/color_primary_dark</item>
+        
+        <!-- Estilos de texto -->
+        <item name="android:textColorPrimary">@color/text_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_secondary_dark</item>
+        
+        <!-- Estilo de la Toolbar -->
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
     </style>
 </resources>
