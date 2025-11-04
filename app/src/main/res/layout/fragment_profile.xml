@@ -36,7 +36,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Información Personal"
+                        android:text="@string/profile_section_title"
                         android:textColor="@color/text_primary_dark"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -61,7 +61,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nombre"
+                        android:text="@string/profile_field_name_label"
                         android:textColor="@color/text_secondary_dark"
                         android:textSize="14sp" />
 
@@ -69,7 +69,7 @@
                         android:id="@+id/profile_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Sofia"
+                        android:text="@string/profile_field_name_placeholder"
                         android:textColor="@color/text_primary_dark"
                         android:textSize="16sp"
                         android:layout_marginTop="4dp" />
@@ -77,7 +77,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Apellido"
+                        android:text="@string/profile_field_lastname_label"
                         android:textColor="@color/text_secondary_dark"
                         android:textSize="14sp"
                         android:layout_marginTop="16dp" />
@@ -86,7 +86,7 @@
                         android:id="@+id/profile_lastname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Martinez"
+                        android:text="@string/profile_field_lastname_placeholder"
                         android:textColor="@color/text_primary_dark"
                         android:textSize="16sp"
                         android:layout_marginTop="4dp" />
@@ -94,7 +94,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Correo electrónico"
+                        android:text="@string/profile_field_email_label"
                         android:textColor="@color/text_secondary_dark"
                         android:textSize="14sp"
                         android:layout_marginTop="16dp" />
@@ -103,7 +103,7 @@
                         android:id="@+id/profile_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="sofia.martinez@email.com"
+                        android:text="@string/profile_field_email_placeholder"
                         android:textColor="@color/text_primary_dark"
                         android:textSize="16sp"
                         android:layout_marginTop="4dp" />
@@ -123,7 +123,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Acciones Rápidas"
+                    android:text="@string/profile_quick_actions_title"
                     android:textColor="@color/text_primary_dark"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -139,7 +139,7 @@
                         android:id="@+id/favorites_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Mis Favoritos"
+                        android:text="@string/profile_quick_action_favorites"
                         android:textAlignment="textStart"
                         android:paddingVertical="12dp"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -150,7 +150,7 @@
                         android:id="@+id/purchase_history_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Historial de Compras"
+                        android:text="@string/profile_quick_action_purchases"
                         android:textAlignment="textStart"
                         android:paddingVertical="12dp"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -161,7 +161,7 @@
                         android:id="@+id/settings_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Configuración"
+                        android:text="@string/profile_quick_action_settings"
                         android:textAlignment="textStart"
                         android:paddingVertical="12dp"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -175,7 +175,7 @@
                 android:id="@+id/save_changes_button"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Guardar cambios"
+                android:text="@string/profile_save_changes"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:layout_marginTop="24dp"
@@ -187,7 +187,7 @@
                 android:id="@+id/logout_button"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Cerrar sesión"
+                android:text="@string/profile_logout"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:layout_marginTop="12dp"

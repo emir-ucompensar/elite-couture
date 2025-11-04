@@ -3,15 +3,15 @@
     <item
         android:id="@+id/navigation_store"
         android:icon="@android:drawable/ic_menu_gallery"
-        android:title="Tienda" />
+        android:title="@string/menu_store" />
 
     <item
         android:id="@+id/navigation_cart"
         android:icon="@android:drawable/ic_menu_add"
-        android:title="Carrito" />
+        android:title="@string/menu_cart" />
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@android:drawable/ic_menu_myplaces"
-        android:title="Mi perfil" />
+        android:title="@string/menu_profile" />
 </menu>

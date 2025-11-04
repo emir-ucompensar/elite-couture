@@ -1,3 +1,94 @@
 <resources>
     <string name="app_name">Elite Couture</string>
+
+    <!-- General -->
+    <string name="logo_content_description">Elite Couture Logo</string>
+    <string name="divider_or">o</string>
+
+    <!-- Splash -->
+    <string name="splash_loading_text">Cargando recursos</string>
+
+    <!-- Auth common -->
+    <string name="tab_login">Inicio</string>
+    <string name="tab_register">Registro</string>
+    <string name="hint_email">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_confirm_password">Confirmar contraseña</string>
+    <string name="hint_first_name">Nombre</string>
+    <string name="hint_last_name">Apellidos (opcional)</string>
+    <string name="guest_access_action"><u>Explorar como invitado</u></string>
+
+    <!-- Login -->
+    <string name="login_title">Bienvenido de nuevo</string>
+    <string name="login_subtitle">Ingresa tus credenciales para continuar</string>
+    <string name="forgot_password">¿Has olvidado tu contraseña?</string>
+    <string name="login_primary_action">Iniciar Sesión</string>
+    <string name="login_with_google">Iniciar sesión con Google</string>
+    <string name="login_with_apple">Iniciar sesión con tú Apple ID</string>
+    <string name="login_no_account_prompt">¿No tienes una cuenta?</string>
+    <string name="login_no_account_action"><u>Crea una cuenta</u></string>
+
+    <!-- Register -->
+    <string name="register_intro">Únete a Elite Couture\ny comienza a crear tus outfits</string>
+    <string name="register_title">Crea tu cuenta</string>
+    <string name="register_subtitle">Completa tus datos para comenzar</string>
+    <string name="register_primary_action">Crear cuenta</string>
+    <string name="register_with_google">Registrarse con Google</string>
+    <string name="register_with_apple">Registrarse con tú Apple ID</string>
+    <string name="register_existing_prompt">¿Ya tienes una cuenta?</string>
+    <string name="register_existing_action"><u>Inicia sesión</u></string>
+    <string name="error_first_name_required">Por favor introduce un nombre</string>
+    <string name="toast_registration_success">Registro exitoso. ¡Bienvenido a Elite Couture!</string>
+    <string name="error_account_already_exists">Ya existe una cuenta con este correo. Inicia sesión para continuar.</string>
+    <string name="error_registration_generic">No fue posible crear la cuenta. Inténtalo nuevamente.</string>
+
+    <!-- Validation & feedback -->
+    <string name="error_email_invalid">Ingresa un correo electrónico válido</string>
+    <string name="error_password_length">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="error_password_mismatch">Las contraseñas no coinciden</string>
+    <string name="error_password_required">Ingresa tu contraseña</string>
+    <string name="error_login_invalid">Credenciales inválidas. Verifica tu correo y contraseña.</string>
+    <string name="toast_feature_unavailable">Funcionalidad no disponible en esta versión</string>
+    <string name="toast_guest_mode_enabled">Modo invitado activado. Algunas funciones estarán limitadas.</string>
+
+    <!-- Profile -->
+    <string name="profile_section_title">Información Personal</string>
+    <string name="profile_field_name_label">Nombre</string>
+    <string name="profile_field_name_placeholder">Sofia</string>
+    <string name="profile_field_lastname_label">Apellido</string>
+    <string name="profile_field_lastname_placeholder">Martinez</string>
+    <string name="profile_field_email_label">Correo electrónico</string>
+    <string name="profile_field_email_placeholder">sofia.martinez@email.com</string>
+    <string name="profile_quick_actions_title">Acciones Rápidas</string>
+    <string name="profile_quick_action_favorites">Mis Favoritos</string>
+    <string name="profile_quick_action_purchases">Historial de Compras</string>
+    <string name="profile_quick_action_settings">Configuración</string>
+    <string name="profile_save_changes">Guardar cambios</string>
+    <string name="profile_logout">Cerrar sesión</string>
+
+    <!-- Store -->
+    <string name="store_under_construction_title">🚧 En Construcción 🚧</string>
+    <string name="store_under_construction_message">Estamos trabajando para traerte\nla mejor tienda de moda</string>
+
+    <!-- Navigation & Menu -->
+    <string name="nav_label_login">Inicio</string>
+    <string name="nav_label_register">Registro</string>
+    <string name="nav_label_store">Tienda</string>
+    <string name="nav_label_profile">Mi perfil</string>
+    <string name="menu_store">Tienda</string>
+    <string name="menu_cart">Carrito</string>
+    <string name="menu_profile">Mi perfil</string>
+
+    <!-- Toast messages -->
+    <string name="toast_login_google">Iniciando sesión con Google...</string>
+    <string name="toast_login_apple">Iniciando sesión con Apple...</string>
+    <string name="toast_forgot_password">Función de recuperación de contraseña</string>
+    <string name="toast_register_google">Registrándose con Google...</string>
+    <string name="toast_register_apple">Registrándose con Apple...</string>
+    <string name="toast_cart_under_construction">Carrito en construcción</string>
+    <string name="toast_profile_edit_in_progress">Editar perfil - En desarrollo</string>
+    <string name="toast_profile_favorites_in_progress">Mis favoritos - En desarrollo</string>
+    <string name="toast_profile_history_in_progress">Historial de compras - En desarrollo</string>
+    <string name="toast_profile_settings_in_progress">Configuración - En desarrollo</string>
+    <string name="toast_profile_changes_saved">Cambios guardados</string>
 </resources>

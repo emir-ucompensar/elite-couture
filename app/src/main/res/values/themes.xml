@@ -16,6 +16,8 @@
         <!-- Estilos de texto -->
         <item name="android:textColorPrimary">@color/text_primary_dark</item>
         <item name="android:textColorSecondary">@color/text_secondary_dark</item>
+    <item name="android:fontFamily">@font/elite_sans</item>
+    <item name="fontFamily">@font/elite_sans</item>
         
         <!-- Estilo de la Toolbar -->
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>

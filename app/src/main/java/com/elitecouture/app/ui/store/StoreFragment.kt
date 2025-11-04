@@ -33,7 +33,7 @@ class StoreFragment : Fragment() {
                     true
                 }
                 R.id.navigation_cart -> {
-                    Toast.makeText(context, "Carrito en construcción", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.toast_cart_under_construction), Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.navigation_profile -> {

@@ -28,7 +28,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🚧 En Construcción 🚧"
+                    android:text="@string/store_under_construction_title"
                     android:textColor="@color/color_warning"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -37,7 +37,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estamos trabajando para traerte\nla mejor tienda de moda"
+                    android:text="@string/store_under_construction_message"
                     android:textAlignment="center"
                     android:textColor="@color/text_secondary_dark"
                     android:textSize="16sp" />

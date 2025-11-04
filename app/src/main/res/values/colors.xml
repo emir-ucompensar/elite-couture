@@ -38,4 +38,10 @@
 
     <!--   LOGO E ICONOS  -->
     <color name="red_700">#741717</color>
+
+    <!--   SOCIAL & DIVIDERS  -->
+    <color name="divider_light">#E0E0E0</color>
+    <color name="button_social_google_text">#5F6368</color>
+    <color name="button_social_google_stroke">#DADCE0</color>
+    <color name="button_social_apple_background">#000000</color>
 </resources>

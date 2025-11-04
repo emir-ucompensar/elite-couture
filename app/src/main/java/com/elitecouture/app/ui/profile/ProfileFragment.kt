@@ -10,9 +10,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.elitecouture.app.R
+import com.elitecouture.app.di.ServiceLocator
 import com.google.android.material.button.MaterialButton
 
 class ProfileFragment : Fragment() {
+    private val sessionManager by lazy { ServiceLocator.provideSessionManager(requireContext()) }
+
     private lateinit var profileName: TextView
     private lateinit var profileLastname: TextView
     private lateinit var profileEmail: TextView
@@ -47,27 +50,27 @@ class ProfileFragment : Fragment() {
 
         // Configurar listeners
         editProfileButton.setOnClickListener {
-            Toast.makeText(context, "Editar perfil - En desarrollo", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.toast_profile_edit_in_progress), Toast.LENGTH_SHORT).show()
         }
 
         favoritesButton.setOnClickListener {
-            Toast.makeText(context, "Mis favoritos - En desarrollo", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.toast_profile_favorites_in_progress), Toast.LENGTH_SHORT).show()
         }
 
         purchaseHistoryButton.setOnClickListener {
-            Toast.makeText(context, "Historial de compras - En desarrollo", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.toast_profile_history_in_progress), Toast.LENGTH_SHORT).show()
         }
 
         settingsButton.setOnClickListener {
-            Toast.makeText(context, "Configuración - En desarrollo", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.toast_profile_settings_in_progress), Toast.LENGTH_SHORT).show()
         }
 
         saveChangesButton.setOnClickListener {
-            Toast.makeText(context, "Cambios guardados", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.toast_profile_changes_saved), Toast.LENGTH_SHORT).show()
         }
 
         logoutButton.setOnClickListener {
-            // Navegar al login
+            sessionManager.clearSession()
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
         }
 
@@ -76,8 +79,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun loadMockData() {
-        profileName.text = "Sofia"
-        profileLastname.text = "Martinez"
-        profileEmail.text = "sofia.martinez@email.com"
+        profileName.text = getString(R.string.profile_field_name_placeholder)
+        profileLastname.text = getString(R.string.profile_field_lastname_placeholder)
+        profileEmail.text = getString(R.string.profile_field_email_placeholder)
     }
 }
