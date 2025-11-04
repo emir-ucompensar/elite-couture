@@ -19,7 +19,7 @@ El proyecto tiene como objetivo aplicar principios de desarrollo móvil nativo c
 
 | Categoría | Tecnología / Herramienta |
 |------------|---------------------------|
-| Lenguaje principal | Java |
+| Lenguaje principal | Kotlin |
 | Build system | Gradle |
 | Min SDK | Android 10 (API 29) |
 | Target SDK | Android 34 |
