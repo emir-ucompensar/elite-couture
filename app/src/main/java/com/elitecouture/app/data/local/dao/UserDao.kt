@@ -18,11 +18,42 @@ class UserDao(private val database: EliteCoutureDatabase) {
             put(DatabaseContract.Users.COLUMN_PASSWORD, entity.password)
             put(DatabaseContract.Users.COLUMN_FIRST_NAME, entity.firstName)
             put(DatabaseContract.Users.COLUMN_LAST_NAME, entity.lastName)
+            put(DatabaseContract.Users.COLUMN_ADDRESS, entity.address)
             put(DatabaseContract.Users.COLUMN_IS_GUEST, if (entity.isGuest) 1 else 0)
             put(DatabaseContract.Users.COLUMN_CREATED_AT, entity.createdAt)
         }
 
         return database.writableDatabase.insert(DatabaseContract.Users.TABLE_NAME, null, values)
+    }
+    
+    fun update(entity: UserEntity): Int {
+        val values = ContentValues().apply {
+            put(DatabaseContract.Users.COLUMN_EMAIL, entity.email)
+            put(DatabaseContract.Users.COLUMN_FIRST_NAME, entity.firstName)
+            put(DatabaseContract.Users.COLUMN_LAST_NAME, entity.lastName)
+            put(DatabaseContract.Users.COLUMN_ADDRESS, entity.address)
+            // Password se actualiza por separado para mayor seguridad
+        }
+
+        return database.writableDatabase.update(
+            DatabaseContract.Users.TABLE_NAME,
+            values,
+            "${DatabaseContract.Users.COLUMN_ID} = ?",
+            arrayOf(entity.id.toString())
+        )
+    }
+    
+    fun updatePassword(userId: Long, newPassword: String): Int {
+        val values = ContentValues().apply {
+            put(DatabaseContract.Users.COLUMN_PASSWORD, newPassword)
+        }
+
+        return database.writableDatabase.update(
+            DatabaseContract.Users.TABLE_NAME,
+            values,
+            "${DatabaseContract.Users.COLUMN_ID} = ?",
+            arrayOf(userId.toString())
+        )
     }
 
     fun findByEmail(email: String): UserEntity? {
@@ -33,6 +64,7 @@ class UserDao(private val database: EliteCoutureDatabase) {
             DatabaseContract.Users.COLUMN_PASSWORD,
             DatabaseContract.Users.COLUMN_FIRST_NAME,
             DatabaseContract.Users.COLUMN_LAST_NAME,
+            DatabaseContract.Users.COLUMN_ADDRESS,
             DatabaseContract.Users.COLUMN_IS_GUEST,
             DatabaseContract.Users.COLUMN_CREATED_AT
         )
@@ -58,6 +90,7 @@ class UserDao(private val database: EliteCoutureDatabase) {
             DatabaseContract.Users.COLUMN_PASSWORD,
             DatabaseContract.Users.COLUMN_FIRST_NAME,
             DatabaseContract.Users.COLUMN_LAST_NAME,
+            DatabaseContract.Users.COLUMN_ADDRESS,
             DatabaseContract.Users.COLUMN_IS_GUEST,
             DatabaseContract.Users.COLUMN_CREATED_AT
         )
@@ -89,6 +122,7 @@ class UserDao(private val database: EliteCoutureDatabase) {
             password = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Users.COLUMN_PASSWORD)),
             firstName = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Users.COLUMN_FIRST_NAME)),
             lastName = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Users.COLUMN_LAST_NAME)),
+            address = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Users.COLUMN_ADDRESS)),
             isGuest = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.Users.COLUMN_IS_GUEST)) == 1,
             createdAt = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseContract.Users.COLUMN_CREATED_AT))
         )

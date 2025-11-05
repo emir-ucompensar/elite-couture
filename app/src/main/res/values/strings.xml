@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Elite Couture</string>
+    <string name="app_name_uppercase">ELITE COUTURE</string>
 
     <!-- General -->
     <string name="logo_content_description">Elite Couture Logo</string>
     <string name="divider_or">o</string>
+    <string name="navigation_drawer_open">Abrir menú de navegación</string>
+    <string name="navigation_drawer_close">Cerrar menú de navegación</string>
 
     <!-- Splash -->
     <string name="splash_loading_text">Cargando recursos</string>
@@ -50,34 +53,66 @@
     <string name="error_login_invalid">Credenciales inválidas. Verifica tu correo y contraseña.</string>
     <string name="toast_feature_unavailable">Funcionalidad no disponible en esta versión</string>
     <string name="toast_guest_mode_enabled">Modo invitado activado. Algunas funciones estarán limitadas.</string>
+    <string name="toast_guest_restricted_feature">Crea una cuenta para acceder a esta funcionalidad</string>
 
     <!-- Profile -->
     <string name="profile_section_title">Información Personal</string>
     <string name="profile_field_name_label">Nombre</string>
-    <string name="profile_field_name_placeholder">Sofia</string>
+    <string name="profile_field_name_placeholder">Tu nombre</string>
     <string name="profile_field_lastname_label">Apellido</string>
-    <string name="profile_field_lastname_placeholder">Martinez</string>
+    <string name="profile_field_lastname_placeholder">Tu apellido</string>
     <string name="profile_field_email_label">Correo electrónico</string>
-    <string name="profile_field_email_placeholder">sofia.martinez@email.com</string>
+    <string name="profile_field_email_placeholder">tu.email@ejemplo.com</string>
     <string name="profile_quick_actions_title">Acciones Rápidas</string>
     <string name="profile_quick_action_favorites">Mis Favoritos</string>
     <string name="profile_quick_action_purchases">Historial de Compras</string>
     <string name="profile_quick_action_settings">Configuración</string>
     <string name="profile_save_changes">Guardar cambios</string>
     <string name="profile_logout">Cerrar sesión</string>
+    <string name="profile_edit_button_content_description">Editar información de perfil</string>
+    <string name="profile_address_label">Dirección</string>
+    <string name="profile_field_address_placeholder">Cra. 123 #45-67, Bogotá</string>
+    <string name="profile_address_hint">Añadir una dirección para recibir tus pedidos</string>
+    <string name="profile_edit_action">Editar</string>
+    <string name="profile_back_to_store">Volver a la tienda</string>
 
     <!-- Store -->
     <string name="store_under_construction_title">🚧 En Construcción 🚧</string>
     <string name="store_under_construction_message">Estamos trabajando para traerte\nla mejor tienda de moda</string>
+        <string name="store_filter_gender_all">Todas las prendas</string>
+        <string name="store_filter_gender_men">Moda Hombre</string>
+        <string name="store_filter_gender_women">Moda Mujer</string>
+        <string name="store_filter_category_all">Todas las categorías</string>
+        <string name="store_filter_category_pants">Pantalones</string>
+        <string name="store_filter_category_jackets">Chaquetas</string>
+        <string name="store_filter_category_coats">Abrigos</string>
+        <string name="store_filter_category_skirts">Faldas</string>
+        <string name="store_filter_category_accessories">Accesorios</string>
+        <string name="store_filter_summary">Mostrando %1$s · %2$s</string>
+    <string name="store_exit_dialog_title">¿Salir de la aplicación?</string>
+    <string name="store_exit_dialog_message">¿Estás seguro de que deseas salir?</string>
+    <string name="store_exit_dialog_confirm">Salir</string>
+    <string name="store_exit_dialog_cancel">Cancelar</string>
 
     <!-- Navigation & Menu -->
     <string name="nav_label_login">Inicio</string>
     <string name="nav_label_register">Registro</string>
     <string name="nav_label_store">Tienda</string>
     <string name="nav_label_profile">Mi perfil</string>
+    <string name="nav_label_cart">Carrito de compras</string>
     <string name="menu_store">Tienda</string>
     <string name="menu_cart">Carrito</string>
     <string name="menu_profile">Mi perfil</string>
+    <string name="drawer_subtitle">Descubre colecciones exclusivas</string>
+    <string name="drawer_all_products">TODAS LAS PRENDAS</string>
+    <string name="drawer_section_men">HOMBRE</string>
+    <string name="drawer_section_women">MUJER</string>
+    <string name="drawer_category_all">TODO</string>
+    <string name="drawer_category_pants">PANTALONES</string>
+    <string name="drawer_category_jackets">CHAQUETAS</string>
+    <string name="drawer_category_coats">ABRIGOS</string>
+    <string name="drawer_category_skirts">FALDAS</string>
+    <string name="drawer_category_accessories">ACCESORIOS</string>
 
     <!-- Toast messages -->
     <string name="toast_login_google">Iniciando sesión con Google...</string>
@@ -91,4 +126,33 @@
     <string name="toast_profile_history_in_progress">Historial de compras - En desarrollo</string>
     <string name="toast_profile_settings_in_progress">Configuración - En desarrollo</string>
     <string name="toast_profile_changes_saved">Cambios guardados</string>
+    <string name="toast_menu_in_progress">Función de menú en progreso...</string>
+
+    <!-- Edit Profile -->
+    <string name="edit_profile_back">Cancelar</string>
+    <string name="edit_profile_back_to_profile">Volver a Mi perfil</string>
+    <string name="edit_profile_section_personal_info">Información Personal</string>
+    <string name="edit_profile_section_security">Seguridad</string>
+    <string name="edit_profile_first_name_helper">Este nombre aparecerá en tu perfil</string>
+    <string name="edit_profile_email_helper">Utilizado para iniciar sesión y notificaciones</string>
+    <string name="edit_profile_address_hint">Dirección de envío</string>
+    <string name="edit_profile_address_helper">Para el envío de tus pedidos</string>
+    <string name="edit_profile_password_description">Deja estos campos vacíos si no deseas cambiar tu contraseña</string>
+    <string name="edit_profile_current_password_hint">Contraseña actual</string>
+    <string name="edit_profile_new_password_hint">Nueva contraseña</string>
+    <string name="edit_profile_save_changes">Guardar cambios</string>
+    <string name="edit_profile_cancel">Cancelar</string>
+    
+    <!-- Edit Profile - Dialogs -->
+    <string name="edit_profile_unsaved_changes_title">¿Descartar cambios?</string>
+    <string name="edit_profile_unsaved_changes_message">Tienes cambios sin guardar. ¿Estás seguro de que deseas descartarlos?</string>
+    <string name="edit_profile_unsaved_changes_save">Guardar</string>
+    <string name="edit_profile_unsaved_changes_discard">Descartar</string>
+    <string name="edit_profile_unsaved_changes_cancel">Cancelar</string>
+    
+    <!-- Edit Profile - Success/Error Messages -->
+    <string name="edit_profile_success">Perfil actualizado correctamente</string>
+    <string name="edit_profile_password_updated">Contraseña actualizada correctamente</string>
+    <string name="edit_profile_error_current_password">La contraseña actual es incorrecta</string>
+    <string name="edit_profile_error_update_failed">Error al actualizar el perfil</string>
 </resources>

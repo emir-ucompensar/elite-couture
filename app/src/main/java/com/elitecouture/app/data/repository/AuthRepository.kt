@@ -42,9 +42,10 @@ class AuthRepository(private val userDao: UserDao) {
         val guest = User(
             id = 0L,
             uuid = UUID.randomUUID().toString(),
-            email = "guest@elite-couture",
+            email = "invitado@elitecouture.app",
             firstName = "Invitado",
             lastName = null,
+            address = null,
             isGuest = true,
             createdAt = System.currentTimeMillis()
         )
@@ -53,6 +54,34 @@ class AuthRepository(private val userDao: UserDao) {
             guest
         } else {
             guest.copy(id = inserted)
+        }
+    }
+    
+    fun updateProfile(user: User): Result<User> {
+        val userEntity = UserEntity.fromDomain(user, password = null)
+        val rowsAffected = userDao.update(userEntity)
+        return if (rowsAffected > 0) {
+            Result.success(user)
+        } else {
+            Result.failure(IllegalStateException("Could not update user profile"))
+        }
+    }
+    
+    fun updatePassword(userId: Long, currentPassword: String, newPassword: String): Result<Boolean> {
+        // Primero verificar que la contraseña actual sea correcta
+        val user = userDao.findByEmail("")?.let { entity ->
+            if (entity.id == userId && entity.password == currentPassword) entity else null
+        }
+        
+        return if (user != null) {
+            val rowsAffected = userDao.updatePassword(userId, newPassword)
+            if (rowsAffected > 0) {
+                Result.success(true)
+            } else {
+                Result.failure(IllegalStateException("Could not update password"))
+            }
+        } else {
+            Result.failure(IllegalArgumentException("Current password is incorrect"))
         }
     }
 }

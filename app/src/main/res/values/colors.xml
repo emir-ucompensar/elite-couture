@@ -20,7 +20,8 @@
     <color name="text_primary_dark">#000000</color>     <!-- Texto sobre fondos claros -->
     <color name="text_secondary_light">#E0E0E0</color>  <!-- Texto secundario en modo oscuro -->
     <color name="text_secondary_dark">#424242</color>   <!-- Texto secundario sobre fondo claro -->
-    <color name="text_hint">#9E9E9E</color>             <!-- Texto de hint y placeholders -->    
+    <color name="text_hint">#9E9E9E</color>             <!-- Texto de hint y placeholders -->
+    <color name="text_disabled_pink">#C5A3AD</color>    <!-- Gris rosado para elementos deshabilitados (modo invitado) -->
 
     <!--   COLORES DE INTERFAZ -->
     <color name="background_light">#FAFAFA</color>      <!-- Fondo base de pantallas claras -->

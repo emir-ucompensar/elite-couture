@@ -6,7 +6,7 @@ package com.elitecouture.app.data.local.contract
  */
 object DatabaseContract {
     const val DATABASE_NAME = "elite_couture.db"
-    const val DATABASE_VERSION = 2
+    const val DATABASE_VERSION = 3
 
     object Users {
         const val TABLE_NAME = "users"
@@ -16,6 +16,7 @@ object DatabaseContract {
         const val COLUMN_PASSWORD = "password"
         const val COLUMN_FIRST_NAME = "first_name"
         const val COLUMN_LAST_NAME = "last_name"
+        const val COLUMN_ADDRESS = "address"
         const val COLUMN_IS_GUEST = "is_guest"
         const val COLUMN_CREATED_AT = "created_at"
 
@@ -27,6 +28,7 @@ object DatabaseContract {
                 $COLUMN_PASSWORD TEXT,
                 $COLUMN_FIRST_NAME TEXT NOT NULL,
                 $COLUMN_LAST_NAME TEXT,
+                $COLUMN_ADDRESS TEXT,
                 $COLUMN_IS_GUEST INTEGER NOT NULL DEFAULT 0,
                 $COLUMN_CREATED_AT INTEGER NOT NULL
             )

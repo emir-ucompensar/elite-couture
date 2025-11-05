@@ -69,4 +69,49 @@
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
     </style>
+
+    <style name="TextAppearance.Elite.NavigationItem" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/elite_sans</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Dialog Styles -->
+    <style name="EliteCoutureDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/EliteCoutureDialogTitle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/EliteCoutureDialogMessage</item>
+        <item name="buttonBarPositiveButtonStyle">@style/EliteCoutureDialogButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/EliteCoutureDialogButton</item>
+        <item name="buttonBarNeutralButtonStyle">@style/EliteCoutureDialogButton</item>
+        <item name="shapeAppearanceOverlay">@style/EliteCoutureDialogShape</item>
+        <item name="android:background">@color/surface_light</item>
+    </style>
+
+    <style name="EliteCoutureDialogTitle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:fontFamily">@font/elite_sans_semibold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="EliteCoutureDialogMessage" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:fontFamily">@font/elite_sans</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_secondary_dark</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+    </style>
+
+    <style name="EliteCoutureDialogButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:fontFamily">@font/elite_sans_semibold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="rippleColor">@color/button_primary_pressed</item>
+    </style>
+
+    <style name="EliteCoutureDialogShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
 </resources>

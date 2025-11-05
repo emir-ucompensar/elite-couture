@@ -10,6 +10,7 @@ data class UserEntity(
     val password: String?,
     val firstName: String,
     val lastName: String?,
+    val address: String?,
     val isGuest: Boolean,
     val createdAt: Long
 ) {
@@ -19,6 +20,7 @@ data class UserEntity(
         email = email,
         firstName = firstName,
         lastName = lastName,
+        address = address,
         isGuest = isGuest,
         createdAt = createdAt
     )
@@ -31,6 +33,7 @@ data class UserEntity(
             password = password,
             firstName = user.firstName,
             lastName = user.lastName,
+            address = user.address,
             isGuest = user.isGuest,
             createdAt = user.createdAt
         )

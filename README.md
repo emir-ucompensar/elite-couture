@@ -69,15 +69,49 @@ app/build/outputs/apk/debug/app-debug.apk
 
 ---
 
-## Funcionalidades Planeadas
+## Funcionalidades Implementadas
 
-| Etapa                  | Descripción                                |
-| ---------------------- | ------------------------------------------ |
-| 🧍‍♀️ Registro y login | Creación y autenticación de usuarios.      |
-| 👚 Gestión CRUD        | Alta, baja y edición de prendas de ropa.   |
-| 🛍️ Catálogo visual    | Listado dinámico de productos disponibles. |
-| 💬 Notificaciones      | Recordatorios de stock y novedades.        |
-| ⚙️ Configuración       | Preferencias y temas visuales.             |
+| Funcionalidad | Estado | Descripción |
+|--------------|--------|-------------|
+| 🧍‍♀️ Autenticación | ✅ | Sistema completo de login, registro y modo invitado |
+| 👤 Perfil de usuario | ✅ | Edición completa con validación y cifrado de dirección |
+| 🎨 Sistema de diálogos | ✅ | Diálogos personalizados con identidad visual de marca |
+| �️ Modo invitado | ✅ | Acceso limitado con restricciones visuales |
+| 🔐 Seguridad | ✅ | Encriptación AES-256-CBC para datos sensibles |
+| 👚 Gestión CRUD | 🚧 | En desarrollo |
+| 🛍️ Carrito de compras | 🚧 | En desarrollo |
+| 🎯 Catálogo visual | 🚧 | Filtros por género y categoría |
+
+---
+
+## 🎨 Sistema de Diálogos Personalizados
+
+Elite Couture cuenta con un sistema unificado de diálogos (`EliteCoutureDialog`) que mantiene la identidad visual en toda la app:
+
+### Características
+- ✨ **Tipografía Elite Sans Semibold** en todos los botones
+- � **Texto en MAYÚSCULAS** con letter-spacing optimizado (0.05)
+- 🔗 **Subrayado en botones** para mejor accesibilidad
+- 📏 **Tamaño profesional** (12sp) compacto y legible
+- 🎨 **Color de marca consistente** (#560E2D)
+- ⚙️ **Soporte para 3 botones** (Positivo/Neutral/Negativo)
+
+### Ejemplo de uso
+```kotlin
+EliteCoutureDialog.create(requireContext())
+    .setTitle(R.string.dialog_title)
+    .setMessage(R.string.dialog_message)
+    .setPositiveButton(R.string.button_save) {
+        saveChanges()
+    }
+    .setNeutralButton(R.string.button_discard) {
+        discardChanges()
+    }
+    .setNegativeButton(R.string.button_cancel)
+    .show()
+```
+
+📖 **Documentación completa**: Ver [DIALOG_SYSTEM.md](design/DIALOG_SYSTEM.md)
 
 ---
 
