@@ -69,6 +69,10 @@
     <string name="profile_quick_action_settings">Configuración</string>
     <string name="profile_save_changes">Guardar cambios</string>
     <string name="profile_logout">Cerrar sesión</string>
+    <string name="profile_logout_dialog_title">¿Cerrar sesión?</string>
+    <string name="profile_logout_dialog_message">¿Estás seguro de que deseas cerrar tu sesión?</string>
+    <string name="profile_logout_dialog_confirm">Cerrar sesión</string>
+    <string name="profile_logout_dialog_cancel">Cancelar</string>
     <string name="profile_edit_button_content_description">Editar información de perfil</string>
     <string name="profile_address_label">Dirección</string>
     <string name="profile_field_address_placeholder">Cra. 123 #45-67, Bogotá</string>
@@ -155,4 +159,27 @@
     <string name="edit_profile_password_updated">Contraseña actualizada correctamente</string>
     <string name="edit_profile_error_current_password">La contraseña actual es incorrecta</string>
     <string name="edit_profile_error_update_failed">Error al actualizar el perfil</string>
+    
+    <!-- Bottom Navigation -->
+    <string name="bottom_nav_store">Tienda</string>
+    <string name="bottom_nav_favorites">Favoritos</string>
+    <string name="bottom_nav_cart">Carrito</string>
+    <string name="bottom_nav_profile">Perfil</string>
+    
+    <!-- Favorites -->
+    <string name="favorites_title">Favoritos</string>
+    <string name="favorites_empty_title">Sin favoritos aún</string>
+    <string name="favorites_empty_message">Añade tus productos favoritos tocando la estrella en cualquier producto que te guste</string>
+    <string name="favorites_empty_action">Explorar productos</string>
+    <string name="favorites_item_removed">Eliminado de favoritos</string>
+    <string name="favorites_item_removed_undo">Deshacer</string>
+    <string name="favorites_item_added">Añadido a favoritos</string>
+    <string name="favorites_item_added_action">Ver favoritos</string>
+    <string name="favorites_count_single">%d producto guardado</string>
+    <string name="favorites_count_plural">%d productos guardados</string>
+    
+    <!-- Content Descriptions -->
+    <string name="desc_product_image">Imagen del producto</string>
+    <string name="desc_delete_favorite">Eliminar de favoritos</string>
+    <string name="desc_no_favorites">Sin favoritos</string>
 </resources>

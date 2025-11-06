@@ -114,4 +114,22 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">12dp</item>
     </style>
+
+    <!-- Brand Logo Styles -->
+    <style name="Widget.Elite.BrandLogo" parent="">
+        <item name="android:src">@drawable/ic_brand_logo_color</item>
+        <item name="android:contentDescription">@string/logo_content_description</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="Widget.Elite.BrandLogo.Splash">
+        <item name="android:layout_width">@dimen/logo_splash_width</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Widget.Elite.BrandLogo.Auth">
+        <item name="android:layout_width">@dimen/logo_auth_width</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

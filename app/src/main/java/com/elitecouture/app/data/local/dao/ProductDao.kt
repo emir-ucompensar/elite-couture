@@ -5,9 +5,36 @@ import android.database.Cursor
 import com.elitecouture.app.data.local.EliteCoutureDatabase
 import com.elitecouture.app.data.local.contract.DatabaseContract
 import com.elitecouture.app.data.local.entity.ProductEntity
+import com.elitecouture.app.domain.model.Product
 
 /** Access helpers for the products table. */
 class ProductDao(private val database: EliteCoutureDatabase) {
+    /**
+     * Inserts a Product domain model into the database
+     */
+    fun insert(product: Product): Long {
+        val values = ContentValues().apply {
+            if (product.id != 0L) {
+                put(DatabaseContract.Products.COLUMN_ID, product.id)
+            }
+            put(DatabaseContract.Products.COLUMN_UUID, product.uuid)
+            put(DatabaseContract.Products.COLUMN_NAME, product.name)
+            put(DatabaseContract.Products.COLUMN_TYPE, product.type)
+            put(DatabaseContract.Products.COLUMN_GENDER, product.gender)
+            put(DatabaseContract.Products.COLUMN_DESCRIPTION, product.description)
+            put(DatabaseContract.Products.COLUMN_PRICE, product.price)
+            put(DatabaseContract.Products.COLUMN_STOCK, product.stock)
+            put(DatabaseContract.Products.COLUMN_IMAGES, product.images.joinToString("|"))
+            put(DatabaseContract.Products.COLUMN_IS_VISIBLE_TO_GUEST, if (product.isVisibleToGuest) 1 else 0)
+        }
+
+        return database.writableDatabase.insert(
+            DatabaseContract.Products.TABLE_NAME,
+            null,
+            values
+        )
+    }
+
     fun insertOrReplace(entity: ProductEntity): Long {
         val values = ContentValues().apply {
             if (entity.id != 0L) {
@@ -20,7 +47,7 @@ class ProductDao(private val database: EliteCoutureDatabase) {
             put(DatabaseContract.Products.COLUMN_DESCRIPTION, entity.description)
             put(DatabaseContract.Products.COLUMN_PRICE, entity.price)
             put(DatabaseContract.Products.COLUMN_STOCK, entity.stock)
-            put(DatabaseContract.Products.COLUMN_IMAGE_URL, entity.imageUrl)
+            put(DatabaseContract.Products.COLUMN_IMAGES, entity.images)
             put(DatabaseContract.Products.COLUMN_IS_VISIBLE_TO_GUEST, if (entity.isVisibleToGuest) 1 else 0)
         }
 
@@ -42,7 +69,7 @@ class ProductDao(private val database: EliteCoutureDatabase) {
             DatabaseContract.Products.COLUMN_DESCRIPTION,
             DatabaseContract.Products.COLUMN_PRICE,
             DatabaseContract.Products.COLUMN_STOCK,
-            DatabaseContract.Products.COLUMN_IMAGE_URL,
+            DatabaseContract.Products.COLUMN_IMAGES,
             DatabaseContract.Products.COLUMN_IS_VISIBLE_TO_GUEST
         )
 
@@ -90,7 +117,7 @@ class ProductDao(private val database: EliteCoutureDatabase) {
             gender = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_GENDER)),
             price = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_PRICE)),
             stock = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_STOCK)),
-            imageUrl = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_IMAGE_URL)),
+            images = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_IMAGES)) ?: "",
             isVisibleToGuest = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_IS_VISIBLE_TO_GUEST)) == 1
         )
     }

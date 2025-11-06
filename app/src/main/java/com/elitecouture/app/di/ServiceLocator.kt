@@ -2,15 +2,21 @@ package com.elitecouture.app.di
 
 import android.content.Context
 import com.elitecouture.app.data.local.EliteCoutureDatabase
+import com.elitecouture.app.data.local.dao.FavoriteDao
 import com.elitecouture.app.data.local.dao.ProductDao
 import com.elitecouture.app.data.local.dao.UserDao
 import com.elitecouture.app.data.repository.AuthRepository
 import com.elitecouture.app.data.repository.ProductRepository
+import com.elitecouture.app.data.seed.DatabaseSeeder
 import com.elitecouture.app.data.session.SessionManager
 import com.elitecouture.app.domain.usecase.auth.EnableGuestAccessUseCase
 import com.elitecouture.app.domain.usecase.auth.LoginUserUseCase
 import com.elitecouture.app.domain.usecase.auth.LogoutUserUseCase
 import com.elitecouture.app.domain.usecase.auth.RegisterUserUseCase
+import com.elitecouture.app.domain.usecase.favorites.AddProductToFavoritesUseCase
+import com.elitecouture.app.domain.usecase.favorites.GetUserFavoritesUseCase
+import com.elitecouture.app.domain.usecase.favorites.IsProductFavoriteUseCase
+import com.elitecouture.app.domain.usecase.favorites.RemoveProductFromFavoritesUseCase
 import com.elitecouture.app.domain.usecase.product.GetProductCatalogUseCase
 import com.elitecouture.app.domain.usecase.product.GetProductsByCategoryUseCase
 import com.elitecouture.app.domain.usecase.product.GetProductsByGenderUseCase
@@ -69,6 +75,21 @@ object ServiceLocator {
      */
     fun provideSessionManager(context: Context): SessionManager =
         SessionManager(context.applicationContext)
+
+    // ============================================
+    // DATABASE SEEDER
+    // ============================================
+    
+    /**
+     * Proporciona instancia de DatabaseSeeder.
+     */
+    fun provideDatabaseSeeder(context: Context): DatabaseSeeder {
+        val database = provideDatabase(context)
+        return DatabaseSeeder(
+            context = context.applicationContext,
+            productDao = ProductDao(database)
+        )
+    }
 
     // ============================================
     // USE CASES - AUTH
@@ -164,6 +185,54 @@ object ServiceLocator {
     fun provideSearchProductsUseCase(context: Context): SearchProductsUseCase {
         return SearchProductsUseCase(
             productRepository = provideProductRepository(context)
+        )
+    }
+
+    // ============================================
+    // USE CASES - FAVORITES
+    // ============================================
+    
+    /**
+     * Proporciona AddProductToFavoritesUseCase.
+     */
+    fun provideAddProductToFavoritesUseCase(context: Context): AddProductToFavoritesUseCase {
+        val database = provideDatabase(context)
+        return AddProductToFavoritesUseCase(
+            favoriteDao = FavoriteDao(database),
+            sessionManager = provideSessionManager(context)
+        )
+    }
+
+    /**
+     * Proporciona RemoveProductFromFavoritesUseCase.
+     */
+    fun provideRemoveProductFromFavoritesUseCase(context: Context): RemoveProductFromFavoritesUseCase {
+        val database = provideDatabase(context)
+        return RemoveProductFromFavoritesUseCase(
+            favoriteDao = FavoriteDao(database),
+            sessionManager = provideSessionManager(context)
+        )
+    }
+
+    /**
+     * Proporciona IsProductFavoriteUseCase.
+     */
+    fun provideIsProductFavoriteUseCase(context: Context): IsProductFavoriteUseCase {
+        val database = provideDatabase(context)
+        return IsProductFavoriteUseCase(
+            favoriteDao = FavoriteDao(database),
+            sessionManager = provideSessionManager(context)
+        )
+    }
+
+    /**
+     * Proporciona GetUserFavoritesUseCase.
+     */
+    fun provideGetUserFavoritesUseCase(context: Context): GetUserFavoritesUseCase {
+        val database = provideDatabase(context)
+        return GetUserFavoritesUseCase(
+            favoriteDao = FavoriteDao(database),
+            sessionManager = provideSessionManager(context)
         )
     }
 }

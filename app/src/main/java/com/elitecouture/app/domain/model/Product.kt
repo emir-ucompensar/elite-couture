@@ -10,6 +10,6 @@ data class Product(
     val gender: String?,
     val price: Double,
     val stock: Int,
-    val imageUrl: String?,
+    val images: List<String> = emptyList(), // Lista de rutas de imágenes (ej: ["product_01_img_1.webp", ...])
     val isVisibleToGuest: Boolean = true
 )

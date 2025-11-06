@@ -19,80 +19,17 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <ScrollView
+            <!-- RecyclerView vertical para lista de productos -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_products"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fillViewport="true">
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/item_product" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/filter_card"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="24dp"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="3dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="20dp">
-
-                            <TextView
-                                android:id="@+id/store_filter_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/text_primary_dark"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                tools:text="Moda Hombre · Chaquetas" />
-
-                            <TextView
-                                android:id="@+id/store_filter_hint"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/drawer_subtitle"
-                                android:textColor="@color/text_secondary_dark"
-                                android:textSize="14sp" />
-
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            android:text="@string/store_under_construction_title"
-                            android:textColor="@color/color_warning"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/store_under_construction_message"
-                            android:textAlignment="center"
-                            android:textColor="@color/text_secondary_dark"
-                            android:textSize="16sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </ScrollView>
         </FrameLayout>
 
         <!-- Barra de navegación inferior -->
@@ -102,7 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@color/surface_light"
-            app:itemTextColor="@color/color_primary"
+            app:itemTextColor="@color/bottom_nav_icon_color"
+            app:itemIconTint="@color/bottom_nav_icon_color"
+            app:itemBackground="@drawable/bottom_nav_item_background"
             app:menu="@menu/menu_navigation_bottom" />
 
     </LinearLayout>

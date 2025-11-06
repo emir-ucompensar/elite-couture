@@ -54,13 +54,8 @@
 
             <ImageView
                 android:id="@+id/register_hero"
-                android:layout_width="96dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/logo_content_description"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_brand_logo_color"
+                style="@style/Widget.Elite.BrandLogo.Auth"
+                android:layout_marginStart="@dimen/spacing_xs"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/register_title_text"
                 app:layout_constraintTop_toTopOf="parent"

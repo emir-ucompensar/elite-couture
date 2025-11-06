@@ -21,10 +21,12 @@ class EliteCoutureDatabase private constructor(
         db.execSQL(DatabaseContract.Users.CREATE_TABLE)
         db.execSQL(DatabaseContract.Products.CREATE_TABLE)
         db.execSQL(DatabaseContract.CartItems.CREATE_TABLE)
+        db.execSQL(DatabaseContract.Favorites.CREATE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         // Academic project: easiest path is to recreate the schema on each upgrade.
+        db.execSQL("DROP TABLE IF EXISTS ${DatabaseContract.Favorites.TABLE_NAME}")
         db.execSQL("DROP TABLE IF EXISTS ${DatabaseContract.CartItems.TABLE_NAME}")
         db.execSQL("DROP TABLE IF EXISTS ${DatabaseContract.Products.TABLE_NAME}")
         db.execSQL("DROP TABLE IF EXISTS ${DatabaseContract.Users.TABLE_NAME}")

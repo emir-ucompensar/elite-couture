@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generic product placeholder with Elite Couture branding -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- Background gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:startColor="#FFE6ED"
+                android:endColor="#F5D5DC"
+                android:type="linear"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+    
+    <!-- Center brand logo -->
+    <item
+        android:width="80dp"
+        android:height="80dp"
+        android:gravity="center">
+        <shape android:shape="oval">
+            <solid android:color="#560E2D"/>
+        </shape>
+    </item>
+    
+    <!-- Inner circle detail -->
+    <item
+        android:width="60dp"
+        android:height="60dp"
+        android:gravity="center">
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF"/>
+            <stroke
+                android:width="2dp"
+                android:color="#560E2D"/>
+        </shape>
+    </item>
+    
+</layer-list>

@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.elitecouture.app.R
 import com.elitecouture.app.di.ServiceLocator
 import com.elitecouture.app.domain.usecase.auth.RegisterUserUseCase
+import com.elitecouture.app.ui.common.extension.showStyledSnackbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -73,7 +73,7 @@ class RegisterFragment : Fragment() {
 
             val existingUser = authRepository.findByEmail(email)
             if (existingUser != null) {
-                Toast.makeText(requireContext(), getString(R.string.error_account_already_exists), Toast.LENGTH_LONG).show()
+                requireView().showStyledSnackbar(getString(R.string.error_account_already_exists))
                 return@setOnClickListener
             }
 
@@ -84,7 +84,7 @@ class RegisterFragment : Fragment() {
                 password = password
             )
             result.onSuccess {
-                Toast.makeText(requireContext(), getString(R.string.toast_registration_success), Toast.LENGTH_SHORT).show()
+                requireView().showStyledSnackbar(getString(R.string.toast_registration_success))
                 
                 // Navegar a tienda y limpiar back stack completo (login y register)
                 val navOptions = androidx.navigation.NavOptions.Builder()
@@ -92,16 +92,16 @@ class RegisterFragment : Fragment() {
                     .build()
                 findNavController().navigate(R.id.action_registerFragment_to_storeFragment, null, navOptions)
             }.onFailure {
-                Toast.makeText(requireContext(), getString(R.string.error_registration_generic), Toast.LENGTH_SHORT).show()
+                requireView().showStyledSnackbar(getString(R.string.error_registration_generic))
             }
         }
 
         googleRegisterButton.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.toast_feature_unavailable), Toast.LENGTH_SHORT).show()
+            requireView().showStyledSnackbar(getString(R.string.toast_feature_unavailable))
         }
 
         appleRegisterButton.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.toast_feature_unavailable), Toast.LENGTH_SHORT).show()
+            requireView().showStyledSnackbar(getString(R.string.toast_feature_unavailable))
         }
 
         loginLink.setOnClickListener {

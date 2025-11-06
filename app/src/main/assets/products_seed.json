@@ -1,0 +1,109 @@
+{
+  "products": [
+    {
+      "uuid": "prod-001-vestido-vinotinto",
+      "name": "Vestido Vinotinto Elegante",
+      "description": "Hermoso vestido en tono vinotinto, perfecto para eventos especiales y ocasiones formales.",
+      "type": "Vestido",
+      "gender": "Mujer",
+      "price": 185000.00,
+      "stock": 8,
+      "images": [
+        "product_01_img_1",
+        "product_01_img_2",
+        "product_01_img_3"
+      ],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-002-vestido-vino-rojo",
+      "name": "Vestido Vino Rojo",
+      "description": "Elegante vestido en color vino rojo, ideal para cenas y eventos nocturnos sofisticados.",
+      "type": "Vestido",
+      "gender": "Mujer",
+      "price": 175000.00,
+      "stock": 10,
+      "images": [
+        "product_02_img_1",
+        "product_02_img_2",
+        "product_02_img_3"
+      ],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-003-vestido-corto-negro",
+      "name": "Vestido Corto Negro",
+      "description": "Vestido corto negro versátil, perfecto para fiestas y salidas casuales elegantes.",
+      "type": "Vestido",
+      "gender": "Mujer",
+      "price": 145000.00,
+      "stock": 12,
+      "images": [
+        "product_03_img_1",
+        "product_03_img_2",
+        "product_03_img_3"
+      ],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-004-conjunto-negro-sin-mangas",
+      "name": "Vestido/Pantalón Negro Sin Mangas",
+      "description": "Elegante conjunto negro sin mangas, diseño moderno y sofisticado para múltiples ocasiones.",
+      "type": "Conjunto",
+      "gender": "Mujer",
+      "price": 195000.00,
+      "stock": 7,
+      "images": [
+        "product_04_img_1",
+        "product_04_img_2",
+        "product_04_img_3"
+      ],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-005-vestido-largo-azul-oscuro",
+      "name": "Vestido Largo Azul Oscuro",
+      "description": "Majestuoso vestido largo en azul oscuro, ideal para galas y eventos formales de noche.",
+      "type": "Vestido",
+      "gender": "Mujer",
+      "price": 220000.00,
+      "stock": 6,
+      "images": [
+        "product_05_img_1",
+        "product_05_img_2",
+        "product_05_img_3"
+      ],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-006-vestido-estampado-vinotinto-amarillo",
+      "name": "Vestido Estampado Vinotinto y Amarillo",
+      "description": "Vestido con vibrante estampado en vinotinto y amarillo, perfecto para destacar con estilo único.",
+      "type": "Vestido",
+      "gender": "Mujer",
+      "price": 165000.00,
+      "stock": 9,
+      "images": [
+        "product_06_img_1",
+        "product_06_img_2",
+        "product_06_img_3"
+      ],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-007-chaqueta-fiesta-azul-texturizada",
+      "name": "Chaqueta Fiesta Azul Oscuro Texturizada",
+      "description": "Sofisticada chaqueta texturizada en azul oscuro, perfecta para elevar cualquier look de fiesta.",
+      "type": "Chaqueta",
+      "gender": "Mujer",
+      "price": 210000.00,
+      "stock": 5,
+      "images": [
+        "product_07_img_1",
+        "product_07_img_2",
+        "product_07_img_3"
+      ],
+      "isVisibleToGuest": false
+    }
+  ]
+}

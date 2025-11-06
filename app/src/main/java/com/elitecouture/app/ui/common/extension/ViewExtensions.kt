@@ -240,3 +240,70 @@ inline fun View.doIfGone(block: View.() -> Unit) {
         block()
     }
 }
+
+/**
+ * Muestra un Snackbar con estilo personalizado (color de fondo magenta, texto blanco)
+ * y anclado encima del BottomNavigationView si está presente.
+ * 
+ * @param message mensaje a mostrar
+ * @param duration duración del Snackbar (por defecto LENGTH_SHORT)
+ * @param actionText texto del botón de acción (opcional)
+ * @param actionCallback callback a ejecutar cuando se hace clic en la acción (opcional)
+ * @param onDismissed callback a ejecutar cuando el Snackbar se descarta sin acción (opcional)
+ */
+fun View.showStyledSnackbar(
+    message: String,
+    duration: Int = com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,
+    actionText: String? = null,
+    actionCallback: (() -> Unit)? = null,
+    onDismissed: (() -> Unit)? = null
+) {
+    val snackbar = com.google.android.material.snackbar.Snackbar.make(this, message, duration)
+    
+    // Buscar el BottomNavigationView en la jerarquía para anclarlo correctamente
+    val rootView = this.rootView
+    val bottomNav = rootView.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+        com.elitecouture.app.R.id.bottom_navigation
+    )
+    
+    // Si existe el BottomNavigationView, anclar el Snackbar encima de él
+    if (bottomNav != null) {
+        snackbar.anchorView = bottomNav
+    }
+    
+    // Cambiar el color de fondo a magenta oscuro
+    snackbar.view.setBackgroundColor(context.getColorCompat(com.elitecouture.app.R.color.color_primary))
+    
+    // Cambiar el color del texto a blanco
+    val textView = snackbar.view.findViewById<android.widget.TextView>(
+        com.google.android.material.R.id.snackbar_text
+    )
+    textView.setTextColor(context.getColorCompat(android.R.color.white))
+    
+    // Configurar acción si se proporciona
+    if (actionText != null && actionCallback != null) {
+        snackbar.setAction(actionText) {
+            actionCallback.invoke()
+        }
+        // Color del texto de la acción en blanco
+        snackbar.setActionTextColor(context.getColorCompat(android.R.color.white))
+    }
+    
+    // Configurar callback de descarte si se proporciona
+    if (onDismissed != null) {
+        snackbar.addCallback(object : com.google.android.material.snackbar.Snackbar.Callback() {
+            override fun onDismissed(transientBottomBar: com.google.android.material.snackbar.Snackbar?, event: Int) {
+                super.onDismissed(transientBottomBar, event)
+                // Solo ejecutar onDismissed si el Snackbar se descartó por timeout o swipe, no por acción
+                if (event == DISMISS_EVENT_TIMEOUT || event == DISMISS_EVENT_SWIPE || event == DISMISS_EVENT_CONSECUTIVE) {
+                    onDismissed.invoke()
+                }
+            }
+        })
+    }
+    
+    // Aumentar la elevación para asegurar que esté encima de todo
+    snackbar.view.elevation = 16f
+    
+    snackbar.show()
+}

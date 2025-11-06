@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:clipChildren="true"
+    android:clipToPadding="true">
+
+    <!-- Botón de eliminar que aparece al deslizar -->
+    <FrameLayout
+        android:id="@+id/delete_button"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@drawable/bg_delete_button"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="46dp"
+            android:src="@drawable/star_off_outline"
+            android:tint="@android:color/white"
+            android:contentDescription="@string/desc_delete_favorite"
+            android:clickable="false"
+            android:focusable="false" />
+
+    </FrameLayout>
+
+    <!-- Tarjeta del producto (foreground) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/surface_light">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <!-- Product Image (pequeña) -->
+            <ImageView
+                android:id="@+id/image_product"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/desc_product_image"
+                android:background="@color/background_light"
+                tools:src="@drawable/product_placeholder" />
+
+            <!-- Product Info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+
+                <!-- Product Name -->
+                <TextView
+                    android:id="@+id/text_product_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/elite_sans"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.02"
+                    android:textColor="@color/text_primary_dark"
+                    android:textSize="14sp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    tools:text="VESTIDO ELEGANTE" />
+
+                <!-- Product Description -->
+                <TextView
+                    android:id="@+id/text_product_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/elite_sans"
+                    android:textColor="@color/text_secondary_dark"
+                    android:textSize="12sp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    tools:text="Elegante y moderno" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

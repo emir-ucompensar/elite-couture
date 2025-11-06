@@ -6,8 +6,8 @@
     <color name="color_primary_dark">#3F0D23</color>    <!-- Rojo oscuro para estados presionados -->
     
     <!--    PALETA DE BOTONES   -->
-    <color name="button_primary">#B4213B</color>        <!-- Color principal para botones CTA -->
-    <color name="button_primary_pressed">#931C31</color><!-- Estado presionado de botones -->
+    <color name="button_primary">#b42146</color>        <!-- Color principal para botones CTA -->
+    <color name="button_primary_pressed">#931C75</color><!-- Estado presionado de botones -->
     <color name="button_primary_disabled">#D88D9A</color><!-- Estado deshabilitado de botones -->
     
     <!--    PALETA DE ACENTOS   -->
@@ -38,7 +38,8 @@
     <color name="color_info">#2196F3</color>            <!-- Azul informativo -->
 
     <!--   LOGO E ICONOS  -->
-    <color name="red_700">#741717</color>
+    <color name="red_700">#741742</color>
+    <color name="icon_background">#FFE6ED</color>       <!-- Rosa pálido para fondo del icono -->
 
     <!--   SOCIAL & DIVIDERS  -->
     <color name="divider_light">#E0E0E0</color>

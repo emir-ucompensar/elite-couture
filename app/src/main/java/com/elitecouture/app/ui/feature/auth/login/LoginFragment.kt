@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.elitecouture.app.R
 import com.elitecouture.app.di.ServiceLocator
 import com.elitecouture.app.domain.usecase.auth.EnableGuestAccessUseCase
 import com.elitecouture.app.domain.usecase.auth.LoginUserUseCase
+import com.elitecouture.app.ui.common.extension.showStyledSnackbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -63,15 +63,15 @@ class LoginFragment : Fragment() {
         }
 
         googleLoginButton.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.toast_feature_unavailable), Toast.LENGTH_SHORT).show()
+            requireView().showStyledSnackbar(getString(R.string.toast_feature_unavailable))
         }
 
         appleLoginButton.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.toast_feature_unavailable), Toast.LENGTH_SHORT).show()
+            requireView().showStyledSnackbar(getString(R.string.toast_feature_unavailable))
         }
 
         forgotPasswordText.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.toast_forgot_password), Toast.LENGTH_SHORT).show()
+            requireView().showStyledSnackbar(getString(R.string.toast_forgot_password))
         }
 
         createAccountLink.setOnClickListener {
@@ -81,7 +81,7 @@ class LoginFragment : Fragment() {
 
         guestAccessText.setOnClickListener {
             enableGuestAccessUseCase()
-            Toast.makeText(requireContext(), getString(R.string.toast_guest_mode_enabled), Toast.LENGTH_SHORT).show()
+            requireView().showStyledSnackbar(getString(R.string.toast_guest_mode_enabled))
             
             // Navegar a tienda y limpiar back stack (para invitado, back cierra la app)
             val navOptions = androidx.navigation.NavOptions.Builder()
@@ -129,7 +129,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_storeFragment, null, navOptions)
         }.onFailure {
             passwordInputLayout.error = getString(R.string.error_login_invalid)
-            Toast.makeText(requireContext(), getString(R.string.error_login_invalid), Toast.LENGTH_SHORT).show()
+            requireView().showStyledSnackbar(getString(R.string.error_login_invalid))
         }
     }
 }

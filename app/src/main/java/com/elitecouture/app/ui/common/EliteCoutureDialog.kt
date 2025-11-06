@@ -40,10 +40,13 @@ class EliteCoutureDialog private constructor(
         private var message: String? = null
         private var positiveButtonText: String? = null
         private var positiveButtonAction: (() -> Unit)? = null
+        private var positiveButtonColor: Int? = null
         private var negativeButtonText: String? = null
         private var negativeButtonAction: (() -> Unit)? = null
+        private var negativeButtonColor: Int? = null
         private var neutralButtonText: String? = null
         private var neutralButtonAction: (() -> Unit)? = null
+        private var neutralButtonColor: Int? = null
         private var cancelable: Boolean = true
         
         /**
@@ -97,6 +100,14 @@ class EliteCoutureDialog private constructor(
         }
         
         /**
+         * Establece el color del botón positivo.
+         */
+        fun setPositiveButtonColor(colorResId: Int): Builder {
+            this.positiveButtonColor = context.getColor(colorResId)
+            return this
+        }
+        
+        /**
          * Establece el botón negativo (ej: "CANCELAR").
          */
         fun setNegativeButton(text: String, action: (() -> Unit)? = null): Builder {
@@ -115,6 +126,14 @@ class EliteCoutureDialog private constructor(
         }
         
         /**
+         * Establece el color del botón negativo.
+         */
+        fun setNegativeButtonColor(colorResId: Int): Builder {
+            this.negativeButtonColor = context.getColor(colorResId)
+            return this
+        }
+        
+        /**
          * Establece el botón neutral (ej: "DESCARTAR").
          */
         fun setNeutralButton(text: String, action: (() -> Unit)? = null): Builder {
@@ -129,6 +148,14 @@ class EliteCoutureDialog private constructor(
         fun setNeutralButton(textResId: Int, action: (() -> Unit)? = null): Builder {
             this.neutralButtonText = context.getString(textResId)
             this.neutralButtonAction = action
+            return this
+        }
+        
+        /**
+         * Establece el color del botón neutral.
+         */
+        fun setNeutralButtonColor(colorResId: Int): Builder {
+            this.neutralButtonColor = context.getColor(colorResId)
             return this
         }
         
@@ -192,11 +219,11 @@ class EliteCoutureDialog private constructor(
          */
         private fun applyButtonStyles(dialog: androidx.appcompat.app.AlertDialog) {
             val font = ResourcesCompat.getFont(context, R.font.elite_sans_semibold)
-            val primaryColor = context.getColor(R.color.color_primary)
+            val defaultColor = context.getColor(R.color.color_primary)
             
             // Estilizar botón positivo
             dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)?.apply {
-                setTextColor(primaryColor)
+                setTextColor(positiveButtonColor ?: defaultColor)
                 typeface = font
                 textSize = 12f
                 letterSpacing = 0.05f
@@ -207,7 +234,7 @@ class EliteCoutureDialog private constructor(
             
             // Estilizar botón negativo
             dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE)?.apply {
-                setTextColor(primaryColor)
+                setTextColor(negativeButtonColor ?: defaultColor)
                 typeface = font
                 textSize = 12f
                 letterSpacing = 0.05f
@@ -218,7 +245,7 @@ class EliteCoutureDialog private constructor(
             
             // Estilizar botón neutral
             dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL)?.apply {
-                setTextColor(primaryColor)
+                setTextColor(neutralButtonColor ?: defaultColor)
                 typeface = font
                 textSize = 12f
                 letterSpacing = 0.05f

@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.elitecouture.app.R
 import com.elitecouture.app.di.ServiceLocator
+import com.elitecouture.app.ui.common.EliteCoutureDialog
+import com.elitecouture.app.ui.common.extension.showStyledSnackbar
 import com.google.android.material.button.MaterialButton
 
 class ProfileFragment : Fragment() {
@@ -24,6 +25,7 @@ class ProfileFragment : Fragment() {
     private lateinit var purchaseHistoryButton: MaterialButton
     private lateinit var settingsButton: MaterialButton
     private lateinit var logoutButton: MaterialButton
+    private lateinit var bottomNavigation: com.google.android.material.bottomnavigation.BottomNavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +48,10 @@ class ProfileFragment : Fragment() {
         purchaseHistoryButton = view.findViewById(R.id.purchase_history_button)
         settingsButton = view.findViewById(R.id.settings_button)
         logoutButton = view.findViewById(R.id.logout_button)
+        bottomNavigation = view.findViewById(R.id.bottom_navigation)
+
+        // Configurar Bottom Navigation
+        setupBottomNavigation()
 
         // Configurar listeners
         backButton.setOnClickListener {
@@ -57,20 +63,19 @@ class ProfileFragment : Fragment() {
         }
 
         favoritesButton.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.toast_profile_favorites_in_progress), Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_profileFragment_to_favoritesFragment)
         }
 
         purchaseHistoryButton.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.toast_profile_history_in_progress), Toast.LENGTH_SHORT).show()
+            requireView().showStyledSnackbar(getString(R.string.toast_profile_history_in_progress))
         }
 
         settingsButton.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.toast_profile_settings_in_progress), Toast.LENGTH_SHORT).show()
+            requireView().showStyledSnackbar(getString(R.string.toast_profile_settings_in_progress))
         }
 
         logoutButton.setOnClickListener {
-            sessionManager.clearSession()
-            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+            showLogoutConfirmationDialog()
         }
 
         // Cargar datos del usuario desde la sesión
@@ -110,5 +115,58 @@ class ProfileFragment : Fragment() {
             )
             profileAddress.setTypeface(null, android.graphics.Typeface.NORMAL)
         }
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        EliteCoutureDialog.create(requireContext())
+            .setTitle(R.string.profile_logout_dialog_title)
+            .setMessage(R.string.profile_logout_dialog_message)
+            .setPositiveButton(R.string.profile_logout_dialog_confirm) {
+                performLogout()
+            }
+            .setPositiveButtonColor(R.color.color_error)
+            .setNegativeButton(R.string.profile_logout_dialog_cancel)
+            .setCancelable(true)
+            .show()
+    }
+
+    private fun performLogout() {
+        sessionManager.clearSession()
+        findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+    }
+
+    private fun setupBottomNavigation() {
+        // Establecer el ítem seleccionado como "Mi Perfil"
+        bottomNavigation.selectedItemId = R.id.navigation_profile
+
+        bottomNavigation.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.navigation_store -> {
+                    // Volver a la tienda (pop back stack)
+                    findNavController().popBackStack()
+                    true
+                }
+                R.id.navigation_cart -> {
+                    if (sessionManager.isGuestMode()) {
+                        requireView().showStyledSnackbar(getString(R.string.toast_guest_restricted_feature))
+                        false
+                    } else {
+                        requireView().showStyledSnackbar(getString(R.string.toast_cart_under_construction))
+                        true
+                    }
+                }
+                R.id.navigation_profile -> {
+                    // Ya estamos en perfil
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Asegurar que el ítem correcto esté seleccionado al volver a este fragmento
+        bottomNavigation.selectedItemId = R.id.navigation_profile
     }
 }
