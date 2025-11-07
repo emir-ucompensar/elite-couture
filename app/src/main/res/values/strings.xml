@@ -54,6 +54,7 @@
     <string name="toast_feature_unavailable">Funcionalidad no disponible en esta versión</string>
     <string name="toast_guest_mode_enabled">Modo invitado activado. Algunas funciones estarán limitadas.</string>
     <string name="toast_guest_restricted_feature">Crea una cuenta para acceder a esta funcionalidad</string>
+    <string name="action_login">Iniciar sesión</string>
 
     <!-- Profile -->
     <string name="profile_section_title">Información Personal</string>
@@ -86,6 +87,17 @@
         <string name="store_filter_gender_all">Todas las prendas</string>
         <string name="store_filter_gender_men">Moda Hombre</string>
         <string name="store_filter_gender_women">Moda Mujer</string>
+    
+    <!-- Menu lateral -->
+    <string name="menu_category_men">Hombre</string>
+    <string name="menu_category_women">Mujer</string>
+    <string name="menu_item_dresses">Vestidos</string>
+    <string name="menu_item_shirts">Camisas</string>
+    <string name="menu_item_jackets">Chaquetas</string>
+    <string name="menu_item_pants">Pantalones</string>
+    <string name="menu_item_shoes">Zapatos</string>
+    <string name="menu_item_accessories">Accesorios</string>
+    <string name="menu_item_bags">Bolsos</string>
         <string name="store_filter_category_all">Todas las categorías</string>
         <string name="store_filter_category_pants">Pantalones</string>
         <string name="store_filter_category_jackets">Chaquetas</string>
@@ -125,6 +137,7 @@
     <string name="toast_register_google">Registrándose con Google...</string>
     <string name="toast_register_apple">Registrándose con Apple...</string>
     <string name="toast_cart_under_construction">Carrito en construcción</string>
+    <string name="toast_menu_under_construction">Menú en construcción</string>
     <string name="toast_profile_edit_in_progress">Editar perfil - En desarrollo</string>
     <string name="toast_profile_favorites_in_progress">Mis favoritos - En desarrollo</string>
     <string name="toast_profile_history_in_progress">Historial de compras - En desarrollo</string>
@@ -178,8 +191,29 @@
     <string name="favorites_count_single">%d producto guardado</string>
     <string name="favorites_count_plural">%d productos guardados</string>
     
+    <!-- Cart -->
+    <string name="cart_title">Carrito de Compras</string>
+    <string name="cart_empty_title">Tu carrito está vacío</string>
+    <string name="cart_empty_message">Añade productos a tu carrito y haz tu pedido cuando estés listo</string>
+    <string name="cart_empty_action">Explorar productos</string>
+    <string name="cart_count_singular">1 producto en el carrito</string>
+    <string name="cart_count_plural">%d productos en el carrito</string>
+    <string name="cart_subtotal">Subtotal</string>
+    <string name="cart_checkout_button">Finalizar Compra</string>
+    <string name="cart_item_removed">%s eliminado del carrito</string>
+    <string name="cart_item_added">%s añadido al carrito</string>
+    <string name="cart_stock_label">Stock: %d</string>
+    <string name="cart_button_add">Añadir al carrito</string>
+    <string name="cart_button_added">Producto añadido</string>
+    
     <!-- Content Descriptions -->
     <string name="desc_product_image">Imagen del producto</string>
     <string name="desc_delete_favorite">Eliminar de favoritos</string>
     <string name="desc_no_favorites">Sin favoritos</string>
+    <string name="desc_no_cart_items">Carrito vacío</string>
+    <string name="desc_decrease_quantity">Disminuir cantidad</string>
+    <string name="desc_increase_quantity">Aumentar cantidad</string>
+    
+    <!-- Toast Messages -->
+    <string name="toast_checkout_under_construction">Funcionalidad de compra no disponible</string>
 </resources>

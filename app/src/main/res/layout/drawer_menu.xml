@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    android:background="@color/surface_light"
+    android:orientation="vertical">
+
+    <!-- Toolbar con título y botón de cierre -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/drawer_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/surface_light"
+        android:elevation="4dp"
+        app:title="MENÚ"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:titleTextColor="@color/color_primary">
+
+        <!-- Botón de cierre personalizado -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/drawer_close_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="4dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/close_box"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="24dp"
+            app:iconTint="@color/color_primary" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <!-- Divisor -->
+    <View
+        android:id="@+id/drawer_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_light" />
+
+    <!-- Contenedor para el contenido del menú -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/drawer_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/drawer_menu_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <!-- Opción TODO (sin subcategorías) -->
+            <TextView
+                android:id="@+id/menu_all_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/elite_sans_semibold"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="16dp"
+                android:text="TODO"
+                android:textAllCaps="true"
+                android:textColor="@color/text_primary_dark"
+                android:textSize="16sp" />
+
+            <!-- Divisor -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/divider_light" />
+
+            <!-- Menú Hombre -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Header Hombre -->
+                <LinearLayout
+                    android:id="@+id/menu_men_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="24dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/menu_men_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/elite_sans_semibold"
+                        android:text="@string/menu_category_men"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text_primary_dark"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/menu_men_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@string/menu_category_men"
+                        android:src="@drawable/menu_down"
+                        app:tint="@color/text_primary_dark" />
+
+                </LinearLayout>
+
+                <!-- Subitems Hombre -->
+                <LinearLayout
+                    android:id="@+id/menu_men_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/menu_men_shirts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="@string/menu_item_shirts"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_men_jackets"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="@string/menu_item_jackets"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_men_pants"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="@string/menu_item_pants"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_men_shoes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="@string/menu_item_shoes"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_men_accessories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="@string/menu_item_accessories"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_men_jerseys"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="Jerseys"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_men_sacos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="Sacos"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Divisor -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/divider_light" />
+
+            <!-- Menú Mujer -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Header Mujer -->
+                <LinearLayout
+                    android:id="@+id/menu_women_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="24dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/menu_women_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/elite_sans_semibold"
+                        android:text="@string/menu_category_women"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text_primary_dark"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/menu_women_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@string/menu_category_women"
+                        android:src="@drawable/menu_down"
+                        app:tint="@color/text_primary_dark" />
+
+                </LinearLayout>
+
+                <!-- Subitems Mujer -->
+                <LinearLayout
+                    android:id="@+id/menu_women_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/menu_women_dresses"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="@string/menu_item_dresses"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_women_pants"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="@string/menu_item_pants"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_women_shoes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="@string/menu_item_shoes"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_women_accessories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="@string/menu_item_accessories"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_women_bags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="@string/menu_item_bags"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/menu_women_suits"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/elite_sans"
+                        android:paddingStart="48dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="12dp"
+                        android:text="Conjuntos"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

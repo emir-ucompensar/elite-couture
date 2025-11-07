@@ -123,6 +123,7 @@ class FavoriteDao(private val database: EliteCoutureDatabase) {
                 p.${DatabaseContract.Products.COLUMN_PRICE} as prod_price,
                 p.${DatabaseContract.Products.COLUMN_STOCK} as prod_stock,
                 p.${DatabaseContract.Products.COLUMN_IMAGES} as prod_images,
+                p.${DatabaseContract.Products.COLUMN_TAGS} as prod_tags,
                 p.${DatabaseContract.Products.COLUMN_IS_VISIBLE_TO_GUEST} as prod_is_visible
             FROM ${DatabaseContract.Favorites.TABLE_NAME} f
             INNER JOIN ${DatabaseContract.Products.TABLE_NAME} p 
@@ -152,6 +153,7 @@ class FavoriteDao(private val database: EliteCoutureDatabase) {
                     price = it.getDouble(it.getColumnIndexOrThrow("prod_price")),
                     stock = it.getInt(it.getColumnIndexOrThrow("prod_stock")),
                     images = it.getString(it.getColumnIndexOrThrow("prod_images")),
+                    tags = it.getString(it.getColumnIndexOrThrow("prod_tags")),
                     isVisibleToGuest = it.getInt(it.getColumnIndexOrThrow("prod_is_visible")) == 1
                 )
 

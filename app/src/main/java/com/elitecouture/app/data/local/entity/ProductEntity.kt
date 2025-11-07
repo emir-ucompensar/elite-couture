@@ -13,6 +13,7 @@ data class ProductEntity(
     val price: Double,
     val stock: Int,
     val images: String, // Lista serializada como string separado por '|' (ej: "img1.webp|img2.webp|img3.webp")
+    val tags: String, // Tags serializados como string separado por '|' (ej: "Vestido|Mujer|Elegante")
     val isVisibleToGuest: Boolean
 ) {
     fun toDomain(): Product = Product(
@@ -25,6 +26,7 @@ data class ProductEntity(
         price = price,
         stock = stock,
         images = if (images.isBlank()) emptyList() else images.split('|'),
+        tags = if (tags.isBlank()) emptyList() else tags.split('|'),
         isVisibleToGuest = isVisibleToGuest
     )
 
@@ -39,6 +41,7 @@ data class ProductEntity(
             price = product.price,
             stock = product.stock,
             images = product.images.joinToString("|"),
+            tags = product.tags.joinToString("|"),
             isVisibleToGuest = product.isVisibleToGuest
         )
     }

@@ -2,6 +2,7 @@ package com.elitecouture.app.di
 
 import android.content.Context
 import com.elitecouture.app.data.local.EliteCoutureDatabase
+import com.elitecouture.app.data.local.dao.CartDao
 import com.elitecouture.app.data.local.dao.FavoriteDao
 import com.elitecouture.app.data.local.dao.ProductDao
 import com.elitecouture.app.data.local.dao.UserDao
@@ -13,6 +14,12 @@ import com.elitecouture.app.domain.usecase.auth.EnableGuestAccessUseCase
 import com.elitecouture.app.domain.usecase.auth.LoginUserUseCase
 import com.elitecouture.app.domain.usecase.auth.LogoutUserUseCase
 import com.elitecouture.app.domain.usecase.auth.RegisterUserUseCase
+import com.elitecouture.app.domain.usecase.cart.AddToCartUseCase
+import com.elitecouture.app.domain.usecase.cart.ClearCartUseCase
+import com.elitecouture.app.domain.usecase.cart.GetUserCartUseCase
+import com.elitecouture.app.domain.usecase.cart.IsProductInCartUseCase
+import com.elitecouture.app.domain.usecase.cart.RemoveFromCartUseCase
+import com.elitecouture.app.domain.usecase.cart.UpdateCartItemQuantityUseCase
 import com.elitecouture.app.domain.usecase.favorites.AddProductToFavoritesUseCase
 import com.elitecouture.app.domain.usecase.favorites.GetUserFavoritesUseCase
 import com.elitecouture.app.domain.usecase.favorites.IsProductFavoriteUseCase
@@ -232,6 +239,76 @@ object ServiceLocator {
         val database = provideDatabase(context)
         return GetUserFavoritesUseCase(
             favoriteDao = FavoriteDao(database),
+            sessionManager = provideSessionManager(context)
+        )
+    }
+
+    // ============================================
+    // USE CASES - CART
+    // ============================================
+    
+    /**
+     * Proporciona AddToCartUseCase.
+     */
+    fun provideAddToCartUseCase(context: Context): AddToCartUseCase {
+        val database = provideDatabase(context)
+        return AddToCartUseCase(
+            cartDao = CartDao(database),
+            sessionManager = provideSessionManager(context)
+        )
+    }
+
+    /**
+     * Proporciona UpdateCartItemQuantityUseCase.
+     */
+    fun provideUpdateCartItemQuantityUseCase(context: Context): UpdateCartItemQuantityUseCase {
+        val database = provideDatabase(context)
+        return UpdateCartItemQuantityUseCase(
+            cartDao = CartDao(database),
+            sessionManager = provideSessionManager(context)
+        )
+    }
+
+    /**
+     * Proporciona RemoveFromCartUseCase.
+     */
+    fun provideRemoveFromCartUseCase(context: Context): RemoveFromCartUseCase {
+        val database = provideDatabase(context)
+        return RemoveFromCartUseCase(
+            cartDao = CartDao(database),
+            sessionManager = provideSessionManager(context)
+        )
+    }
+
+    /**
+     * Proporciona GetUserCartUseCase.
+     */
+    fun provideGetUserCartUseCase(context: Context): GetUserCartUseCase {
+        val database = provideDatabase(context)
+        return GetUserCartUseCase(
+            cartDao = CartDao(database),
+            sessionManager = provideSessionManager(context)
+        )
+    }
+
+    /**
+     * Proporciona ClearCartUseCase.
+     */
+    fun provideClearCartUseCase(context: Context): ClearCartUseCase {
+        val database = provideDatabase(context)
+        return ClearCartUseCase(
+            cartDao = CartDao(database),
+            sessionManager = provideSessionManager(context)
+        )
+    }
+
+    /**
+     * Proporciona IsProductInCartUseCase.
+     */
+    fun provideIsProductInCartUseCase(context: Context): IsProductInCartUseCase {
+        val database = provideDatabase(context)
+        return IsProductInCartUseCase(
+            cartDao = CartDao(database),
             sessionManager = provideSessionManager(context)
         )
     }

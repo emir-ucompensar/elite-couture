@@ -6,7 +6,7 @@ package com.elitecouture.app.data.local.contract
  */
 object DatabaseContract {
     const val DATABASE_NAME = "elite_couture.db"
-    const val DATABASE_VERSION = 5 // Incrementado para tabla de favoritos
+    const val DATABASE_VERSION = 7 // Incrementado para añadir columna tags a products
 
     object Users {
         const val TABLE_NAME = "users"
@@ -46,6 +46,7 @@ object DatabaseContract {
         const val COLUMN_PRICE = "price"
         const val COLUMN_STOCK = "stock"
         const val COLUMN_IMAGES = "images" // Cambiado de image_url a images (string delimitado por '|')
+        const val COLUMN_TAGS = "tags" // Tags delimitados por '|' (ej: "Vestido|Mujer|Elegante")
         const val COLUMN_IS_VISIBLE_TO_GUEST = "is_visible_to_guest"
 
         val CREATE_TABLE = """
@@ -59,6 +60,7 @@ object DatabaseContract {
                 $COLUMN_PRICE REAL NOT NULL,
                 $COLUMN_STOCK INTEGER NOT NULL DEFAULT 0,
                 $COLUMN_IMAGES TEXT NOT NULL DEFAULT '',
+                $COLUMN_TAGS TEXT NOT NULL DEFAULT '',
                 $COLUMN_IS_VISIBLE_TO_GUEST INTEGER NOT NULL DEFAULT 1
             )
         """.trimIndent()
@@ -70,6 +72,7 @@ object DatabaseContract {
         const val COLUMN_USER_UUID = "user_uuid"
         const val COLUMN_PRODUCT_UUID = "product_uuid"
         const val COLUMN_QUANTITY = "quantity"
+        const val COLUMN_ADDED_AT = "added_at"
 
         val CREATE_TABLE = """
             CREATE TABLE IF NOT EXISTS $TABLE_NAME (
@@ -77,8 +80,10 @@ object DatabaseContract {
                 $COLUMN_USER_UUID TEXT NOT NULL,
                 $COLUMN_PRODUCT_UUID TEXT NOT NULL,
                 $COLUMN_QUANTITY INTEGER NOT NULL DEFAULT 1,
+                $COLUMN_ADDED_AT INTEGER NOT NULL,
                 FOREIGN KEY ($COLUMN_USER_UUID) REFERENCES ${Users.TABLE_NAME}(${Users.COLUMN_UUID}) ON DELETE CASCADE,
-                FOREIGN KEY ($COLUMN_PRODUCT_UUID) REFERENCES ${Products.TABLE_NAME}(${Products.COLUMN_UUID}) ON DELETE CASCADE
+                FOREIGN KEY ($COLUMN_PRODUCT_UUID) REFERENCES ${Products.TABLE_NAME}(${Products.COLUMN_UUID}) ON DELETE CASCADE,
+                UNIQUE ($COLUMN_USER_UUID, $COLUMN_PRODUCT_UUID)
             )
         """.trimIndent()
     }

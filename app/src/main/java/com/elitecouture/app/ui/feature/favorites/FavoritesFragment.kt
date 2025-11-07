@@ -187,8 +187,8 @@ class FavoritesFragment : Fragment() {
                     true
                 }
                 R.id.navigation_cart -> {
-                    requireView().showStyledSnackbar(getString(R.string.toast_cart_under_construction))
-                    false
+                    findNavController().navigate(R.id.action_favoritesFragment_to_cartFragment)
+                    true
                 }
                 R.id.navigation_profile -> {
                     // Volver a Perfil usando navigateUp

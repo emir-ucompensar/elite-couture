@@ -16,6 +16,7 @@ data class ProductSeedDto(
     val price: Double,
     val stock: Int,
     val images: List<String> = emptyList(),
+    val tags: List<String> = emptyList(),
     val imageResource: String? = null, // Legacy support
     val isVisibleToGuest: Boolean = true
 )

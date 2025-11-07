@@ -13,6 +13,7 @@
         "product_01_img_2",
         "product_01_img_3"
       ],
+      "tags": ["Vestido", "Mujer", "Elegante"],
       "isVisibleToGuest": true
     },
     {
@@ -28,6 +29,7 @@
         "product_02_img_2",
         "product_02_img_3"
       ],
+      "tags": ["Vestido", "Mujer", "Noche"],
       "isVisibleToGuest": true
     },
     {
@@ -43,6 +45,7 @@
         "product_03_img_2",
         "product_03_img_3"
       ],
+      "tags": ["Vestido", "Mujer", "Casual"],
       "isVisibleToGuest": true
     },
     {
@@ -58,6 +61,7 @@
         "product_04_img_2",
         "product_04_img_3"
       ],
+      "tags": ["Conjunto", "Mujer", "Moderno"],
       "isVisibleToGuest": true
     },
     {
@@ -73,6 +77,7 @@
         "product_05_img_2",
         "product_05_img_3"
       ],
+      "tags": ["Vestido", "Mujer", "Formal"],
       "isVisibleToGuest": true
     },
     {
@@ -88,22 +93,312 @@
         "product_06_img_2",
         "product_06_img_3"
       ],
+      "tags": ["Vestido", "Mujer", "Estampado"],
       "isVisibleToGuest": true
     },
     {
-      "uuid": "prod-007-chaqueta-fiesta-azul-texturizada",
-      "name": "Chaqueta Fiesta Azul Oscuro Texturizada",
-      "description": "Sofisticada chaqueta texturizada en azul oscuro, perfecta para elevar cualquier look de fiesta.",
-      "type": "Chaqueta",
+      "uuid": "prod-007-conjunto-fiesta-azul-texturizado",
+      "name": "Conjunto de Fiesta Azul Oscuro Texturizado",
+      "description": "Elegante conjunto texturizado en azul oscuro, ideal para eventos especiales y fiestas nocturnas con estilo sofisticado.",
+      "type": "Conjunto",
       "gender": "Mujer",
-      "price": 210000.00,
+      "price": 230000.00,
       "stock": 5,
       "images": [
         "product_07_img_1",
         "product_07_img_2",
         "product_07_img_3"
       ],
-      "isVisibleToGuest": false
+      "tags": ["Conjunto", "Mujer", "Fiesta"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-008-botines-negros-mujer",
+      "name": "Botines Negros Elegantes",
+      "description": "Botines negros versátiles y elegantes, perfectos para completar cualquier outfit casual o formal.",
+      "type": "Zapatos",
+      "gender": "Mujer",
+      "price": 165000.00,
+      "stock": 12,
+      "images": [
+        "product_08_img_1",
+        "product_08_img_2",
+        "product_08_img_3"
+      ],
+      "tags": ["Zapatos", "Mujer", "Botines"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-009-jersey-negro-hombre",
+      "name": "Jersey Negro Clásico",
+      "description": "Jersey negro de alta calidad, esencial en cualquier guardarropa masculino para looks casuales elegantes.",
+      "type": "Jersey",
+      "gender": "Hombre",
+      "price": 95000.00,
+      "stock": 15,
+      "images": [
+        "product_09_img_1",
+        "product_09_img_2",
+        "product_09_img_3"
+      ],
+      "tags": ["Jersey", "Hombre", "Casual"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-010-jersey-mostaza-hombre",
+      "name": "Jersey Mostaza Moderno",
+      "description": "Jersey en vibrante color mostaza, perfecto para agregar un toque de color a tus looks casuales de otoño.",
+      "type": "Jersey",
+      "gender": "Hombre",
+      "price": 98000.00,
+      "stock": 10,
+      "images": [
+        "product_10_img_1",
+        "product_10_img_2",
+        "product_10_img_3"
+      ],
+      "tags": ["Jersey", "Hombre", "Casual"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-011-jersey-azul-texturizado-hombre",
+      "name": "Jersey Azul Texturizado",
+      "description": "Jersey azul con textura distintiva, combina comodidad y estilo para ocasiones casuales y semi-formales.",
+      "type": "Jersey",
+      "gender": "Hombre",
+      "price": 105000.00,
+      "stock": 8,
+      "images": [
+        "product_11_img_1",
+        "product_11_img_2",
+        "product_11_img_3"
+      ],
+      "tags": ["Jersey", "Hombre", "Texturizado"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-012-saco-beige-hombre",
+      "name": "Saco Beige Elegante",
+      "description": "Saco beige de corte clásico, ideal para looks formales y semi-formales con un toque de sofisticación atemporal.",
+      "type": "Saco",
+      "gender": "Hombre",
+      "price": 185000.00,
+      "stock": 7,
+      "images": [
+        "product_12_img_1",
+        "product_12_img_2",
+        "product_12_img_3"
+      ],
+      "tags": ["Saco", "Hombre", "Formal"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-013-pantalon-pana-verde-hombre",
+      "name": "Pantalón de Pana Verde",
+      "description": "Pantalón de pana en elegante tono verde, combina estilo retro con comodidad moderna para looks casuales.",
+      "type": "Pantalones",
+      "gender": "Hombre",
+      "price": 115000.00,
+      "stock": 10,
+      "images": [
+        "product_13_img_1",
+        "product_13_img_2",
+        "product_13_img_3"
+      ],
+      "tags": ["Pantalones", "Hombre", "Pana"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-014-pantalon-semiformal-azul-hombre",
+      "name": "Pantalón Semi-Formal Azul Oscuro",
+      "description": "Pantalón semi-formal en azul oscuro, perfecto para la oficina y eventos que requieren un look pulido y profesional.",
+      "type": "Pantalones",
+      "gender": "Hombre",
+      "price": 125000.00,
+      "stock": 12,
+      "images": [
+        "product_14_img_1",
+        "product_14_img_2",
+        "product_14_img_3"
+      ],
+      "tags": ["Pantalones", "Hombre", "Formal"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-015-pantalon-beige-hombre",
+      "name": "Pantalón Beige Versátil",
+      "description": "Pantalón beige de corte moderno, esencial para combinar con cualquier camisa en looks casuales y smart casual.",
+      "type": "Pantalones",
+      "gender": "Hombre",
+      "price": 110000.00,
+      "stock": 14,
+      "images": [
+        "product_15_img_1",
+        "product_15_img_2",
+        "product_15_img_3"
+      ],
+      "tags": ["Pantalones", "Hombre", "Casual"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-016-pantalon-crema-hombre",
+      "name": "Pantalón Color Crema",
+      "description": "Pantalón en suave tono crema, perfecto para looks veraniegos y casuales con un toque de elegancia relajada.",
+      "type": "Pantalones",
+      "gender": "Hombre",
+      "price": 112000.00,
+      "stock": 11,
+      "images": [
+        "product_16_img_1",
+        "product_16_img_2",
+        "product_16_img_3"
+      ],
+      "tags": ["Pantalones", "Hombre", "Casual"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-017-botines-cafe-oscuro-mujer",
+      "name": "Botines Café Oscuro",
+      "description": "Botines en café oscuro con diseño clásico, ideales para complementar outfits casuales y semi-formales todo el año.",
+      "type": "Zapatos",
+      "gender": "Mujer",
+      "price": 170000.00,
+      "stock": 9,
+      "images": [
+        "product_17_img_1",
+        "product_17_img_2",
+        "product_17_img_3"
+      ],
+      "tags": ["Zapatos", "Mujer", "Botines"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-018-mocasines-vinotinto-mujer",
+      "name": "Mocasines Vinotinto Elegantes",
+      "description": "Sofisticados mocasines en tono vinotinto, perfectos para looks formales y casual-elegantes con un toque distintivo.",
+      "type": "Zapatos",
+      "gender": "Mujer",
+      "price": 155000.00,
+      "stock": 10,
+      "images": [
+        "product_18_img_1",
+        "product_18_img_2",
+        "product_18_img_3"
+      ],
+      "tags": ["Zapatos", "Mujer", "Mocasines"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-019-polo-negro-hombre",
+      "name": "Camisa Polo Negra Clásica",
+      "description": "Camisa tipo polo negra de corte clásico, perfecta para looks casuales y smart casual con estilo atemporal.",
+      "type": "Camisas",
+      "gender": "Hombre",
+      "price": 85000.00,
+      "stock": 15,
+      "images": [
+        "product_19_img_1",
+        "product_19_img_2",
+        "product_19_img_3"
+      ],
+      "tags": ["Camisas", "Hombre", "Polo"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-020-zapatos-blancos-casuales-hombre",
+      "name": "Zapatos Blancos Casuales",
+      "description": "Zapatos blancos versátiles y cómodos, ideales para looks casuales modernos y urbanos con estilo deportivo elegante.",
+      "type": "Zapatos",
+      "gender": "Hombre",
+      "price": 145000.00,
+      "stock": 12,
+      "images": [
+        "product_20_img_1",
+        "product_20_img_2",
+        "product_20_img_3"
+      ],
+      "tags": ["Zapatos", "Hombre", "Casual"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-021-zapatos-cafe-formales-hombre",
+      "name": "Zapatos Café Oscuro Formales",
+      "description": "Zapatos formales en café oscuro con acabado elegante, esenciales para eventos formales y uso profesional en la oficina.",
+      "type": "Zapatos",
+      "gender": "Hombre",
+      "price": 175000.00,
+      "stock": 10,
+      "images": [
+        "product_21_img_1",
+        "product_21_img_2",
+        "product_21_img_3"
+      ],
+      "tags": ["Zapatos", "Hombre", "Formal"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-022-pantalon-estampado-rojo-negro-mujer",
+      "name": "Pantalón Estampado Rojo y Negro",
+      "description": "Pantalón informal con vibrante estampado en rojo y negro, perfecto para looks casuales con personalidad y estilo único.",
+      "type": "Pantalones",
+      "gender": "Mujer",
+      "price": 120000.00,
+      "stock": 8,
+      "images": [
+        "product_22_img_1",
+        "product_22_img_2",
+        "product_22_img_3"
+      ],
+      "tags": ["Pantalones", "Mujer", "Estampado"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-023-pantalon-azul-oscuro-ancho-mujer",
+      "name": "Pantalón Azul Oscuro Ancho",
+      "description": "Pantalón ancho en azul oscuro de corte elegante, ideal para looks modernos y cómodos con estilo contemporáneo.",
+      "type": "Pantalones",
+      "gender": "Mujer",
+      "price": 135000.00,
+      "stock": 10,
+      "images": [
+        "product_23_img_1",
+        "product_23_img_2",
+        "product_23_img_3"
+      ],
+      "tags": ["Pantalones", "Mujer", "Casual"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-024-conjunto-formal-negro-rayas-mujer",
+      "name": "Conjunto Formal Negro con Rayas",
+      "description": "Elegante traje formal negro con rayas sutiles, perfecto para ambientes profesionales y eventos de negocios.",
+      "type": "Conjunto",
+      "gender": "Mujer",
+      "price": 285000.00,
+      "stock": 6,
+      "images": [
+        "product_24_img_1",
+        "product_24_img_2",
+        "product_24_img_3"
+      ],
+      "tags": ["Conjunto", "Mujer", "Formal"],
+      "isVisibleToGuest": true
+    },
+    {
+      "uuid": "prod-025-pantalon-rojo-palido-casual-mujer",
+      "name": "Pantalón Rojo Pálido Casual",
+      "description": "Pantalón casual en suave tono rojo pálido, ideal para looks frescos y modernos con un toque de color elegante.",
+      "type": "Pantalones",
+      "gender": "Mujer",
+      "price": 115000.00,
+      "stock": 12,
+      "images": [
+        "product_25_img_1",
+        "product_25_img_2",
+        "product_25_img_3"
+      ],
+      "tags": ["Pantalones", "Mujer", "Casual"],
+      "isVisibleToGuest": true
     }
   ]
 }

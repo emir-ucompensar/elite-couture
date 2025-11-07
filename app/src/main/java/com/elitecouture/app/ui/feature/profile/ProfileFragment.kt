@@ -143,15 +143,22 @@ class ProfileFragment : Fragment() {
             when (menuItem.itemId) {
                 R.id.navigation_store -> {
                     // Volver a la tienda (pop back stack)
-                    findNavController().popBackStack()
+                    findNavController().navigate(R.id.action_profileFragment_to_storeFragment)
                     true
                 }
                 R.id.navigation_cart -> {
                     if (sessionManager.isGuestMode()) {
-                        requireView().showStyledSnackbar(getString(R.string.toast_guest_restricted_feature))
+                        requireView().showStyledSnackbar(
+                            message = getString(R.string.toast_guest_restricted_feature),
+                            duration = com.google.android.material.snackbar.Snackbar.LENGTH_LONG,
+                            actionText = getString(R.string.action_login),
+                            actionCallback = {
+                                findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+                            }
+                        )
                         false
                     } else {
-                        requireView().showStyledSnackbar(getString(R.string.toast_cart_under_construction))
+                        findNavController().navigate(R.id.action_profileFragment_to_cartFragment)
                         true
                     }
                 }

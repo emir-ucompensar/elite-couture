@@ -72,9 +72,15 @@ def convert_avif_to_webp(input_path: Path, output_path: Path) -> bool:
         print(f"{Colors.RED}✗ Error convirtiendo {input_path.name}: {e}{Colors.RESET}")
         return False
 
-def process_product_images(source_root: Path, dest_root: Path, num_products: int = 7) -> Tuple[int, int, List[str]]:
+def process_product_images(source_root: Path, dest_root: Path, start_from: int = 1, max_products: int = None) -> Tuple[int, int, List[str]]:
     """
     Procesa todas las imágenes de productos.
+    
+    Args:
+        source_root: Carpeta origen con las imágenes
+        dest_root: Carpeta destino para las imágenes procesadas
+        start_from: Número de producto desde el cual comenzar (default: 1)
+        max_products: Número máximo de productos a procesar (default: None = todos los disponibles)
     
     Returns:
         (total_copied, errors, warnings)
@@ -86,7 +92,41 @@ def process_product_images(source_root: Path, dest_root: Path, num_products: int
     # Crear directorio de destino si no existe
     dest_root.mkdir(parents=True, exist_ok=True)
     
-    for i in range(1, num_products + 1):
+    # Detectar automáticamente cuántas carpetas de productos existen
+    product_folders = sorted([f for f in source_root.iterdir() if f.is_dir() and f.name.startswith("product_")])
+    
+    if not product_folders:
+        print(f"{Colors.RED}ERROR: No se encontraron carpetas de productos en {source_root}{Colors.RESET}")
+        return 0, 1, ["No hay carpetas product_* en el directorio"]
+    
+    # Extraer números de productos disponibles
+    available_products = []
+    for folder in product_folders:
+        try:
+            num = int(folder.name.split("_")[1])
+            available_products.append(num)
+        except (IndexError, ValueError):
+            continue
+    
+    available_products.sort()
+    
+    if not available_products:
+        print(f"{Colors.RED}ERROR: No se pudieron extraer números de productos{Colors.RESET}")
+        return 0, 1, ["No se encontraron números válidos en las carpetas"]
+    
+    print(f"{Colors.CYAN}Productos disponibles: {min(available_products)} - {max(available_products)}{Colors.RESET}")
+    print(f"{Colors.CYAN}Procesando desde: {start_from}{Colors.RESET}")
+    
+    # Filtrar productos según start_from y max_products
+    products_to_process = [p for p in available_products if p >= start_from]
+    if max_products:
+        products_to_process = products_to_process[:max_products]
+    
+    total_expected = len(products_to_process) * 3
+    print(f"{Colors.CYAN}Total de productos a procesar: {len(products_to_process)} ({total_expected} imágenes esperadas){Colors.RESET}")
+    print()
+    
+    for i in products_to_process:
         product_num = f"{i:02d}"
         product_folder = source_root / f"product_{product_num}"
         
@@ -170,14 +210,36 @@ def main():
     print(f"📂 Destino: {dest_root}")
     print()
     
+    # Parámetros opcionales desde argumentos
+    start_from = 1
+    max_products = None
+    
+    if len(sys.argv) > 1:
+        try:
+            start_from = int(sys.argv[1])
+            print(f"{Colors.YELLOW}Iniciando desde producto: {start_from}{Colors.RESET}")
+        except ValueError:
+            print(f"{Colors.RED}ERROR: El primer argumento debe ser un número{Colors.RESET}")
+            return 1
+    
+    if len(sys.argv) > 2:
+        try:
+            max_products = int(sys.argv[2])
+            print(f"{Colors.YELLOW}Máximo de productos a procesar: {max_products}{Colors.RESET}")
+        except ValueError:
+            print(f"{Colors.RED}ERROR: El segundo argumento debe ser un número{Colors.RESET}")
+            return 1
+    
+    print()
+    
     # Procesar imágenes
-    total_copied, errors, warnings = process_product_images(source_root, dest_root)
+    total_copied, errors, warnings = process_product_images(source_root, dest_root, start_from, max_products)
     
     # Resumen
     print()
     print(f"{Colors.CYAN}{'=' * 50}{Colors.RESET}")
     print(f"{Colors.MAGENTA}{Colors.BOLD}Resumen:{Colors.RESET}")
-    print(f"  {Colors.GREEN if total_copied == 21 else Colors.YELLOW}Imágenes procesadas: {total_copied} / 21{Colors.RESET}")
+    print(f"  {Colors.GREEN if errors == 0 else Colors.YELLOW}Imágenes procesadas: {total_copied}{Colors.RESET}")
     print(f"  {Colors.GREEN if errors == 0 else Colors.RED}Errores: {errors}{Colors.RESET}")
     
     if warnings:
@@ -188,7 +250,7 @@ def main():
     print(f"{Colors.CYAN}{'=' * 50}{Colors.RESET}")
     
     # Mensaje final
-    if total_copied == 21 and errors == 0:
+    if total_copied > 0 and errors == 0:
         print(f"\n{Colors.GREEN}{Colors.BOLD}✓ ¡Todas las imágenes procesadas exitosamente!{Colors.RESET}")
         print(f"{Colors.CYAN}Ahora puedes compilar la app con: gradle assembleDebug{Colors.RESET}")
     elif total_copied > 0:

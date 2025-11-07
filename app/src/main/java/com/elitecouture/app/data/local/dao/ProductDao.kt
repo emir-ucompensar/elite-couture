@@ -25,6 +25,7 @@ class ProductDao(private val database: EliteCoutureDatabase) {
             put(DatabaseContract.Products.COLUMN_PRICE, product.price)
             put(DatabaseContract.Products.COLUMN_STOCK, product.stock)
             put(DatabaseContract.Products.COLUMN_IMAGES, product.images.joinToString("|"))
+            put(DatabaseContract.Products.COLUMN_TAGS, product.tags.joinToString("|"))
             put(DatabaseContract.Products.COLUMN_IS_VISIBLE_TO_GUEST, if (product.isVisibleToGuest) 1 else 0)
         }
 
@@ -48,6 +49,7 @@ class ProductDao(private val database: EliteCoutureDatabase) {
             put(DatabaseContract.Products.COLUMN_PRICE, entity.price)
             put(DatabaseContract.Products.COLUMN_STOCK, entity.stock)
             put(DatabaseContract.Products.COLUMN_IMAGES, entity.images)
+            put(DatabaseContract.Products.COLUMN_TAGS, entity.tags)
             put(DatabaseContract.Products.COLUMN_IS_VISIBLE_TO_GUEST, if (entity.isVisibleToGuest) 1 else 0)
         }
 
@@ -70,6 +72,7 @@ class ProductDao(private val database: EliteCoutureDatabase) {
             DatabaseContract.Products.COLUMN_PRICE,
             DatabaseContract.Products.COLUMN_STOCK,
             DatabaseContract.Products.COLUMN_IMAGES,
+            DatabaseContract.Products.COLUMN_TAGS,
             DatabaseContract.Products.COLUMN_IS_VISIBLE_TO_GUEST
         )
 
@@ -118,6 +121,7 @@ class ProductDao(private val database: EliteCoutureDatabase) {
             price = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_PRICE)),
             stock = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_STOCK)),
             images = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_IMAGES)) ?: "",
+            tags = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_TAGS)) ?: "",
             isVisibleToGuest = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.Products.COLUMN_IS_VISIBLE_TO_GUEST)) == 1
         )
     }

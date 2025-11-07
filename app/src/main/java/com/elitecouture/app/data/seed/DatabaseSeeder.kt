@@ -101,6 +101,7 @@ class DatabaseSeeder(
                     price = dto.price,
                     stock = dto.stock,
                     images = imagePaths,
+                    tags = dto.tags,
                     isVisibleToGuest = dto.isVisibleToGuest
                 )
                 

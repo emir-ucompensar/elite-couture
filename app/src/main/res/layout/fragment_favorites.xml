@@ -19,8 +19,9 @@
             android:background="@color/surface_light"
             android:elevation="4dp"
             app:title="@string/favorites_title"
+            app:titleCentered="true"
             app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:titleTextColor="@color/text_primary_dark"
+            app:titleTextColor="@color/color_primary"
             app:navigationIcon="@drawable/keyboard_backspace"
             app:navigationIconTint="@color/color_primary" />
 

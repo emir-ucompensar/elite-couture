@@ -11,5 +11,6 @@ data class Product(
     val price: Double,
     val stock: Int,
     val images: List<String> = emptyList(), // Lista de rutas de imágenes (ej: ["product_01_img_1.webp", ...])
+    val tags: List<String> = emptyList(), // Tags para categorización y filtrado (ej: ["Vestido", "Mujer", "Elegante"])
     val isVisibleToGuest: Boolean = true
 )

@@ -7,8 +7,10 @@
     
     <!--    PALETA DE BOTONES   -->
     <color name="button_primary">#b42146</color>        <!-- Color principal para botones CTA -->
-    <color name="button_primary_pressed">#931C75</color><!-- Estado presionado de botones -->
-    <color name="button_primary_disabled">#D88D9A</color><!-- Estado deshabilitado de botones -->
+    <color name="button_primary_pressed"> #68103c</color><!-- Estado presionado de botones -->
+    <color name="button_primary_disabled"> #af8196</color><!-- Estado deshabilitado de botones -->
+    <color name="button_cart"> #68103c</color>           <!-- Magenta oscuro para botones de carrito -->
+    <color name="button_cart_added"> #af8196</color>     <!-- Magenta claro para producto añadido al carrito -->
     
     <!--    PALETA DE ACENTOS   -->
     <color name="accent_red">#D81B60</color>           <!-- Acento rojo para elementos destacados -->
