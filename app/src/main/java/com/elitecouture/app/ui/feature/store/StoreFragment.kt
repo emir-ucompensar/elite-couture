@@ -37,6 +37,10 @@ class StoreFragment : Fragment() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var drawerCloseButton: MaterialButton
     private lateinit var textActiveFilter: android.widget.TextView
+    private lateinit var emptyCategoryState: android.widget.LinearLayout
+    private lateinit var textEmptyCategoryTitle: android.widget.TextView
+    private lateinit var textEmptyCategoryMessage: android.widget.TextView
+    private lateinit var btnExploreProducts: MaterialButton
     // Lista completa de productos y filtro activo
     private var fullProductList: List<Product> = emptyList()
     private var lastFilterTags: List<String>? = null
@@ -61,6 +65,15 @@ class StoreFragment : Fragment() {
         recyclerProducts = view.findViewById(R.id.recycler_products)
         recyclerProducts.layoutManager = LinearLayoutManager(requireContext())
         textActiveFilter = view.findViewById(R.id.text_active_filter)
+        emptyCategoryState = view.findViewById(R.id.empty_category_state)
+        textEmptyCategoryTitle = view.findViewById(R.id.text_empty_category_title)
+        textEmptyCategoryMessage = view.findViewById(R.id.text_empty_category_message)
+        btnExploreProducts = view.findViewById(R.id.btn_explore_products)
+        
+        // Configurar botón de estado vacío
+        btnExploreProducts.setOnClickListener {
+            clearFilter()
+        }
         
         // Configurar drawer
         setupDrawer()
@@ -136,6 +149,10 @@ class StoreFragment : Fragment() {
                 // Guardar lista completa para filtrados
                 fullProductList = products
                 
+                // Asegurar que el estado vacío esté oculto al inicio
+                emptyCategoryState.visibility = View.GONE
+                recyclerProducts.visibility = View.VISIBLE
+                
                 // Proporcionar use cases de favoritos
                 val addToFavoritesUseCase = ServiceLocator.provideAddProductToFavoritesUseCase(requireContext())
                 val removeFromFavoritesUseCase = ServiceLocator.provideRemoveProductFromFavoritesUseCase(requireContext())
@@ -186,6 +203,8 @@ class StoreFragment : Fragment() {
     private fun clearFilter() {
         lastFilterTags = null
         textActiveFilter.visibility = View.GONE
+        emptyCategoryState.visibility = View.GONE
+        recyclerProducts.visibility = View.VISIBLE
         recyclerProducts.adapter = ProductListAdapter(
             items = fullProductList,
             addToFavoritesUseCase = ServiceLocator.provideAddProductToFavoritesUseCase(requireContext()),
@@ -218,18 +237,34 @@ class StoreFragment : Fragment() {
         textActiveFilter.text = toastMessage.replace("Filtrando: ", "")
         textActiveFilter.visibility = View.VISIBLE
         
-        recyclerProducts.adapter = ProductListAdapter(
-            items = filtered,
-            addToFavoritesUseCase = ServiceLocator.provideAddProductToFavoritesUseCase(requireContext()),
-            removeFromFavoritesUseCase = ServiceLocator.provideRemoveProductFromFavoritesUseCase(requireContext()),
-            isProductFavoriteUseCase = ServiceLocator.provideIsProductFavoriteUseCase(requireContext()),
-            addToCartUseCase = ServiceLocator.provideAddToCartUseCase(requireContext()),
-            isProductInCartUseCase = ServiceLocator.provideIsProductInCartUseCase(requireContext()),
-            isGuestMode = sessionManager.isGuestMode(),
-            onNavigateToFavorites = { findNavController().navigate(R.id.action_storeFragment_to_favoritesFragment) },
-            onNavigateToCart = { findNavController().navigate(R.id.action_storeFragment_to_cartFragment) }
-        )
-        requireView().showStyledSnackbar(toastMessage)
+        // Verificar si hay productos filtrados
+        if (filtered.isEmpty()) {
+            // Mostrar estado vacío
+            recyclerProducts.visibility = View.GONE
+            emptyCategoryState.visibility = View.VISIBLE
+            
+            // Personalizar mensaje según la categoría
+            val categoryName = toastMessage.replace("Filtrando: ", "")
+            textEmptyCategoryMessage.text = getString(R.string.empty_category_message, categoryName)
+        } else {
+            // Mostrar productos
+            emptyCategoryState.visibility = View.GONE
+            recyclerProducts.visibility = View.VISIBLE
+            
+            recyclerProducts.adapter = ProductListAdapter(
+                items = filtered,
+                addToFavoritesUseCase = ServiceLocator.provideAddProductToFavoritesUseCase(requireContext()),
+                removeFromFavoritesUseCase = ServiceLocator.provideRemoveProductFromFavoritesUseCase(requireContext()),
+                isProductFavoriteUseCase = ServiceLocator.provideIsProductFavoriteUseCase(requireContext()),
+                addToCartUseCase = ServiceLocator.provideAddToCartUseCase(requireContext()),
+                isProductInCartUseCase = ServiceLocator.provideIsProductInCartUseCase(requireContext()),
+                isGuestMode = sessionManager.isGuestMode(),
+                onNavigateToFavorites = { findNavController().navigate(R.id.action_storeFragment_to_favoritesFragment) },
+                onNavigateToCart = { findNavController().navigate(R.id.action_storeFragment_to_cartFragment) }
+            )
+            requireView().showStyledSnackbar(toastMessage)
+        }
+        
         drawerLayout.closeDrawers()
     }
 

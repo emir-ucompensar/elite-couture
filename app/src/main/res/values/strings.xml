@@ -88,6 +88,11 @@
         <string name="store_filter_gender_men">Moda Hombre</string>
         <string name="store_filter_gender_women">Moda Mujer</string>
     
+    <!-- Empty category state -->
+    <string name="empty_category_title">¡Se agotaron rápido!</string>
+    <string name="empty_category_message">El stock de %s se ha agotado rápidamente.\n¡Explora nuestros otros productos y no te pierdas de nuestras ofertas!</string>
+    <string name="empty_category_button">VER TODOS LOS PRODUCTOS</string>
+    
     <!-- Menu lateral -->
     <string name="menu_category_men">Hombre</string>
     <string name="menu_category_women">Mujer</string>
