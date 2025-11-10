@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.elitecouture.app.domain.model.Product
 import com.elitecouture.app.ui.feature.store.ProductListAdapter
-import com.elitecouture.app.data.seed.DatabaseSeeder
 import com.elitecouture.app.ui.common.extension.showStyledSnackbar
 import kotlinx.coroutines.launch
 import androidx.drawerlayout.widget.DrawerLayout
@@ -134,16 +133,9 @@ class StoreFragment : Fragment() {
     }
 
     private fun initProductList() {
-        val seeder: DatabaseSeeder = ServiceLocator.provideDatabaseSeeder(requireContext())
-
-        // Seed database in background if needed, then load products on main thread
+        // Load products - ya no necesitamos seed porque usamos Supabase
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
-                try {
-                    seeder.seedDatabaseIfNeeded()
-                } catch (e: Exception) {
-                    android.util.Log.e("StoreFragment", "Error seeding database", e)
-                }
 
                 val products = ServiceLocator.provideGetProductCatalogUseCase(requireContext())()
                 // Guardar lista completa para filtrados

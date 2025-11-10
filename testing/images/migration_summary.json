@@ -1,0 +1,560 @@
+{
+  "timestamp": "2025-11-10T17:17:27.317339",
+  "stats": {
+    "success": 25,
+    "failed": 0,
+    "total_price": 3173000
+  },
+  "products": [
+    {
+      "uuid": "cd0d7590-fc54-4c87-b335-e18a457bb7c8",
+      "name": "Vestido Midi Floral Primavera",
+      "description": "Vestido midi con estampado floral, perfecto para ocasiones especiales. Corte favorecedor con cinturón incluido.",
+      "price": 189000,
+      "stock": 15,
+      "type": "Vestidos",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_01/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_01/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_01/image_3.jpg"
+      ],
+      "tags": [
+        "vestido",
+        "floral",
+        "midi",
+        "primavera"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813041573
+    },
+    {
+      "uuid": "f9dcb611-f25e-4635-a316-a3aea4f7196a",
+      "name": "Blusa Elegante Manga Larga",
+      "description": "Blusa de corte elegante con manga larga y cuello en V. Ideal para looks de oficina o casuales sofisticados.",
+      "price": 95000,
+      "stock": 20,
+      "type": "Blusas",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_02/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_02/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_02/image_3.jpg"
+      ],
+      "tags": [
+        "blusa",
+        "elegante",
+        "manga larga",
+        "oficina"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813042504
+    },
+    {
+      "uuid": "7a4db1a0-00c2-4591-b9ad-facc67ef3209",
+      "name": "Top Crop Moderno",
+      "description": "Top crop de diseño moderno y juvenil. Combina perfecto con jeans de tiro alto o faldas midi.",
+      "price": 65000,
+      "stock": 25,
+      "type": "Tops",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_03/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_03/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_03/image_3.jpg"
+      ],
+      "tags": [
+        "top",
+        "crop",
+        "moderno",
+        "casual"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813042673
+    },
+    {
+      "uuid": "0f032932-0e07-476e-a0c2-d090484b56fc",
+      "name": "Pantalón Palazzo Negro",
+      "description": "Pantalón palazzo de corte amplio y elegante. Material fluido, ideal para eventos formales y salidas nocturnas.",
+      "price": 135000,
+      "stock": 12,
+      "type": "Pantalones",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_04/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_04/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_04/image_3.jpg"
+      ],
+      "tags": [
+        "pantalón",
+        "palazzo",
+        "negro",
+        "elegante"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813042837
+    },
+    {
+      "uuid": "5996d041-92d1-41c3-8fe0-eb142421cc07",
+      "name": "Camiseta Básica Premium",
+      "description": "Camiseta básica de algodón premium. Corte perfecto y gran variedad de colores. Esencial en todo guardarropa.",
+      "price": 45000,
+      "stock": 30,
+      "type": "Básicos",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_05/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_05/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_05/image_3.jpg"
+      ],
+      "tags": [
+        "camiseta",
+        "básica",
+        "algodón",
+        "esencial"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813042973
+    },
+    {
+      "uuid": "a9480898-f61d-4dbf-96e4-82784db73d92",
+      "name": "Falda Plisada Romántica",
+      "description": "Falda plisada de longitud midi con caída romántica. Perfect para looks femeninos y sofisticados.",
+      "price": 110000,
+      "stock": 18,
+      "type": "Faldas",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_06/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_06/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_06/image_3.jpg"
+      ],
+      "tags": [
+        "falda",
+        "plisada",
+        "midi",
+        "romántica"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813043112
+    },
+    {
+      "uuid": "c7d98038-4a9f-42e1-96e0-83a85d9710ab",
+      "name": "Blazer Estructurado Beige",
+      "description": "Blazer de corte estructurado en tono beige neutro. Prenda versátil para looks formales y casual chic.",
+      "price": 225000,
+      "stock": 10,
+      "type": "Chaquetas",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_07/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_07/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_07/image_3.jpg"
+      ],
+      "tags": [
+        "blazer",
+        "beige",
+        "formal",
+        "estructurado"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813043253
+    },
+    {
+      "uuid": "7ec8e1c2-f31d-4620-9a03-ed06745c58f2",
+      "name": "Conjunto Deportivo Chic",
+      "description": "Conjunto deportivo de dos piezas con diseño moderno. Cómodo y elegante para actividades casuales.",
+      "price": 155000,
+      "stock": 14,
+      "type": "Conjuntos",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_08/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_08/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_08/image_3.jpg"
+      ],
+      "tags": [
+        "conjunto",
+        "deportivo",
+        "cómodo",
+        "moderno"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813043872
+    },
+    {
+      "uuid": "c9caa71b-4543-447e-91c4-e7e4fa1712e2",
+      "name": "Vestido Cóctel Negro",
+      "description": "Vestido corto tipo cóctel en negro clásico. Diseño atemporal perfecto para eventos formales.",
+      "price": 245000,
+      "stock": 8,
+      "type": "Vestidos",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_09/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_09/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_09/image_3.jpg"
+      ],
+      "tags": [
+        "vestido",
+        "cóctel",
+        "negro",
+        "formal"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813044033
+    },
+    {
+      "uuid": "c0b95e8c-94e8-426d-b93e-a4e0467e594a",
+      "name": "Kimono Estampado Boho",
+      "description": "Kimono ligero con estampados bohemios. Ideal para looks veraniegos y playeros.",
+      "price": 85000,
+      "stock": 22,
+      "type": "Chaquetas",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_10/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_10/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_10/image_3.jpg"
+      ],
+      "tags": [
+        "kimono",
+        "boho",
+        "verano",
+        "playero"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813044292
+    },
+    {
+      "uuid": "2776c2c4-b3e1-43c6-87bf-f301e93dba4d",
+      "name": "Jumpsuit Elegante Verde",
+      "description": "Jumpsuit de pierna ancha en tono verde esmeralda. Statement piece para ocasiones especiales.",
+      "price": 198000,
+      "stock": 9,
+      "type": "Monos",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_11/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_11/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_11/image_3.jpg"
+      ],
+      "tags": [
+        "jumpsuit",
+        "verde",
+        "elegante",
+        "pierna ancha"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813044444
+    },
+    {
+      "uuid": "8739609b-ae51-410a-8122-b06cabd2e45e",
+      "name": "Cardigan Largo Tejido",
+      "description": "Cardigan largo de punto con textura suave. Perfecto para entretiempo y looks cozy.",
+      "price": 125000,
+      "stock": 16,
+      "type": "Chaquetas",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_12/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_12/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_12/image_3.jpg"
+      ],
+      "tags": [
+        "cardigan",
+        "tejido",
+        "largo",
+        "cozy"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813044584
+    },
+    {
+      "uuid": "c412c84b-a3d6-4207-a08b-79445936fb2a",
+      "name": "Falda Mini Denim",
+      "description": "Falda mini en denim clásico con botones frontales. Estilo casual juvenil y versátil.",
+      "price": 75000,
+      "stock": 28,
+      "type": "Faldas",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_13/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_13/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_13/image_3.jpg"
+      ],
+      "tags": [
+        "falda",
+        "mini",
+        "denim",
+        "casual"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813044722
+    },
+    {
+      "uuid": "25743413-ab67-4e91-9dad-9a00d43e60a6",
+      "name": "Blusa Satinada Rosada",
+      "description": "Blusa en satín con acabado brillante en tono rosa suave. Sofisticación para looks de noche.",
+      "price": 115000,
+      "stock": 13,
+      "type": "Blusas",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_14/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_14/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_14/image_3.jpg"
+      ],
+      "tags": [
+        "blusa",
+        "satín",
+        "rosa",
+        "brillante"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813044864
+    },
+    {
+      "uuid": "94e6b88a-44a8-44d8-a1b8-b017d4fc0c2f",
+      "name": "Pantalón Cargo Tendencia",
+      "description": "Pantalón cargo con múltiples bolsillos y corte moderno. Combina comodidad y estilo urbano.",
+      "price": 145000,
+      "stock": 19,
+      "type": "Pantalones",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_15/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_15/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_15/image_3.jpg"
+      ],
+      "tags": [
+        "pantalón",
+        "cargo",
+        "urbano",
+        "tendencia"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813045002
+    },
+    {
+      "uuid": "4d346254-bba7-465c-90bb-79334bb3b9a0",
+      "name": "Top Halter Verano",
+      "description": "Top tipo halter con escote favorecedor. Ideal para looks veraniegos y eventos al aire libre.",
+      "price": 68000,
+      "stock": 24,
+      "type": "Tops",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_16/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_16/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_16/image_3.jpg"
+      ],
+      "tags": [
+        "top",
+        "halter",
+        "verano",
+        "escote"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813045265
+    },
+    {
+      "uuid": "d166f7e0-fe45-432f-8466-95b2624ff841",
+      "name": "Vestido Maxi Bohemio",
+      "description": "Vestido largo estilo bohemio con estampados étnicos. Comodidad y estilo para el día a día.",
+      "price": 175000,
+      "stock": 11,
+      "type": "Vestidos",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_17/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_17/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_17/image_3.jpg"
+      ],
+      "tags": [
+        "vestido",
+        "maxi",
+        "bohemio",
+        "étnico"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813045426
+    },
+    {
+      "uuid": "ab2764c3-8871-434a-a605-3c4866fd69a2",
+      "name": "Camisa Oversized Blanca",
+      "description": "Camisa blanca de corte oversized en algodón premium. Básico reinventado para looks modernos.",
+      "price": 98000,
+      "stock": 21,
+      "type": "Camisas",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_18/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_18/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_18/image_3.jpg"
+      ],
+      "tags": [
+        "camisa",
+        "oversized",
+        "blanca",
+        "básica"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813045563
+    },
+    {
+      "uuid": "2c4eaa87-655f-4e27-86d7-a0091e51e3ec",
+      "name": "Short Tiro Alto Lino",
+      "description": "Short de tiro alto en lino natural. Fresco y cómodo para temporadas cálidas.",
+      "price": 72000,
+      "stock": 26,
+      "type": "Shorts",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_19/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_19/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_19/image_3.jpg"
+      ],
+      "tags": [
+        "short",
+        "lino",
+        "tiro alto",
+        "verano"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813045713
+    },
+    {
+      "uuid": "b0d59e2c-10df-4bdf-ab66-d71e133fa740",
+      "name": "Suéter Cuello Tortuga",
+      "description": "Suéter de cuello alto en lana suave. Clásico invernal para looks sofisticados.",
+      "price": 135000,
+      "stock": 14,
+      "type": "Suéteres",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_20/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_20/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_20/image_3.jpg"
+      ],
+      "tags": [
+        "suéter",
+        "cuello alto",
+        "lana",
+        "invierno"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813045976
+    },
+    {
+      "uuid": "f67ca42c-09a7-426a-851d-4341bd324ea2",
+      "name": "Body Encaje Negro",
+      "description": "Body de encaje con detalles delicados. Pieza versátil para looks de día o noche.",
+      "price": 88000,
+      "stock": 17,
+      "type": "Bodys",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_21/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_21/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_21/image_3.jpg"
+      ],
+      "tags": [
+        "body",
+        "encaje",
+        "negro",
+        "delicado"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813046257
+    },
+    {
+      "uuid": "85ed04a8-a31d-4605-bc8d-575098e04173",
+      "name": "Falda Lápiz Ejecutiva",
+      "description": "Falda lápiz de corte ejecutivo. Elegancia y profesionalismo para el entorno laboral.",
+      "price": 105000,
+      "stock": 15,
+      "type": "Faldas",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_22/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_22/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_22/image_3.jpg"
+      ],
+      "tags": [
+        "falda",
+        "lápiz",
+        "ejecutiva",
+        "formal"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813046407
+    },
+    {
+      "uuid": "45e6fd22-0ab6-43d2-85b7-df18fe63abd2",
+      "name": "Top Bustier Fiesta",
+      "description": "Top bustier estructurado para ocasiones especiales. Diseño sofisticado con aros interiores.",
+      "price": 125000,
+      "stock": 10,
+      "type": "Tops",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_23/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_23/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_23/image_3.jpg"
+      ],
+      "tags": [
+        "top",
+        "bustier",
+        "fiesta",
+        "estructurado"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813046663
+    },
+    {
+      "uuid": "94caefad-30c6-4b5d-976d-cb64dd15c6e1",
+      "name": "Pantalón Wide Leg Café",
+      "description": "Pantalón de pierna ancha en tono café tierra. Tendencia actual con máxima comodidad.",
+      "price": 158000,
+      "stock": 13,
+      "type": "Pantalones",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_24/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_24/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_24/image_3.jpg"
+      ],
+      "tags": [
+        "pantalón",
+        "wide leg",
+        "café",
+        "tendencia"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813046804
+    },
+    {
+      "uuid": "5264bc74-0f30-4682-a298-27f1f98551f9",
+      "name": "Vestido Camisero Rayas",
+      "description": "Vestido tipo camisero con estampado de rayas. Clásico atemporal con cinturón ajustable.",
+      "price": 142000,
+      "stock": 16,
+      "type": "Vestidos",
+      "gender": "Mujer",
+      "images": [
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_25/image_1.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_25/image_2.jpg",
+        "https://tjhhqwizpiywyrwjpgrg.supabase.co/storage/v1/object/public/product-images/products/product_25/image_3.jpg"
+      ],
+      "tags": [
+        "vestido",
+        "camisero",
+        "rayas",
+        "clásico"
+      ],
+      "is_visible_to_guest": true,
+      "created_at": 1762813047049
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.elitecouture.app.R
 import com.elitecouture.app.di.ServiceLocator
@@ -16,6 +17,7 @@ import com.elitecouture.app.ui.common.EliteCoutureDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
 
 class EditProfileFragment : Fragment() {
     private val sessionManager by lazy { ServiceLocator.provideSessionManager(requireContext()) }
@@ -193,38 +195,40 @@ class EditProfileFragment : Fragment() {
             return
         }
         
-        // Guardar información personal
-        val success = savePersonalInfo()
-        
-        // Guardar contraseña si se modificó
-        val passwordChanged = savePasswordIfChanged()
-        
-        // Mostrar resultado
-        if (success) {
-            hasUnsavedChanges = false
+        lifecycleScope.launch {
+            // Guardar información personal
+            val success = savePersonalInfo()
             
-            if (passwordChanged) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.edit_profile_password_updated),
-                    Toast.LENGTH_SHORT
-                ).show()
+            // Guardar contraseña si se modificó
+            val passwordChanged = savePasswordIfChanged()
+            
+            // Mostrar resultado
+            if (success) {
+                hasUnsavedChanges = false
+                
+                if (passwordChanged) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.edit_profile_password_updated),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.edit_profile_success),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                
+                // Volver al perfil
+                findNavController().popBackStack()
             } else {
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.edit_profile_success),
+                    getString(R.string.edit_profile_error_update_failed),
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            
-            // Volver al perfil
-            findNavController().popBackStack()
-        } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.edit_profile_error_update_failed),
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
     
@@ -291,7 +295,7 @@ class EditProfileFragment : Fragment() {
         confirmPasswordLayout.error = null
     }
     
-    private fun savePersonalInfo(): Boolean {
+    private suspend fun savePersonalInfo(): Boolean {
         return try {
             val firstName = firstNameInput.text.toString().trim()
             val lastName = lastNameInput.text.toString().trim()

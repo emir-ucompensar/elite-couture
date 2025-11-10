@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.elitecouture.app.R
 import com.elitecouture.app.di.ServiceLocator
@@ -16,6 +17,7 @@ import com.elitecouture.app.ui.common.extension.showStyledSnackbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
     private lateinit var emailInput: TextInputEditText
@@ -29,10 +31,10 @@ class LoginFragment : Fragment() {
     private lateinit var emailInputLayout: TextInputLayout
     private lateinit var passwordInputLayout: TextInputLayout
 
-    private val authRepository by lazy { ServiceLocator.provideAuthRepository(requireContext()) }
+    private val userRepository by lazy { ServiceLocator.provideSupabaseUserRepository() }
     private val sessionManager by lazy { ServiceLocator.provideSessionManager(requireContext()) }
-    private val loginUserUseCase by lazy { LoginUserUseCase(authRepository, sessionManager) }
-    private val enableGuestAccessUseCase by lazy { EnableGuestAccessUseCase(authRepository, sessionManager) }
+    private val loginUserUseCase by lazy { LoginUserUseCase(userRepository, sessionManager) }
+    private val enableGuestAccessUseCase by lazy { EnableGuestAccessUseCase(userRepository, sessionManager) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,14 +82,16 @@ class LoginFragment : Fragment() {
         }
 
         guestAccessText.setOnClickListener {
-            enableGuestAccessUseCase()
-            requireView().showStyledSnackbar(getString(R.string.toast_guest_mode_enabled))
-            
-            // Navegar a tienda y limpiar back stack (para invitado, back cierra la app)
-            val navOptions = androidx.navigation.NavOptions.Builder()
-                .setPopUpTo(R.id.loginFragment, true) // Eliminar loginFragment del back stack
-                .build()
-            findNavController().navigate(R.id.action_loginFragment_to_storeFragment, null, navOptions)
+            lifecycleScope.launch {
+                enableGuestAccessUseCase()
+                requireView().showStyledSnackbar(getString(R.string.toast_guest_mode_enabled))
+                
+                // Navegar a tienda y limpiar back stack (para invitado, back cierra la app)
+                val navOptions = androidx.navigation.NavOptions.Builder()
+                    .setPopUpTo(R.id.loginFragment, true) // Eliminar loginFragment del back stack
+                    .build()
+                findNavController().navigate(R.id.action_loginFragment_to_storeFragment, null, navOptions)
+            }
         }
     }
 
@@ -118,18 +122,20 @@ class LoginFragment : Fragment() {
 
         if (hasError) return
 
-        val result = loginUserUseCase(email, password)
-        result.onSuccess {
-            passwordInputLayout.error = null
-            
-            // Navegar a tienda y limpiar back stack (para usuario real, back cierra la app)
-            val navOptions = androidx.navigation.NavOptions.Builder()
-                .setPopUpTo(R.id.loginFragment, true) // Eliminar loginFragment del back stack
-                .build()
-            findNavController().navigate(R.id.action_loginFragment_to_storeFragment, null, navOptions)
-        }.onFailure {
-            passwordInputLayout.error = getString(R.string.error_login_invalid)
-            requireView().showStyledSnackbar(getString(R.string.error_login_invalid))
+        lifecycleScope.launch {
+            val result = loginUserUseCase(email, password)
+            result.onSuccess {
+                passwordInputLayout.error = null
+                
+                // Navegar a tienda y limpiar back stack (para usuario real, back cierra la app)
+                val navOptions = androidx.navigation.NavOptions.Builder()
+                    .setPopUpTo(R.id.loginFragment, true) // Eliminar loginFragment del back stack
+                    .build()
+                findNavController().navigate(R.id.action_loginFragment_to_storeFragment, null, navOptions)
+            }.onFailure {
+                passwordInputLayout.error = getString(R.string.error_login_invalid)
+                requireView().showStyledSnackbar(getString(R.string.error_login_invalid))
+            }
         }
     }
 }

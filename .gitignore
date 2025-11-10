@@ -23,3 +23,10 @@ local.properties
 *.aab
 release/
 releases/
+
+# Python
+__pycache__/
+*.pyc
+env/
+venv/
+.env

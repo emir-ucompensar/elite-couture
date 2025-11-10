@@ -1,14 +1,10 @@
 package com.elitecouture.app.di
 
 import android.content.Context
-import com.elitecouture.app.data.local.EliteCoutureDatabase
-import com.elitecouture.app.data.local.dao.CartDao
-import com.elitecouture.app.data.local.dao.FavoriteDao
-import com.elitecouture.app.data.local.dao.ProductDao
-import com.elitecouture.app.data.local.dao.UserDao
-import com.elitecouture.app.data.repository.AuthRepository
-import com.elitecouture.app.data.repository.ProductRepository
-import com.elitecouture.app.data.seed.DatabaseSeeder
+import com.elitecouture.app.data.repository.SupabaseCartRepository
+import com.elitecouture.app.data.repository.SupabaseFavoriteRepository
+import com.elitecouture.app.data.repository.SupabaseProductRepository
+import com.elitecouture.app.data.repository.SupabaseUserRepository
 import com.elitecouture.app.data.session.SessionManager
 import com.elitecouture.app.domain.usecase.auth.EnableGuestAccessUseCase
 import com.elitecouture.app.domain.usecase.auth.LoginUserUseCase
@@ -33,45 +29,57 @@ import com.elitecouture.app.domain.usecase.profile.UpdateProfileUseCase
 /**
  * ServiceLocator - Contenedor de dependencias centralizado.
  * 
+ * ✨ MIGRADO A SUPABASE ✨
+ * 
  * Proporciona instancias únicas de:
- * - Repositorios (AuthRepository, ProductRepository)
+ * - Repositorios de Supabase (SupabaseUserRepository, SupabaseProductRepository, etc.)
  * - SessionManager
  * - UseCases organizados por features
  * 
- * Mantiene todas las dependencias en un solo lugar,
- * facilitando testing y mantenimiento.
+ * Todas las operaciones ahora se realizan en la nube usando Supabase.
+ * SQLite local ha sido completamente eliminado.
  */
 object ServiceLocator {
     
     // ============================================
-    // DATABASE & DAOs
+    // SUPABASE REPOSITORIES - Singleton instances
     // ============================================
     
-    /**
-     * Proporciona instancia de la base de datos.
-     */
-    private fun provideDatabase(context: Context): EliteCoutureDatabase =
-        EliteCoutureDatabase.getInstance(context.applicationContext)
-
-    // ============================================
-    // REPOSITORIES
-    // ============================================
+    private val supabaseUserRepository: SupabaseUserRepository by lazy {
+        SupabaseUserRepository()
+    }
+    
+    private val supabaseProductRepository: SupabaseProductRepository by lazy {
+        SupabaseProductRepository()
+    }
+    
+    private val supabaseFavoriteRepository: SupabaseFavoriteRepository by lazy {
+        SupabaseFavoriteRepository()
+    }
+    
+    private val supabaseCartRepository: SupabaseCartRepository by lazy {
+        SupabaseCartRepository()
+    }
     
     /**
-     * Proporciona instancia de AuthRepository.
+     * Proporciona instancia de SupabaseUserRepository.
      */
-    fun provideAuthRepository(context: Context): AuthRepository {
-        val database = provideDatabase(context)
-        return AuthRepository(UserDao(database))
-    }
+    fun provideSupabaseUserRepository(): SupabaseUserRepository = supabaseUserRepository
 
     /**
-     * Proporciona instancia de ProductRepository.
+     * Proporciona instancia de SupabaseProductRepository.
      */
-    fun provideProductRepository(context: Context): ProductRepository {
-        val database = provideDatabase(context)
-        return ProductRepository(ProductDao(database))
-    }
+    fun provideSupabaseProductRepository(): SupabaseProductRepository = supabaseProductRepository
+    
+    /**
+     * Proporciona instancia de SupabaseFavoriteRepository.
+     */
+    fun provideSupabaseFavoriteRepository(): SupabaseFavoriteRepository = supabaseFavoriteRepository
+    
+    /**
+     * Proporciona instancia de SupabaseCartRepository.
+     */
+    fun provideSupabaseCartRepository(): SupabaseCartRepository = supabaseCartRepository
 
     // ============================================
     // SESSION MANAGER
@@ -84,21 +92,6 @@ object ServiceLocator {
         SessionManager(context.applicationContext)
 
     // ============================================
-    // DATABASE SEEDER
-    // ============================================
-    
-    /**
-     * Proporciona instancia de DatabaseSeeder.
-     */
-    fun provideDatabaseSeeder(context: Context): DatabaseSeeder {
-        val database = provideDatabase(context)
-        return DatabaseSeeder(
-            context = context.applicationContext,
-            productDao = ProductDao(database)
-        )
-    }
-
-    // ============================================
     // USE CASES - AUTH
     // ============================================
     
@@ -107,7 +100,7 @@ object ServiceLocator {
      */
     fun provideLoginUserUseCase(context: Context): LoginUserUseCase {
         return LoginUserUseCase(
-            authRepository = provideAuthRepository(context),
+            userRepository = supabaseUserRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -117,7 +110,7 @@ object ServiceLocator {
      */
     fun provideRegisterUserUseCase(context: Context): RegisterUserUseCase {
         return RegisterUserUseCase(
-            authRepository = provideAuthRepository(context),
+            userRepository = supabaseUserRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -127,7 +120,7 @@ object ServiceLocator {
      */
     fun provideEnableGuestAccessUseCase(context: Context): EnableGuestAccessUseCase {
         return EnableGuestAccessUseCase(
-            authRepository = provideAuthRepository(context),
+            userRepository = supabaseUserRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -150,7 +143,7 @@ object ServiceLocator {
      */
     fun provideUpdateProfileUseCase(context: Context): UpdateProfileUseCase {
         return UpdateProfileUseCase(
-            authRepository = provideAuthRepository(context),
+            userRepository = supabaseUserRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -164,7 +157,7 @@ object ServiceLocator {
      */
     fun provideGetProductCatalogUseCase(context: Context): GetProductCatalogUseCase {
         return GetProductCatalogUseCase(
-            productRepository = provideProductRepository(context)
+            productRepository = supabaseProductRepository
         )
     }
 
@@ -173,7 +166,7 @@ object ServiceLocator {
      */
     fun provideGetProductsByCategoryUseCase(context: Context): GetProductsByCategoryUseCase {
         return GetProductsByCategoryUseCase(
-            productRepository = provideProductRepository(context)
+            productRepository = supabaseProductRepository
         )
     }
 
@@ -182,7 +175,7 @@ object ServiceLocator {
      */
     fun provideGetProductsByGenderUseCase(context: Context): GetProductsByGenderUseCase {
         return GetProductsByGenderUseCase(
-            productRepository = provideProductRepository(context)
+            productRepository = supabaseProductRepository
         )
     }
 
@@ -191,7 +184,7 @@ object ServiceLocator {
      */
     fun provideSearchProductsUseCase(context: Context): SearchProductsUseCase {
         return SearchProductsUseCase(
-            productRepository = provideProductRepository(context)
+            productRepository = supabaseProductRepository
         )
     }
 
@@ -203,9 +196,8 @@ object ServiceLocator {
      * Proporciona AddProductToFavoritesUseCase.
      */
     fun provideAddProductToFavoritesUseCase(context: Context): AddProductToFavoritesUseCase {
-        val database = provideDatabase(context)
         return AddProductToFavoritesUseCase(
-            favoriteDao = FavoriteDao(database),
+            favoriteRepository = supabaseFavoriteRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -214,9 +206,8 @@ object ServiceLocator {
      * Proporciona RemoveProductFromFavoritesUseCase.
      */
     fun provideRemoveProductFromFavoritesUseCase(context: Context): RemoveProductFromFavoritesUseCase {
-        val database = provideDatabase(context)
         return RemoveProductFromFavoritesUseCase(
-            favoriteDao = FavoriteDao(database),
+            favoriteRepository = supabaseFavoriteRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -225,9 +216,8 @@ object ServiceLocator {
      * Proporciona IsProductFavoriteUseCase.
      */
     fun provideIsProductFavoriteUseCase(context: Context): IsProductFavoriteUseCase {
-        val database = provideDatabase(context)
         return IsProductFavoriteUseCase(
-            favoriteDao = FavoriteDao(database),
+            favoriteRepository = supabaseFavoriteRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -236,9 +226,9 @@ object ServiceLocator {
      * Proporciona GetUserFavoritesUseCase.
      */
     fun provideGetUserFavoritesUseCase(context: Context): GetUserFavoritesUseCase {
-        val database = provideDatabase(context)
         return GetUserFavoritesUseCase(
-            favoriteDao = FavoriteDao(database),
+            favoriteRepository = supabaseFavoriteRepository,
+            productRepository = supabaseProductRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -251,9 +241,8 @@ object ServiceLocator {
      * Proporciona AddToCartUseCase.
      */
     fun provideAddToCartUseCase(context: Context): AddToCartUseCase {
-        val database = provideDatabase(context)
         return AddToCartUseCase(
-            cartDao = CartDao(database),
+            cartRepository = supabaseCartRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -262,9 +251,8 @@ object ServiceLocator {
      * Proporciona UpdateCartItemQuantityUseCase.
      */
     fun provideUpdateCartItemQuantityUseCase(context: Context): UpdateCartItemQuantityUseCase {
-        val database = provideDatabase(context)
         return UpdateCartItemQuantityUseCase(
-            cartDao = CartDao(database),
+            cartRepository = supabaseCartRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -273,9 +261,8 @@ object ServiceLocator {
      * Proporciona RemoveFromCartUseCase.
      */
     fun provideRemoveFromCartUseCase(context: Context): RemoveFromCartUseCase {
-        val database = provideDatabase(context)
         return RemoveFromCartUseCase(
-            cartDao = CartDao(database),
+            cartRepository = supabaseCartRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -284,9 +271,9 @@ object ServiceLocator {
      * Proporciona GetUserCartUseCase.
      */
     fun provideGetUserCartUseCase(context: Context): GetUserCartUseCase {
-        val database = provideDatabase(context)
         return GetUserCartUseCase(
-            cartDao = CartDao(database),
+            cartRepository = supabaseCartRepository,
+            productRepository = supabaseProductRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -295,9 +282,8 @@ object ServiceLocator {
      * Proporciona ClearCartUseCase.
      */
     fun provideClearCartUseCase(context: Context): ClearCartUseCase {
-        val database = provideDatabase(context)
         return ClearCartUseCase(
-            cartDao = CartDao(database),
+            cartRepository = supabaseCartRepository,
             sessionManager = provideSessionManager(context)
         )
     }
@@ -306,9 +292,8 @@ object ServiceLocator {
      * Proporciona IsProductInCartUseCase.
      */
     fun provideIsProductInCartUseCase(context: Context): IsProductInCartUseCase {
-        val database = provideDatabase(context)
         return IsProductInCartUseCase(
-            cartDao = CartDao(database),
+            cartRepository = supabaseCartRepository,
             sessionManager = provideSessionManager(context)
         )
     }

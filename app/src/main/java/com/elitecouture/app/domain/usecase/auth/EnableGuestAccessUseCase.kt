@@ -1,23 +1,26 @@
 package com.elitecouture.app.domain.usecase.auth
 
-import com.elitecouture.app.data.repository.AuthRepository
+import com.elitecouture.app.data.repository.SupabaseUserRepository
 import com.elitecouture.app.data.session.SessionManager
 import com.elitecouture.app.domain.model.User
+import java.util.UUID
 
 /**
  * Caso de uso para habilitar el modo invitado.
  * 
+ * ✨ MIGRADO A SUPABASE ✨
+ * 
  * Responsabilidades:
- * - Crear perfil de invitado en el repositorio
+ * - Crear perfil de invitado en Supabase
  * - Activar modo invitado en SessionManager
- * - Guardar ID de usuario invitado
+ * - Guardar UUID de usuario invitado
  * - Retornar perfil de invitado
  * 
- * @property authRepository repositorio para operaciones de autenticación
+ * @property userRepository repositorio de Supabase para operaciones de usuario
  * @property sessionManager gestor de sesión del usuario
  */
 class EnableGuestAccessUseCase(
-    private val authRepository: AuthRepository,
+    private val userRepository: SupabaseUserRepository,
     private val sessionManager: SessionManager
 ) {
     /**
@@ -25,18 +28,13 @@ class EnableGuestAccessUseCase(
      * 
      * @return Result<User> con el perfil de invitado creado
      */
-    operator fun invoke(): Result<User> {
+    suspend operator fun invoke(): Result<User> {
         return try {
-            // Simplemente activar el flag de invitado
-            // NO crear usuario en base de datos, NO persistir datos
-            sessionManager.setGuestModeEnabled(true)
-            
-            // Retornar un objeto User dummy solo para compatibilidad
-            // (no se guarda en ningún lado)
-            val dummyGuest = User(
-                id = 0L,
-                uuid = "",
-                email = "",
+            // Crear usuario invitado en Supabase
+            val guestUser = User(
+                id = 0L, // Será asignado por Supabase
+                uuid = UUID.randomUUID().toString(),
+                email = "invitado_${System.currentTimeMillis()}@elitecouture.app",
                 firstName = "Invitado",
                 lastName = null,
                 address = null,
@@ -44,7 +42,22 @@ class EnableGuestAccessUseCase(
                 createdAt = System.currentTimeMillis()
             )
             
-            Result.success(dummyGuest)
+            val createdGuest = userRepository.createUser(guestUser, password = "")
+            
+            // Guardar sesión del invitado
+            sessionManager.setUserFullInfo(
+                id = createdGuest.id,
+                uuid = createdGuest.uuid,
+                email = createdGuest.email,
+                firstName = createdGuest.firstName,
+                lastName = createdGuest.lastName,
+                address = createdGuest.address,
+                isGuest = true,
+                createdAt = createdGuest.createdAt
+            )
+            sessionManager.setGuestModeEnabled(true)
+            
+            Result.success(createdGuest)
         } catch (e: Exception) {
             Result.failure(e)
         }

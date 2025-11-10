@@ -14,6 +14,9 @@ import com.elitecouture.app.domain.usecase.favorites.AddProductToFavoritesUseCas
 import com.elitecouture.app.domain.usecase.favorites.IsProductFavoriteUseCase
 import com.elitecouture.app.domain.usecase.favorites.RemoveProductFromFavoritesUseCase
 import com.elitecouture.app.ui.common.extension.showStyledSnackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -26,7 +29,8 @@ class ProductListAdapter(
     private val isProductInCartUseCase: IsProductInCartUseCase,
     private val isGuestMode: Boolean = false,
     private val onNavigateToFavorites: () -> Unit = {},
-    private val onNavigateToCart: () -> Unit = {}
+    private val onNavigateToCart: () -> Unit = {},
+    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
 ) : RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
 
     companion object {
@@ -49,7 +53,8 @@ class ProductListAdapter(
             isProductInCartUseCase = isProductInCartUseCase,
             isGuestMode = isGuestMode,
             onNavigateToFavorites = onNavigateToFavorites,
-            onNavigateToCart = onNavigateToCart
+            onNavigateToCart = onNavigateToCart,
+            coroutineScope = coroutineScope
         )
     }
 
@@ -74,7 +79,8 @@ class ProductListAdapter(
             isProductInCartUseCase: IsProductInCartUseCase,
             isGuestMode: Boolean,
             onNavigateToFavorites: () -> Unit,
-            onNavigateToCart: () -> Unit
+            onNavigateToCart: () -> Unit,
+            coroutineScope: CoroutineScope
         ) {
             name.text = product.name
             description.text = product.description ?: ""
@@ -187,85 +193,91 @@ class ProductListAdapter(
             // FAVORITES Y CART - Solo si NO es modo invitado
             // ============================================
             if (!isGuestMode) {
-                // Verificar estado inicial de favoritos desde DB
-                val isFavorite = isProductFavoriteUseCase(product.uuid)
-                android.util.Log.d(TAG, "bind() -> Product: ${product.name} (${product.uuid}), isFavorite=$isFavorite")
-                updateFavoriteIcon(isFavorite)
-                
-                // Verificar y actualizar el estado inicial del botón de carrito
-                val isInCart = isProductInCartUseCase(product.uuid)
-                updateAddToCartButton(isInCart)
+                coroutineScope.launch {
+                    // Verificar estado inicial de favoritos desde DB
+                    val isFavorite = isProductFavoriteUseCase(product.uuid)
+                    android.util.Log.d(TAG, "bind() -> Product: ${product.name} (${product.uuid}), isFavorite=$isFavorite")
+                    updateFavoriteIcon(isFavorite)
+                    
+                    // Verificar y actualizar el estado inicial del botón de carrito
+                    val isInCart = isProductInCartUseCase(product.uuid)
+                    updateAddToCartButton(isInCart)
+                }
 
                 btnFav.setOnClickListener {
-                android.util.Log.d(TAG, "btnFav clicked for product: ${product.name} (${product.uuid})")
-                
-                // Verificar estado actual desde la base de datos
-                val currentlyFavorite = isProductFavoriteUseCase(product.uuid)
-                android.util.Log.d(TAG, "Current favorite status: $currentlyFavorite")
-                
-                if (currentlyFavorite) {
-                    // Eliminar de favoritos
-                    android.util.Log.d(TAG, "Attempting to REMOVE from favorites...")
-                    val success = removeFromFavoritesUseCase(product.uuid)
-                    android.util.Log.d(TAG, "Remove result: $success")
-                    if (success) {
-                        updateFavoriteIcon(false)
-                        itemView.showStyledSnackbar("Eliminado de favoritos")
-                    } else {
-                        // Error: no se pudo eliminar
-                        itemView.showStyledSnackbar("Error al eliminar de favoritos")
+                    coroutineScope.launch {
+                        android.util.Log.d(TAG, "btnFav clicked for product: ${product.name} (${product.uuid})")
+                        
+                        // Verificar estado actual desde la base de datos
+                        val currentlyFavorite = isProductFavoriteUseCase(product.uuid)
+                        android.util.Log.d(TAG, "Current favorite status: $currentlyFavorite")
+                        
+                        if (currentlyFavorite) {
+                            // Eliminar de favoritos
+                            android.util.Log.d(TAG, "Attempting to REMOVE from favorites...")
+                            val success = removeFromFavoritesUseCase(product.uuid)
+                            android.util.Log.d(TAG, "Remove result: $success")
+                            if (success) {
+                                updateFavoriteIcon(false)
+                                itemView.showStyledSnackbar("Eliminado de favoritos")
+                            } else {
+                                // Error: no se pudo eliminar
+                                itemView.showStyledSnackbar("Error al eliminar de favoritos")
+                            }
+                        } else {
+                            // Añadir a favoritos
+                            android.util.Log.d(TAG, "Attempting to ADD to favorites...")
+                            val success = addToFavoritesUseCase(product.uuid)
+                            android.util.Log.d(TAG, "Add result: $success")
+                            if (success) {
+                                updateFavoriteIcon(true)
+                                itemView.showStyledSnackbar(
+                                    message = itemView.context.getString(R.string.favorites_item_added),
+                                    duration = com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,
+                                    actionText = itemView.context.getString(R.string.favorites_item_added_action),
+                                    actionCallback = {
+                                        onNavigateToFavorites()
+                                    }
+                                )
+                            } else {
+                                // Error: no se pudo añadir (puede que ya exista o usuario no esté logueado)
+                                itemView.showStyledSnackbar("Error al añadir a favoritos")
+                            }
+                        }
                     }
-                } else {
-                    // Añadir a favoritos
-                    android.util.Log.d(TAG, "Attempting to ADD to favorites...")
-                    val success = addToFavoritesUseCase(product.uuid)
-                    android.util.Log.d(TAG, "Add result: $success")
-                    if (success) {
-                        updateFavoriteIcon(true)
+                }
+
+            btnAdd.setOnClickListener {
+                coroutineScope.launch {
+                    android.util.Log.d(TAG, "btnAdd clicked for product: ${product.name} (${product.uuid})")
+                    
+                    // Validar que haya stock disponible
+                    if (product.stock <= 0) {
+                        itemView.showStyledSnackbar("Producto sin stock disponible")
+                        return@launch
+                    }
+                    
+                    // Añadir al carrito
+                    android.util.Log.d(TAG, "Attempting to ADD to cart...")
+                    val result = addToCartUseCase(product.uuid, quantity = 1)
+                    android.util.Log.d(TAG, "Add to cart result: $result")
+                    
+                    if (result > 0) {
+                        // Éxito - cambiar estado del botón
+                        updateAddToCartButton(true)
+                        
                         itemView.showStyledSnackbar(
-                            message = itemView.context.getString(R.string.favorites_item_added),
+                            message = itemView.context.getString(R.string.cart_item_added, product.name),
                             duration = com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,
-                            actionText = itemView.context.getString(R.string.favorites_item_added_action),
+                            actionText = "Ver carrito",
                             actionCallback = {
-                                onNavigateToFavorites()
+                                onNavigateToCart()
                             }
                         )
                     } else {
-                        // Error: no se pudo añadir (puede que ya exista o usuario no esté logueado)
-                        itemView.showStyledSnackbar("Error al añadir a favoritos")
+                        // Error: usuario no logueado o error en DB
+                        itemView.showStyledSnackbar("Error al añadir al carrito")
                     }
-                }
-            }
-
-            btnAdd.setOnClickListener {
-                android.util.Log.d(TAG, "btnAdd clicked for product: ${product.name} (${product.uuid})")
-                
-                // Validar que haya stock disponible
-                if (product.stock <= 0) {
-                    itemView.showStyledSnackbar("Producto sin stock disponible")
-                    return@setOnClickListener
-                }
-                
-                // Añadir al carrito
-                android.util.Log.d(TAG, "Attempting to ADD to cart...")
-                val result = addToCartUseCase(product.uuid, quantity = 1)
-                android.util.Log.d(TAG, "Add to cart result: $result")
-                
-                if (result > 0) {
-                    // Éxito - cambiar estado del botón
-                    updateAddToCartButton(true)
-                    
-                    itemView.showStyledSnackbar(
-                        message = itemView.context.getString(R.string.cart_item_added, product.name),
-                        duration = com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,
-                        actionText = "Ver carrito",
-                        actionCallback = {
-                            onNavigateToCart()
-                        }
-                    )
-                } else {
-                    // Error: usuario no logueado o error en DB
-                    itemView.showStyledSnackbar("Error al añadir al carrito")
                 }
             }
             }

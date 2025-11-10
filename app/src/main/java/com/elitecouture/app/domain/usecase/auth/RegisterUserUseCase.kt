@@ -1,23 +1,25 @@
 package com.elitecouture.app.domain.usecase.auth
 
-import com.elitecouture.app.data.repository.AuthRepository
+import com.elitecouture.app.data.repository.SupabaseUserRepository
 import com.elitecouture.app.data.session.SessionManager
 import com.elitecouture.app.domain.model.User
 
 /**
  * Caso de uso para registrar un nuevo usuario.
  * 
+ * ✨ MIGRADO A SUPABASE ✨
+ * 
  * Responsabilidades:
- * - Registrar usuario en el repositorio
+ * - Registrar usuario en Supabase
  * - Guardar sesión automáticamente después del registro
  * - Desactivar modo invitado
  * - Retornar resultado del registro
  * 
- * @property authRepository repositorio para operaciones de autenticación
+ * @property userRepository repositorio de Supabase para operaciones de usuario
  * @property sessionManager gestor de sesión del usuario
  */
 class RegisterUserUseCase(
-    private val authRepository: AuthRepository,
+    private val userRepository: SupabaseUserRepository,
     private val sessionManager: SessionManager
 ) {
     /**
@@ -29,25 +31,26 @@ class RegisterUserUseCase(
      * @param password contraseña
      * @return Result<User> con el usuario creado si es exitoso, o error si falla
      */
-    operator fun invoke(
+    suspend operator fun invoke(
         firstName: String,
         lastName: String?,
         email: String,
         password: String
     ): Result<User> {
-        // Crear usuario temporal con los datos
-        val user = User(
-            id = 0, // El ID será asignado por el repositorio
-            uuid = "", // Será asignado por el repositorio
-            email = email,
-            firstName = firstName,
-            lastName = lastName,
-            isGuest = false,
-            createdAt = System.currentTimeMillis()
-        )
-        
-        val result = authRepository.register(user, password)
-        result.getOrNull()?.let { createdUser ->
+        return try {
+            // Crear usuario temporal con los datos
+            val user = User(
+                id = 0, // El ID será asignado por Supabase
+                uuid = "", // Será asignado por Supabase
+                email = email,
+                firstName = firstName,
+                lastName = lastName,
+                isGuest = false,
+                createdAt = System.currentTimeMillis()
+            )
+            
+            val createdUser = userRepository.createUser(user, password)
+            
             // Guardar sesión automáticamente con todos los datos
             sessionManager.setUserFullInfo(
                 id = createdUser.id,
@@ -59,7 +62,10 @@ class RegisterUserUseCase(
                 isGuest = createdUser.isGuest,
                 createdAt = createdUser.createdAt
             )
+            
+            Result.success(createdUser)
+        } catch (e: Exception) {
+            Result.failure(e)
         }
-        return result
     }
 }

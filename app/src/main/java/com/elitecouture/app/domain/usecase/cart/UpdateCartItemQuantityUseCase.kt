@@ -1,16 +1,18 @@
 package com.elitecouture.app.domain.usecase.cart
 
-import com.elitecouture.app.data.local.dao.CartDao
+import com.elitecouture.app.data.repository.SupabaseCartRepository
 import com.elitecouture.app.data.session.SessionManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Use case for updating the quantity of a product in the shopping cart.
  * 
- * @param cartDao DAO for cart operations
+ * @param cartRepository Supabase repository for cart operations
  * @param sessionManager Session manager to get current user UUID
  */
 class UpdateCartItemQuantityUseCase(
-    private val cartDao: CartDao,
+    private val cartRepository: SupabaseCartRepository,
     private val sessionManager: SessionManager
 ) {
     /**
@@ -21,8 +23,13 @@ class UpdateCartItemQuantityUseCase(
      * @param newQuantity New quantity value
      * @return Number of rows updated
      */
-    operator fun invoke(productUuid: String, newQuantity: Int): Int {
-        val userUuid = sessionManager.getUserUuid() ?: return 0
-        return cartDao.updateQuantity(userUuid, productUuid, newQuantity)
+    suspend operator fun invoke(productUuid: String, newQuantity: Int): Int = withContext(Dispatchers.IO) {
+        val userUuid = sessionManager.getUserUuid() ?: return@withContext 0
+        try {
+            cartRepository.updateQuantity(userUuid, productUuid, newQuantity)
+            1 // Supabase doesn't return affected rows, assume success
+        } catch (e: Exception) {
+            0
+        }
     }
 }

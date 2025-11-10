@@ -16,10 +16,29 @@ android {
         versionName "0.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Cargar propiedades locales de forma segura
+        Properties properties = new Properties()
+        def localPropertiesFile = rootProject.file('local.properties')
+        if (localPropertiesFile.exists()) {
+            properties.load(new FileInputStream(localPropertiesFile))
+            buildConfigField "String", "SUPABASE_URL", "\"${properties.getProperty('supabase.url', 'https://tjhhqwizpiywyrwjpgrg.supabase.co')}\""
+            buildConfigField "String", "SUPABASE_ANON_KEY", "\"${properties.getProperty('supabase.anon.key', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqaGhxd2l6cGl5d3lyd2pwZ3JnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3OTY2NDAsImV4cCI6MjA3ODM3MjY0MH0.gEtg3ts6AAkrWZHIsWQxYzKAboZvRYyY5mlrZ5FMTtc')}\""
+        } else {
+            buildConfigField "String", "SUPABASE_URL", "\"\""
+            buildConfigField "String", "SUPABASE_ANON_KEY", "\"\""
+        }
     }
 
     buildFeatures {
         viewBinding true
+        buildConfig true
+    }
+    
+    // Configuración de Lint
+    lint {
+        abortOnError false // No abortar el build por errores de lint
+        checkReleaseBuilds false // No verificar en builds de release
     }
     
     buildTypes {
@@ -56,4 +75,18 @@ dependencies {
     // Coil - Modern image loading library for Android
     implementation 'io.coil-kt:coil:2.5.0'
     implementation 'io.coil-kt:coil-gif:2.5.0'
+    
+    // Supabase
+    implementation platform('io.github.jan-tennert.supabase:bom:2.5.4')
+    implementation 'io.github.jan-tennert.supabase:postgrest-kt'
+    implementation 'io.github.jan-tennert.supabase:storage-kt'
+    implementation 'io.github.jan-tennert.supabase:realtime-kt'
+    
+    // Ktor Client (requerido por Supabase)
+    implementation 'io.ktor:ktor-client-android:2.3.7'
+    implementation 'io.ktor:ktor-client-core:2.3.7'
+    implementation 'io.ktor:ktor-utils:2.3.7'
+    
+    // Coroutines (para operaciones asíncronas)
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 }

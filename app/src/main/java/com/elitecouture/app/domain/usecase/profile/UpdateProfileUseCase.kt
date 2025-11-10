@@ -1,22 +1,24 @@
 package com.elitecouture.app.domain.usecase.profile
 
-import com.elitecouture.app.data.repository.AuthRepository
+import com.elitecouture.app.data.repository.SupabaseUserRepository
 import com.elitecouture.app.data.session.SessionManager
 import com.elitecouture.app.domain.model.User
 
 /**
  * Caso de uso para actualizar el perfil del usuario.
  * 
+ * ✨ MIGRADO A SUPABASE ✨
+ * 
  * Responsabilidades:
- * - Actualizar información del usuario en la base de datos
+ * - Actualizar información del usuario en Supabase
  * - Actualizar la sesión con los nuevos datos
  * - Retornar resultado de la operación
  * 
- * @property authRepository repositorio para operaciones de usuario
+ * @property userRepository repositorio de Supabase para operaciones de usuario
  * @property sessionManager gestor de sesión del usuario
  */
 class UpdateProfileUseCase(
-    private val authRepository: AuthRepository,
+    private val userRepository: SupabaseUserRepository,
     private val sessionManager: SessionManager
 ) {
     /**
@@ -25,10 +27,10 @@ class UpdateProfileUseCase(
      * @param user datos actualizados del usuario
      * @return Result<User> con el usuario actualizado si es exitoso, o error si falla
      */
-    operator fun invoke(user: User): Result<User> {
-        val result = authRepository.updateProfile(user)
-        
-        result.getOrNull()?.let { updatedUser ->
+    suspend operator fun invoke(user: User): Result<User> {
+        return try {
+            val updatedUser = userRepository.updateUser(user)
+            
             // Actualizar la sesión con los nuevos datos
             sessionManager.setUserFullInfo(
                 id = updatedUser.id,
@@ -40,8 +42,10 @@ class UpdateProfileUseCase(
                 isGuest = updatedUser.isGuest,
                 createdAt = updatedUser.createdAt
             )
+            
+            Result.success(updatedUser)
+        } catch (e: Exception) {
+            Result.failure(e)
         }
-        
-        return result
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.elitecouture.app.R
 import com.elitecouture.app.di.ServiceLocator
@@ -14,6 +15,7 @@ import com.elitecouture.app.ui.common.extension.showStyledSnackbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
 
 class RegisterFragment : Fragment() {
     private lateinit var firstNameInput: TextInputEditText
@@ -31,9 +33,9 @@ class RegisterFragment : Fragment() {
     private lateinit var appleRegisterButton: MaterialButton
     private lateinit var loginLink: TextView
 
-    private val authRepository by lazy { ServiceLocator.provideAuthRepository(requireContext()) }
+    private val userRepository by lazy { ServiceLocator.provideSupabaseUserRepository() }
     private val sessionManager by lazy { ServiceLocator.provideSessionManager(requireContext()) }
-    private val registerUserUseCase by lazy { RegisterUserUseCase(authRepository, sessionManager) }
+    private val registerUserUseCase by lazy { RegisterUserUseCase(userRepository, sessionManager) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,33 +68,29 @@ class RegisterFragment : Fragment() {
         registerButton.setOnClickListener {
             if (!validateInputs()) return@setOnClickListener
 
-            val firstName = firstNameInput.text?.toString()?.trim().orEmpty()
-            val lastName = lastNameInput.text?.toString()?.trim().orEmpty().ifBlank { null }
-            val email = emailInput.text?.toString()?.trim().orEmpty()
-            val password = passwordInput.text?.toString()?.trim().orEmpty()
+            lifecycleScope.launch {
+                val firstName = firstNameInput.text?.toString()?.trim().orEmpty()
+                val lastName = lastNameInput.text?.toString()?.trim().orEmpty().ifBlank { null }
+                val email = emailInput.text?.toString()?.trim().orEmpty()
+                val password = passwordInput.text?.toString()?.trim().orEmpty()
 
-            val existingUser = authRepository.findByEmail(email)
-            if (existingUser != null) {
-                requireView().showStyledSnackbar(getString(R.string.error_account_already_exists))
-                return@setOnClickListener
-            }
-
-            val result = registerUserUseCase(
-                firstName = firstName,
-                lastName = lastName,
-                email = email,
-                password = password
-            )
-            result.onSuccess {
-                requireView().showStyledSnackbar(getString(R.string.toast_registration_success))
-                
-                // Navegar a tienda y limpiar back stack completo (login y register)
-                val navOptions = androidx.navigation.NavOptions.Builder()
-                    .setPopUpTo(R.id.loginFragment, true) // Eliminar todo hasta loginFragment inclusive
-                    .build()
-                findNavController().navigate(R.id.action_registerFragment_to_storeFragment, null, navOptions)
-            }.onFailure {
-                requireView().showStyledSnackbar(getString(R.string.error_registration_generic))
+                val result = registerUserUseCase(
+                    firstName = firstName,
+                    lastName = lastName,
+                    email = email,
+                    password = password
+                )
+                result.onSuccess {
+                    requireView().showStyledSnackbar(getString(R.string.toast_registration_success))
+                    
+                    // Navegar a tienda y limpiar back stack completo (login y register)
+                    val navOptions = androidx.navigation.NavOptions.Builder()
+                        .setPopUpTo(R.id.loginFragment, true) // Eliminar todo hasta loginFragment inclusive
+                        .build()
+                    findNavController().navigate(R.id.action_registerFragment_to_storeFragment, null, navOptions)
+                }.onFailure {
+                    requireView().showStyledSnackbar(getString(R.string.error_registration_generic))
+                }
             }
         }
 

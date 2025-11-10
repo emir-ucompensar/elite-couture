@@ -26,8 +26,7 @@ class SplashActivity : BaseActivity<ViewBinding>(R.layout.activity_splash) {
     // Inicializar ViewModel usando lazy para que esté disponible antes de setupObservers()
     private val viewModel: SplashViewModel by lazy {
         val sessionManager = ServiceLocator.provideSessionManager(this)
-        val databaseSeeder = ServiceLocator.provideDatabaseSeeder(this)
-        val factory = SplashViewModelFactory(sessionManager, databaseSeeder)
+        val factory = SplashViewModelFactory(sessionManager)
         ViewModelProvider(this, factory)[SplashViewModel::class.java]
     }
     

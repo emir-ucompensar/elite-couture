@@ -225,7 +225,9 @@ class FavoritesFragment : Fragment() {
         updateFavoritesCount(favoritesAdapter.itemCount)
         
         // Eliminar de la base de datos inmediatamente
-        removeFromFavoritesUseCase(removedFavorite.product.uuid)
+        lifecycleScope.launch {
+            removeFromFavoritesUseCase(removedFavorite.product.uuid)
+        }
         
         // Si la lista queda vacía, mostrar empty state
         if (favoritesAdapter.itemCount == 0) {

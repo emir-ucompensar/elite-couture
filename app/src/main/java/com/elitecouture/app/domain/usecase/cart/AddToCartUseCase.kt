@@ -1,16 +1,18 @@
 package com.elitecouture.app.domain.usecase.cart
 
-import com.elitecouture.app.data.local.dao.CartDao
+import com.elitecouture.app.data.repository.SupabaseCartRepository
 import com.elitecouture.app.data.session.SessionManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Use case for adding a product to the shopping cart.
  * 
- * @param cartDao DAO for cart operations
+ * @param cartRepository Supabase repository for cart operations
  * @param sessionManager Session manager to get current user UUID
  */
 class AddToCartUseCase(
-    private val cartDao: CartDao,
+    private val cartRepository: SupabaseCartRepository,
     private val sessionManager: SessionManager
 ) {
     /**
@@ -22,8 +24,13 @@ class AddToCartUseCase(
      * @param quantity Quantity to add (default: 1)
      * @return Cart item ID or -1 if failed
      */
-    operator fun invoke(productUuid: String, quantity: Int = 1): Long {
-        val userUuid = sessionManager.getUserUuid() ?: return -1
-        return cartDao.addToCart(userUuid, productUuid, quantity)
+    suspend operator fun invoke(productUuid: String, quantity: Int = 1): Long = withContext(Dispatchers.IO) {
+        val userUuid = sessionManager.getUserUuid() ?: return@withContext -1L
+        try {
+            val cartItem = cartRepository.addToCart(userUuid, productUuid, quantity)
+            cartItem.id
+        } catch (e: Exception) {
+            -1L
+        }
     }
 }
