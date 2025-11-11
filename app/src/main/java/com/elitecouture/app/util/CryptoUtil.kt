@@ -15,6 +15,16 @@ import javax.crypto.spec.SecretKeySpec
  * Utilizado principalmente para proteger información personal como direcciones.
  */
 object CryptoUtil {
+
+    /**
+     * Genera un hash SHA-256 seguro para contraseñas.
+     * @param input texto plano de la contraseña
+     * @return hash en hexadecimal
+     */
+    fun sha256(input: String): String {
+        val bytes = java.security.MessageDigest.getInstance("SHA-256").digest(input.toByteArray())
+        return bytes.joinToString("") { "%02x".format(it) }
+    }
     
     private const val ALGORITHM = "AES/CBC/PKCS7Padding"
     private const val KEY_ALGORITHM = "PBKDF2WithHmacSHA256"

@@ -1,6 +1,7 @@
 package com.elitecouture.app.data.remote
 
 import com.elitecouture.app.domain.model.User
+import com.elitecouture.app.util.CryptoUtil
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -77,7 +78,8 @@ object SupabaseUserService {
      * @throws Exception if creation fails
      */
     suspend fun createUser(user: User, password: String? = null): User = withContext(Dispatchers.IO) {
-        val dto = user.toDto(password)
+    val hashedPassword = password?.let { CryptoUtil.sha256(it) }
+    val dto = user.toDto(hashedPassword)
         val result = SupabaseClientProvider.client
             .from("users")
             .insert(dto) {
@@ -147,16 +149,16 @@ object SupabaseUserService {
      */
     suspend fun authenticateUser(email: String, password: String): User? = withContext(Dispatchers.IO) {
         try {
+            val hashedPassword = CryptoUtil.sha256(password)
             val result = SupabaseClientProvider.client
                 .from("users")
                 .select {
                     filter {
                         eq("email", email)
-                        eq("password", password)
+                        eq("password", hashedPassword)
                     }
                 }
                 .decodeSingle<UserDto>()
-            
             result.toDomain()
         } catch (e: Exception) {
             null
@@ -216,10 +218,11 @@ object SupabaseUserService {
      * @throws Exception if update fails
      */
     suspend fun updatePassword(uuid: String, newPassword: String) = withContext(Dispatchers.IO) {
+        val hashedPassword = CryptoUtil.sha256(newPassword)
         SupabaseClientProvider.client
             .from("users")
             .update(
-                mapOf("password" to newPassword)
+                mapOf("password" to hashedPassword)
             ) {
                 filter {
                     eq("uuid", uuid)
