@@ -39,51 +39,57 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <LinearLayout
+            <!-- SwipeRefreshLayout para pull-to-refresh -->
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <!-- Indicador de filtro activo -->
-                <TextView
-                    android:id="@+id/text_active_filter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/surface_light"
-                    android:elevation="2dp"
-                    android:fontFamily="@font/elite_sans"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="Mujer - Vestidos"
-                    android:textColor="@color/text_secondary_dark"
-                    android:textSize="14sp"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
-
-                <!-- RecyclerView vertical para lista de productos -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_products"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:paddingStart="16dp"
-                    android:paddingTop="9dp"
-                    android:paddingBottom="9dp"
-                    android:paddingEnd="16dp"
-                    android:scrollbars="none"
-                    tools:listitem="@layout/item_product" />
-
-                <!-- Estado vacío para categorías sin productos -->
                 <LinearLayout
-                    android:id="@+id/empty_category_state"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="32dp"
-                    android:visibility="gone"
-                    tools:visibility="visible">
+                    android:orientation="vertical">
+
+                    <!-- Indicador de filtro activo -->
+                    <TextView
+                        android:id="@+id/text_active_filter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/surface_light"
+                        android:elevation="2dp"
+                        android:fontFamily="@font/elite_sans"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="Mujer - Vestidos"
+                        android:textColor="@color/text_secondary_dark"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <!-- RecyclerView vertical para lista de productos -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_products"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingStart="16dp"
+                        android:paddingTop="9dp"
+                        android:paddingBottom="9dp"
+                        android:paddingEnd="16dp"
+                        android:scrollbars="none"
+                        tools:listitem="@layout/item_product" />
+
+                    <!-- Estado vacío para categorías sin productos -->
+                    <LinearLayout
+                        android:id="@+id/empty_category_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="32dp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
 
                     <ImageView
                         android:layout_width="120dp"
@@ -130,6 +136,8 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         </FrameLayout>
 

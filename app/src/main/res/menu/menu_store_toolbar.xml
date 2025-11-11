@@ -2,10 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     
+    <!-- Botón de reload/refresh -->
     <item
-        android:id="@+id/action_menu"
-        android:icon="@drawable/menu"
-        android:title="Menú"
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/reload"
+        android:title="@string/action_refresh"
         app:iconTint="@color/color_primary"
         app:showAsAction="always" />
         

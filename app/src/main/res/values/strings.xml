@@ -1,16 +1,51 @@
 <resources>
+    <!-- ============================================ -->
+    <!-- APP GENERAL -->
+    <!-- ============================================ -->
     <string name="app_name">Elite Couture</string>
     <string name="app_name_uppercase">ELITE COUTURE</string>
-
-    <!-- General -->
     <string name="logo_content_description">Elite Couture Logo</string>
     <string name="divider_or">o</string>
     <string name="navigation_drawer_open">Abrir menú de navegación</string>
     <string name="navigation_drawer_close">Cerrar menú de navegación</string>
 
-    <!-- Splash -->
+    <!-- ============================================ -->
+    <!-- SPLASH SCREEN -->
+    <!-- ============================================ -->
     <string name="splash_loading_text">Cargando recursos</string>
 
+    <!-- ============================================ -->
+    <!-- VALIDATION MESSAGES -->
+    <!-- ============================================ -->
+    <!-- Email validation -->
+    <string name="validation_email_required">El correo electrónico es requerido</string>
+    <string name="validation_email_invalid">Ingresa un correo electrónico válido</string>
+    <string name="validation_email_format_invalid">Formato de correo inválido</string>
+    
+    <!-- Password validation -->
+    <string name="validation_password_required">La contraseña es requerida</string>
+    <string name="validation_password_min_length">La contraseña debe tener al menos %d caracteres</string>
+    <string name="validation_password_max_length">La contraseña no puede exceder %d caracteres</string>
+    <string name="validation_password_mismatch">Las contraseñas no coinciden</string>
+    
+    <!-- Name validation -->
+    <string name="validation_name_required">%s es requerido</string>
+    <string name="validation_name_min_length" formatted="false">%s debe tener al menos %d caracteres</string>
+    <string name="validation_name_max_length" formatted="false">%s no puede exceder %d caracteres</string>
+    <string name="validation_name_invalid_chars">%s contiene caracteres no permitidos</string>
+    <string name="validation_field_name_default">Nombre</string>
+    
+    <!-- Address validation -->
+    <string name="validation_address_required">La dirección es requerida</string>
+    <string name="validation_address_max_length">La dirección no puede exceder %d caracteres</string>
+    
+    <!-- Generic validation -->
+    <string name="validation_field_required">%s es requerido</string>
+    <string name="validation_field_default">Este campo</string>
+
+    <!-- ============================================ -->
+    <!-- AUTHENTICATION -->
+    <!-- ============================================ -->
     <!-- Auth common -->
     <string name="tab_login">Inicio</string>
     <string name="tab_register">Registro</string>
@@ -30,6 +65,7 @@
     <string name="login_with_apple">Iniciar sesión con tú Apple ID</string>
     <string name="login_no_account_prompt">¿No tienes una cuenta?</string>
     <string name="login_no_account_action"><u>Crea una cuenta</u></string>
+    <string name="error_login_invalid">Credenciales inválidas. Verifica tu correo y contraseña.</string>
 
     <!-- Register -->
     <string name="register_intro">Únete a Elite Couture\ny comienza a crear tus outfits</string>
@@ -41,22 +77,152 @@
     <string name="register_existing_prompt">¿Ya tienes una cuenta?</string>
     <string name="register_existing_action"><u>Inicia sesión</u></string>
     <string name="error_first_name_required">Por favor introduce un nombre</string>
+    <string name="error_email_invalid">Ingresa un correo electrónico válido</string>
+    <string name="error_password_length">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="error_password_required">Ingresa tu contraseña</string>
+    <string name="error_password_mismatch">Las contraseñas no coinciden</string>
     <string name="toast_registration_success">Registro exitoso. ¡Bienvenido a Elite Couture!</string>
     <string name="error_account_already_exists">Ya existe una cuenta con este correo. Inicia sesión para continuar.</string>
     <string name="error_registration_generic">No fue posible crear la cuenta. Inténtalo nuevamente.</string>
 
-    <!-- Validation & feedback -->
-    <string name="error_email_invalid">Ingresa un correo electrónico válido</string>
-    <string name="error_password_length">La contraseña debe tener al menos 6 caracteres</string>
-    <string name="error_password_mismatch">Las contraseñas no coinciden</string>
-    <string name="error_password_required">Ingresa tu contraseña</string>
-    <string name="error_login_invalid">Credenciales inválidas. Verifica tu correo y contraseña.</string>
-    <string name="toast_feature_unavailable">Funcionalidad no disponible en esta versión</string>
+    <!-- Guest mode -->
     <string name="toast_guest_mode_enabled">Modo invitado activado. Algunas funciones estarán limitadas.</string>
     <string name="toast_guest_restricted_feature">Crea una cuenta para acceder a esta funcionalidad</string>
-    <string name="action_login">Iniciar sesión</string>
 
-    <!-- Profile -->
+    <!-- ============================================ -->
+    <!-- NAVIGATION -->
+    <!-- ============================================ -->
+    <string name="nav_label_login">Inicio</string>
+    <string name="nav_label_register">Registro</string>
+    <string name="nav_label_store">Tienda</string>
+    <string name="nav_label_profile">Mi perfil</string>
+    <string name="nav_label_cart">Carrito de compras</string>
+    
+    <!-- Bottom Navigation -->
+    <string name="bottom_nav_store">Tienda</string>
+    <string name="bottom_nav_favorites">Favoritos</string>
+    <string name="bottom_nav_cart">Carrito</string>
+    <string name="bottom_nav_profile">Perfil</string>
+    
+    <!-- Menu -->
+    <string name="menu_store">Tienda</string>
+    <string name="menu_cart">Carrito</string>
+    <string name="menu_profile">Mi perfil</string>
+
+    <!-- ============================================ -->
+    <!-- STORE / SHOP -->
+    <!-- ============================================ -->
+    <string name="store_under_construction_title">En Construcción</string>
+    <string name="store_under_construction_message">Estamos trabajando para traerte\nla mejor tienda de moda</string>
+    <string name="store_filter_gender_all">Todas las prendas</string>
+    <string name="store_filter_gender_men">Moda Hombre</string>
+    <string name="store_filter_gender_women">Moda Mujer</string>
+    <string name="store_filter_category_all">Todas las categorías</string>
+    <string name="store_filter_category_pants">Pantalones</string>
+    <string name="store_filter_category_jackets">Chaquetas</string>
+    <string name="store_filter_category_coats">Abrigos</string>
+    <string name="store_filter_category_skirts">Faldas</string>
+    <string name="store_filter_category_accessories">Accesorios</string>
+    <string name="store_filter_summary">Mostrando %1$s · %2$s</string>
+    <string name="store_exit_dialog_title">¿Salir de la aplicación?</string>
+    <string name="store_exit_dialog_message">¿Estás seguro de que deseas salir?</string>
+    <string name="store_exit_dialog_confirm">Salir</string>
+    <string name="store_exit_dialog_cancel">Cancelar</string>
+    
+    <!-- Drawer Menu -->
+    <string name="drawer_subtitle">Descubre colecciones exclusivas</string>
+    <string name="drawer_all_products">TODAS LAS PRENDAS</string>
+    <string name="drawer_section_men">HOMBRE</string>
+    <string name="drawer_section_women">MUJER</string>
+    <string name="drawer_category_all">TODO</string>
+    <string name="drawer_category_pants">PANTALONES</string>
+    <string name="drawer_category_jackets">CHAQUETAS</string>
+    <string name="drawer_category_coats">ABRIGOS</string>
+    <string name="drawer_category_skirts">FALDAS</string>
+    <string name="drawer_category_accessories">ACCESORIOS</string>
+    
+    <!-- Menu Categories -->
+    <string name="menu_category_men">Hombre</string>
+    <string name="menu_category_women">Mujer</string>
+    <string name="menu_item_dresses">Vestidos</string>
+    <string name="menu_item_shirts">Camisas</string>
+    <string name="menu_item_jackets">Chaquetas</string>
+    <string name="menu_item_pants">Pantalones</string>
+    <string name="menu_item_shoes">Zapatos</string>
+    <string name="menu_item_accessories">Accesorios</string>
+    <string name="menu_item_bags">Bolsos</string>
+    <string name="menu_item_sweaters">Suéteres</string>
+    <string name="menu_item_suits">Conjuntos</string>
+    <string name="menu_item_sacos">Sacos</string>
+    <string name="menu_item_jerseys">Jerseys</string>
+    
+    <!-- Filters -->
+    <string name="filter_prefix">Filtrando: </string>
+    <string name="filter_showing_all">Mostrando todos los productos</string>
+    <string name="filter_men_shirts">Filtrando: Hombre - Camisas</string>
+    <string name="filter_men_jackets">Filtrando: Hombre - Chaquetas</string>
+    <string name="filter_men_pants">Filtrando: Hombre - Pantalones</string>
+    <string name="filter_men_shoes">Filtrando: Hombre - Zapatos</string>
+    <string name="filter_men_accessories">Filtrando: Hombre - Accesorios</string>
+    <string name="filter_men_jerseys">Filtrando: Hombre - Jerseys</string>
+    <string name="filter_men_sacos">Filtrando: Hombre - Sacos</string>
+    <string name="filter_women_dresses">Filtrando: Mujer - Vestidos</string>
+    <string name="filter_women_pants">Filtrando: Mujer - Pantalones</string>
+    <string name="filter_women_shoes">Filtrando: Mujer - Zapatos</string>
+    <string name="filter_women_accessories">Filtrando: Mujer - Accesorios</string>
+    <string name="filter_women_bags">Filtrando: Mujer - Bolsos</string>
+    <string name="filter_women_suits">Filtrando: Mujer - Conjuntos</string>
+    
+    <!-- Product Updates -->
+    <string name="products_updated_success">Productos actualizados</string>
+    <string name="products_updated_error">Error al actualizar productos</string>
+    
+    <!-- Empty States -->
+    <string name="empty_category_title">¡Se agotaron rápido!</string>
+    <string name="empty_category_message">El stock de %s se ha agotado rápidamente.\n¡Explora nuestros otros productos y no te pierdas de nuestras ofertas!</string>
+    <string name="empty_category_button">VER TODOS LOS PRODUCTOS</string>
+
+    <!-- ============================================ -->
+    <!-- FAVORITES -->
+    <!-- ============================================ -->
+    <string name="favorites_title">Favoritos</string>
+    <string name="favorites_empty_title">Sin favoritos aún</string>
+    <string name="favorites_empty_message">Añade tus productos favoritos tocando la estrella en cualquier producto que te guste</string>
+    <string name="favorites_empty_action">Explorar productos</string>
+    <string name="favorites_item_removed">Eliminado de favoritos</string>
+    <string name="favorites_item_removed_undo">Deshacer</string>
+    <string name="favorites_item_added">Añadido a favoritos</string>
+    <string name="favorites_item_added_action">Ver favoritos</string>
+    <string name="favorites_count_single">%d producto guardado</string>
+    <string name="favorites_count_plural">%d productos guardados</string>
+    <string name="favorites_error_remove">Error al eliminar de favoritos</string>
+    <string name="favorites_error_add">Error al añadir a favoritos</string>
+    <string name="favorites_error_load">Error al cargar favoritos</string>
+
+    <!-- ============================================ -->
+    <!-- CART / SHOPPING CART -->
+    <!-- ============================================ -->
+    <string name="cart_title">Carrito de Compras</string>
+    <string name="cart_empty_title">Tu carrito está vacío</string>
+    <string name="cart_empty_message">Añade productos a tu carrito y haz tu pedido cuando estés listo</string>
+    <string name="cart_empty_action">Explorar productos</string>
+    <string name="cart_count_singular">1 producto en el carrito</string>
+    <string name="cart_count_plural">%d productos en el carrito</string>
+    <string name="cart_subtotal">Subtotal</string>
+    <string name="cart_checkout_button">Finalizar Compra</string>
+    <string name="cart_item_removed">%s eliminado del carrito</string>
+    <string name="cart_item_added">%s añadido al carrito</string>
+    <string name="cart_stock_label">Stock: %d</string>
+    <string name="cart_button_add">Añadir al carrito</string>
+    <string name="cart_button_added">Producto añadido</string>
+    <string name="cart_action_view">Ver carrito</string>
+    <string name="cart_error_add">Error al añadir al carrito</string>
+    <string name="cart_out_of_stock">Producto sin stock disponible</string>
+    <string name="cart_item_restored">Producto restaurado</string>
+
+    <!-- ============================================ -->
+    <!-- PROFILE -->
+    <!-- ============================================ -->
     <string name="profile_section_title">Información Personal</string>
     <string name="profile_field_name_label">Nombre</string>
     <string name="profile_field_name_placeholder">Tu nombre</string>
@@ -64,6 +230,9 @@
     <string name="profile_field_lastname_placeholder">Tu apellido</string>
     <string name="profile_field_email_label">Correo electrónico</string>
     <string name="profile_field_email_placeholder">tu.email@ejemplo.com</string>
+    <string name="profile_address_label">Dirección</string>
+    <string name="profile_field_address_placeholder">Cra. 123 #45-67, Bogotá</string>
+    <string name="profile_address_hint">Añadir una dirección para recibir tus pedidos</string>
     <string name="profile_quick_actions_title">Acciones Rápidas</string>
     <string name="profile_quick_action_favorites">Mis Favoritos</string>
     <string name="profile_quick_action_purchases">Historial de Compras</string>
@@ -75,80 +244,8 @@
     <string name="profile_logout_dialog_confirm">Cerrar sesión</string>
     <string name="profile_logout_dialog_cancel">Cancelar</string>
     <string name="profile_edit_button_content_description">Editar información de perfil</string>
-    <string name="profile_address_label">Dirección</string>
-    <string name="profile_field_address_placeholder">Cra. 123 #45-67, Bogotá</string>
-    <string name="profile_address_hint">Añadir una dirección para recibir tus pedidos</string>
     <string name="profile_edit_action">Editar</string>
     <string name="profile_back_to_store">Volver a la tienda</string>
-
-    <!-- Store -->
-    <string name="store_under_construction_title">🚧 En Construcción 🚧</string>
-    <string name="store_under_construction_message">Estamos trabajando para traerte\nla mejor tienda de moda</string>
-        <string name="store_filter_gender_all">Todas las prendas</string>
-        <string name="store_filter_gender_men">Moda Hombre</string>
-        <string name="store_filter_gender_women">Moda Mujer</string>
-    
-    <!-- Empty category state -->
-    <string name="empty_category_title">¡Se agotaron rápido!</string>
-    <string name="empty_category_message">El stock de %s se ha agotado rápidamente.\n¡Explora nuestros otros productos y no te pierdas de nuestras ofertas!</string>
-    <string name="empty_category_button">VER TODOS LOS PRODUCTOS</string>
-    
-    <!-- Menu lateral -->
-    <string name="menu_category_men">Hombre</string>
-    <string name="menu_category_women">Mujer</string>
-    <string name="menu_item_dresses">Vestidos</string>
-    <string name="menu_item_shirts">Camisas</string>
-    <string name="menu_item_jackets">Chaquetas</string>
-    <string name="menu_item_pants">Pantalones</string>
-    <string name="menu_item_shoes">Zapatos</string>
-    <string name="menu_item_accessories">Accesorios</string>
-    <string name="menu_item_bags">Bolsos</string>
-        <string name="store_filter_category_all">Todas las categorías</string>
-        <string name="store_filter_category_pants">Pantalones</string>
-        <string name="store_filter_category_jackets">Chaquetas</string>
-        <string name="store_filter_category_coats">Abrigos</string>
-        <string name="store_filter_category_skirts">Faldas</string>
-        <string name="store_filter_category_accessories">Accesorios</string>
-        <string name="store_filter_summary">Mostrando %1$s · %2$s</string>
-    <string name="store_exit_dialog_title">¿Salir de la aplicación?</string>
-    <string name="store_exit_dialog_message">¿Estás seguro de que deseas salir?</string>
-    <string name="store_exit_dialog_confirm">Salir</string>
-    <string name="store_exit_dialog_cancel">Cancelar</string>
-
-    <!-- Navigation & Menu -->
-    <string name="nav_label_login">Inicio</string>
-    <string name="nav_label_register">Registro</string>
-    <string name="nav_label_store">Tienda</string>
-    <string name="nav_label_profile">Mi perfil</string>
-    <string name="nav_label_cart">Carrito de compras</string>
-    <string name="menu_store">Tienda</string>
-    <string name="menu_cart">Carrito</string>
-    <string name="menu_profile">Mi perfil</string>
-    <string name="drawer_subtitle">Descubre colecciones exclusivas</string>
-    <string name="drawer_all_products">TODAS LAS PRENDAS</string>
-    <string name="drawer_section_men">HOMBRE</string>
-    <string name="drawer_section_women">MUJER</string>
-    <string name="drawer_category_all">TODO</string>
-    <string name="drawer_category_pants">PANTALONES</string>
-    <string name="drawer_category_jackets">CHAQUETAS</string>
-    <string name="drawer_category_coats">ABRIGOS</string>
-    <string name="drawer_category_skirts">FALDAS</string>
-    <string name="drawer_category_accessories">ACCESORIOS</string>
-
-    <!-- Toast messages -->
-    <string name="toast_login_google">Iniciando sesión con Google...</string>
-    <string name="toast_login_apple">Iniciando sesión con Apple...</string>
-    <string name="toast_forgot_password">Función de recuperación de contraseña</string>
-    <string name="toast_register_google">Registrándose con Google...</string>
-    <string name="toast_register_apple">Registrándose con Apple...</string>
-    <string name="toast_cart_under_construction">Carrito en construcción</string>
-    <string name="toast_menu_under_construction">Menú en construcción</string>
-    <string name="toast_profile_edit_in_progress">Editar perfil - En desarrollo</string>
-    <string name="toast_profile_favorites_in_progress">Mis favoritos - En desarrollo</string>
-    <string name="toast_profile_history_in_progress">Historial de compras - En desarrollo</string>
-    <string name="toast_profile_settings_in_progress">Configuración - En desarrollo</string>
-    <string name="toast_profile_changes_saved">Cambios guardados</string>
-    <string name="toast_menu_in_progress">Función de menú en progreso...</string>
 
     <!-- Edit Profile -->
     <string name="edit_profile_back">Cancelar</string>
@@ -177,48 +274,39 @@
     <string name="edit_profile_password_updated">Contraseña actualizada correctamente</string>
     <string name="edit_profile_error_current_password">La contraseña actual es incorrecta</string>
     <string name="edit_profile_error_update_failed">Error al actualizar el perfil</string>
-    
-    <!-- Bottom Navigation -->
-    <string name="bottom_nav_store">Tienda</string>
-    <string name="bottom_nav_favorites">Favoritos</string>
-    <string name="bottom_nav_cart">Carrito</string>
-    <string name="bottom_nav_profile">Perfil</string>
-    
-    <!-- Favorites -->
-    <string name="favorites_title">Favoritos</string>
-    <string name="favorites_empty_title">Sin favoritos aún</string>
-    <string name="favorites_empty_message">Añade tus productos favoritos tocando la estrella en cualquier producto que te guste</string>
-    <string name="favorites_empty_action">Explorar productos</string>
-    <string name="favorites_item_removed">Eliminado de favoritos</string>
-    <string name="favorites_item_removed_undo">Deshacer</string>
-    <string name="favorites_item_added">Añadido a favoritos</string>
-    <string name="favorites_item_added_action">Ver favoritos</string>
-    <string name="favorites_count_single">%d producto guardado</string>
-    <string name="favorites_count_plural">%d productos guardados</string>
-    
-    <!-- Cart -->
-    <string name="cart_title">Carrito de Compras</string>
-    <string name="cart_empty_title">Tu carrito está vacío</string>
-    <string name="cart_empty_message">Añade productos a tu carrito y haz tu pedido cuando estés listo</string>
-    <string name="cart_empty_action">Explorar productos</string>
-    <string name="cart_count_singular">1 producto en el carrito</string>
-    <string name="cart_count_plural">%d productos en el carrito</string>
-    <string name="cart_subtotal">Subtotal</string>
-    <string name="cart_checkout_button">Finalizar Compra</string>
-    <string name="cart_item_removed">%s eliminado del carrito</string>
-    <string name="cart_item_added">%s añadido al carrito</string>
-    <string name="cart_stock_label">Stock: %d</string>
-    <string name="cart_button_add">Añadir al carrito</string>
-    <string name="cart_button_added">Producto añadido</string>
-    
-    <!-- Content Descriptions -->
+
+    <!-- ============================================ -->
+    <!-- CONTENT DESCRIPTIONS (Accessibility) -->
+    <!-- ============================================ -->
     <string name="desc_product_image">Imagen del producto</string>
     <string name="desc_delete_favorite">Eliminar de favoritos</string>
     <string name="desc_no_favorites">Sin favoritos</string>
     <string name="desc_no_cart_items">Carrito vacío</string>
     <string name="desc_decrease_quantity">Disminuir cantidad</string>
     <string name="desc_increase_quantity">Aumentar cantidad</string>
-    
-    <!-- Toast Messages -->
+
+    <!-- ============================================ -->
+    <!-- COMMON ACTIONS -->
+    <!-- ============================================ -->
+    <string name="action_login">Iniciar sesión</string>
+    <string name="action_refresh">Actualizar</string>
+
+    <!-- ============================================ -->
+    <!-- TOAST MESSAGES / NOTIFICATIONS -->
+    <!-- ============================================ -->
+    <string name="toast_feature_unavailable">Funcionalidad no disponible en esta versión</string>
+    <string name="toast_login_google">Iniciando sesión con Google...</string>
+    <string name="toast_login_apple">Iniciando sesión con Apple...</string>
+    <string name="toast_forgot_password">Función de recuperación de contraseña</string>
+    <string name="toast_register_google">Registrándose con Google...</string>
+    <string name="toast_register_apple">Registrándose con Apple...</string>
+    <string name="toast_cart_under_construction">Carrito en construcción</string>
+    <string name="toast_menu_under_construction">Menú en construcción</string>
+    <string name="toast_profile_edit_in_progress">Editar perfil - En desarrollo</string>
+    <string name="toast_profile_favorites_in_progress">Mis favoritos - En desarrollo</string>
+    <string name="toast_profile_history_in_progress">Historial de compras - En desarrollo</string>
+    <string name="toast_profile_settings_in_progress">Configuración - En desarrollo</string>
+    <string name="toast_profile_changes_saved">Cambios guardados</string>
+    <string name="toast_menu_in_progress">Función de menú en progreso...</string>
     <string name="toast_checkout_under_construction">Funcionalidad de compra no disponible</string>
 </resources>

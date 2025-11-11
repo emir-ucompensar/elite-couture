@@ -243,7 +243,7 @@ class CartFragment : Fragment() {
                             if (result > 0) {
                                 // Recargar la lista del carrito
                                 loadCartItems()
-                                requireView().showStyledSnackbar("Producto restaurado")
+                                requireView().showStyledSnackbar(getString(R.string.cart_item_restored))
                             }
                         }
                     }

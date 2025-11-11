@@ -1,6 +1,7 @@
 package com.elitecouture.app.util
 
 import android.util.Patterns
+import com.elitecouture.app.R
 import com.elitecouture.app.util.Constants.Auth
 import com.elitecouture.app.util.Constants.Validation
 
@@ -9,6 +10,9 @@ import com.elitecouture.app.util.Constants.Validation
  * 
  * Proporciona métodos de validación reutilizables y consistentes en toda la aplicación.
  * Cada método retorna un [ValidationResult] con el estado y mensaje de error si aplica.
+ * 
+ * NOTA: Los métodos usan strings hardcoded para evitar dependencia de Context en ViewModels.
+ * Los strings externalizados están disponibles en strings.xml para uso en UI.
  * 
  * @see ValidationResult
  * @see Constants.Auth para configuraciones de validación

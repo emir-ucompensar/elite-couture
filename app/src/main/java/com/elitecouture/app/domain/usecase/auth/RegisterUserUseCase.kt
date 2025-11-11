@@ -38,10 +38,12 @@ class RegisterUserUseCase(
         password: String
     ): Result<User> {
         return try {
+            android.util.Log.d("RegisterUserUseCase", "Starting registration for email: $email")
+            
             // Crear usuario temporal con los datos
             val user = User(
                 id = 0, // El ID será asignado por Supabase
-                uuid = "", // Será asignado por Supabase
+                uuid = java.util.UUID.randomUUID().toString(), // Generar UUID válido
                 email = email,
                 firstName = firstName,
                 lastName = lastName,
@@ -49,7 +51,9 @@ class RegisterUserUseCase(
                 createdAt = System.currentTimeMillis()
             )
             
+            android.util.Log.d("RegisterUserUseCase", "Calling userRepository.createUser()")
             val createdUser = userRepository.createUser(user, password)
+            android.util.Log.d("RegisterUserUseCase", "User created successfully: ${createdUser.uuid}")
             
             // Guardar sesión automáticamente con todos los datos
             sessionManager.setUserFullInfo(
@@ -65,6 +69,9 @@ class RegisterUserUseCase(
             
             Result.success(createdUser)
         } catch (e: Exception) {
+            android.util.Log.e("RegisterUserUseCase", "Registration failed", e)
+            android.util.Log.e("RegisterUserUseCase", "Error details: ${e.message}")
+            e.printStackTrace()
             Result.failure(e)
         }
     }

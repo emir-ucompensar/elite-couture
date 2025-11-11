@@ -66,21 +66,32 @@ class RegisterFragment : Fragment() {
 
         // Configurar listeners
         registerButton.setOnClickListener {
-            if (!validateInputs()) return@setOnClickListener
+            android.util.Log.d("RegisterFragment", "Register button clicked")
+            if (!validateInputs()) {
+                android.util.Log.w("RegisterFragment", "Validation failed")
+                return@setOnClickListener
+            }
 
             lifecycleScope.launch {
+                android.util.Log.d("RegisterFragment", "Starting registration process")
                 val firstName = firstNameInput.text?.toString()?.trim().orEmpty()
                 val lastName = lastNameInput.text?.toString()?.trim().orEmpty().ifBlank { null }
                 val email = emailInput.text?.toString()?.trim().orEmpty()
                 val password = passwordInput.text?.toString()?.trim().orEmpty()
 
+                android.util.Log.d("RegisterFragment", "Registering user: email=$email, firstName=$firstName")
+                
                 val result = registerUserUseCase(
                     firstName = firstName,
                     lastName = lastName,
                     email = email,
                     password = password
                 )
+                
+                android.util.Log.d("RegisterFragment", "Registration result: ${result.isSuccess}")
+                
                 result.onSuccess {
+                    android.util.Log.d("RegisterFragment", "Registration successful!")
                     requireView().showStyledSnackbar(getString(R.string.toast_registration_success))
                     
                     // Navegar a tienda y limpiar back stack completo (login y register)
@@ -88,7 +99,9 @@ class RegisterFragment : Fragment() {
                         .setPopUpTo(R.id.loginFragment, true) // Eliminar todo hasta loginFragment inclusive
                         .build()
                     findNavController().navigate(R.id.action_registerFragment_to_storeFragment, null, navOptions)
-                }.onFailure {
+                }.onFailure { error ->
+                    android.util.Log.e("RegisterFragment", "Registration failed", error)
+                    android.util.Log.e("RegisterFragment", "Error message: ${error.message}")
                     requireView().showStyledSnackbar(getString(R.string.error_registration_generic))
                 }
             }

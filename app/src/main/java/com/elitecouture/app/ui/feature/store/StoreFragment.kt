@@ -23,6 +23,7 @@ import com.elitecouture.app.ui.feature.store.ProductListAdapter
 import com.elitecouture.app.ui.common.extension.showStyledSnackbar
 import kotlinx.coroutines.launch
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
 import java.text.Normalizer
 import java.util.Locale
@@ -33,6 +34,7 @@ class StoreFragment : Fragment() {
     private lateinit var bottomNavigation: BottomNavigationView
     private val storeViewModel: StoreViewModel by activityViewModels()
     private lateinit var recyclerProducts: RecyclerView
+    private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var drawerCloseButton: MaterialButton
     private lateinit var textActiveFilter: android.widget.TextView
@@ -40,6 +42,13 @@ class StoreFragment : Fragment() {
     private lateinit var textEmptyCategoryTitle: android.widget.TextView
     private lateinit var textEmptyCategoryMessage: android.widget.TextView
     private lateinit var btnExploreProducts: MaterialButton
+    
+    // Variables para los menús expandibles
+    private var menItemsView: View? = null
+    private var menIconView: android.widget.ImageView? = null
+    private var womenItemsView: View? = null
+    private var womenIconView: android.widget.ImageView? = null
+    
     // Lista completa de productos y filtro activo
     private var fullProductList: List<Product> = emptyList()
     private var lastFilterTags: List<String>? = null
@@ -63,11 +72,15 @@ class StoreFragment : Fragment() {
         bottomNavigation.selectedItemId = R.id.navigation_store
         recyclerProducts = view.findViewById(R.id.recycler_products)
         recyclerProducts.layoutManager = LinearLayoutManager(requireContext())
+        swipeRefresh = view.findViewById(R.id.swipe_refresh)
         textActiveFilter = view.findViewById(R.id.text_active_filter)
         emptyCategoryState = view.findViewById(R.id.empty_category_state)
         textEmptyCategoryTitle = view.findViewById(R.id.text_empty_category_title)
         textEmptyCategoryMessage = view.findViewById(R.id.text_empty_category_message)
         btnExploreProducts = view.findViewById(R.id.btn_explore_products)
+        
+        // Configurar SwipeRefreshLayout
+        setupSwipeRefresh()
         
         // Configurar botón de estado vacío
         btnExploreProducts.setOnClickListener {
@@ -181,13 +194,32 @@ class StoreFragment : Fragment() {
         return normalized.replace("\\p{InCombiningDiacriticalMarks}+".toRegex(), "").lowercase(Locale.getDefault())
     }
 
-    // Chequea que un producto contenga todos los tags (substring match, normalizado)
+    // Chequea que un producto coincida con el filtro especificado
+    // Los filtros se componen de: [género, categoría] o solo [género] o solo [categoría]
+    // Ejemplo: ["Mujer", "Vestidos"] - debe tener género=Mujer Y type=Vestidos
     private fun productMatchesAllTags(product: Product, tags: List<String>): Boolean {
         if (tags.isEmpty()) return true
-        val normalizedProductTags = product.tags.map { normalizeText(it) }
+        
         return tags.all { desiredTag ->
             val nTag = normalizeText(desiredTag)
-            normalizedProductTags.any { pt -> pt.contains(nTag) || nTag.contains(pt) }
+            
+            // Buscar en gender (comparación exacta normalizada)
+            val genderMatch = product.gender?.let { normalizeText(it) == nTag } ?: false
+            
+            // Buscar en type (comparación exacta normalizada o substring)
+            val typeMatch = product.type?.let { 
+                val nType = normalizeText(it)
+                nType == nTag || nType.contains(nTag) || nTag.contains(nType)
+            } ?: false
+            
+            // Buscar en tags (substring match)
+            val tagsMatch = product.tags.any { tag ->
+                val nProductTag = normalizeText(tag)
+                nProductTag.contains(nTag) || nTag.contains(nProductTag)
+            }
+            
+            // El tag deseado debe coincidir con al menos uno de los campos
+            genderMatch || typeMatch || tagsMatch
         }
     }
 
@@ -197,18 +229,15 @@ class StoreFragment : Fragment() {
         textActiveFilter.visibility = View.GONE
         emptyCategoryState.visibility = View.GONE
         recyclerProducts.visibility = View.VISIBLE
-        recyclerProducts.adapter = ProductListAdapter(
-            items = fullProductList,
-            addToFavoritesUseCase = ServiceLocator.provideAddProductToFavoritesUseCase(requireContext()),
-            removeFromFavoritesUseCase = ServiceLocator.provideRemoveProductFromFavoritesUseCase(requireContext()),
-            isProductFavoriteUseCase = ServiceLocator.provideIsProductFavoriteUseCase(requireContext()),
-            addToCartUseCase = ServiceLocator.provideAddToCartUseCase(requireContext()),
-            isProductInCartUseCase = ServiceLocator.provideIsProductInCartUseCase(requireContext()),
-            isGuestMode = sessionManager.isGuestMode(),
-            onNavigateToFavorites = { findNavController().navigate(R.id.action_storeFragment_to_favoritesFragment) },
-            onNavigateToCart = { findNavController().navigate(R.id.action_storeFragment_to_cartFragment) }
-        )
-        requireView().showStyledSnackbar("Mostrando todos los productos")
+        updateRecyclerAdapter(fullProductList)
+        requireView().showStyledSnackbar(getString(R.string.filter_showing_all))
+        
+        // Cerrar menús expandidos
+        menItemsView?.visibility = View.GONE
+        menIconView?.rotation = 0f
+        womenItemsView?.visibility = View.GONE
+        womenIconView?.rotation = 0f
+        
         drawerLayout.closeDrawers()
     }
 
@@ -226,7 +255,7 @@ class StoreFragment : Fragment() {
         lastFilterTags = tagsToFilter
         
         // Mostrar indicador de filtro activo
-        textActiveFilter.text = toastMessage.replace("Filtrando: ", "")
+        textActiveFilter.text = toastMessage.replace(getString(R.string.filter_prefix), "")
         textActiveFilter.visibility = View.VISIBLE
         
         // Verificar si hay productos filtrados
@@ -236,24 +265,13 @@ class StoreFragment : Fragment() {
             emptyCategoryState.visibility = View.VISIBLE
             
             // Personalizar mensaje según la categoría
-            val categoryName = toastMessage.replace("Filtrando: ", "")
+            val categoryName = toastMessage.replace(getString(R.string.filter_prefix), "")
             textEmptyCategoryMessage.text = getString(R.string.empty_category_message, categoryName)
         } else {
             // Mostrar productos
             emptyCategoryState.visibility = View.GONE
             recyclerProducts.visibility = View.VISIBLE
-            
-            recyclerProducts.adapter = ProductListAdapter(
-                items = filtered,
-                addToFavoritesUseCase = ServiceLocator.provideAddProductToFavoritesUseCase(requireContext()),
-                removeFromFavoritesUseCase = ServiceLocator.provideRemoveProductFromFavoritesUseCase(requireContext()),
-                isProductFavoriteUseCase = ServiceLocator.provideIsProductFavoriteUseCase(requireContext()),
-                addToCartUseCase = ServiceLocator.provideAddToCartUseCase(requireContext()),
-                isProductInCartUseCase = ServiceLocator.provideIsProductInCartUseCase(requireContext()),
-                isGuestMode = sessionManager.isGuestMode(),
-                onNavigateToFavorites = { findNavController().navigate(R.id.action_storeFragment_to_favoritesFragment) },
-                onNavigateToCart = { findNavController().navigate(R.id.action_storeFragment_to_cartFragment) }
-            )
+            updateRecyclerAdapter(filtered)
             requireView().showStyledSnackbar(toastMessage)
         }
         
@@ -276,95 +294,199 @@ class StoreFragment : Fragment() {
     private fun setupMenuExpanders() {
         // Referencias a las vistas del menú Hombre
         val menHeaderView = view?.findViewById<View>(R.id.menu_men_header)
-        val menItemsView = view?.findViewById<View>(R.id.menu_men_items)
-        val menIconView = view?.findViewById<android.widget.ImageView>(R.id.menu_men_icon)
+        menItemsView = view?.findViewById<View>(R.id.menu_men_items)
+        menIconView = view?.findViewById<android.widget.ImageView>(R.id.menu_men_icon)
         
         // Referencias a las vistas del menú Mujer
         val womenHeaderView = view?.findViewById<View>(R.id.menu_women_header)
-        val womenItemsView = view?.findViewById<View>(R.id.menu_women_items)
-        val womenIconView = view?.findViewById<android.widget.ImageView>(R.id.menu_women_icon)
+        womenItemsView = view?.findViewById<View>(R.id.menu_women_items)
+        womenIconView = view?.findViewById<android.widget.ImageView>(R.id.menu_women_icon)
         
         // Toggle del menú Hombre
         menHeaderView?.setOnClickListener {
             if (menItemsView?.visibility == View.VISIBLE) {
-                menItemsView.visibility = View.GONE
+                // Cerrar menú Hombre
+                menItemsView?.visibility = View.GONE
                 menIconView?.rotation = 0f
             } else {
+                // Abrir menú Hombre y cerrar Mujer
                 menItemsView?.visibility = View.VISIBLE
                 menIconView?.rotation = 180f
+                
+                // Cerrar menú Mujer si está abierto
+                womenItemsView?.visibility = View.GONE
+                womenIconView?.rotation = 0f
             }
         }
         
         // Toggle del menú Mujer
         womenHeaderView?.setOnClickListener {
             if (womenItemsView?.visibility == View.VISIBLE) {
-                womenItemsView.visibility = View.GONE
+                // Cerrar menú Mujer
+                womenItemsView?.visibility = View.GONE
                 womenIconView?.rotation = 0f
             } else {
+                // Abrir menú Mujer y cerrar Hombre
                 womenItemsView?.visibility = View.VISIBLE
                 womenIconView?.rotation = 180f
+                
+                // Cerrar menú Hombre si está abierto
+                menItemsView?.visibility = View.GONE
+                menIconView?.rotation = 0f
             }
         }
         
-        // Click listeners para items del menú (por ahora solo mostrarán toast)
-        setupMenuItemClickListeners()
+        // Click listeners para items del menú
+        setupMenuItemClickListeners(menItemsView, menIconView, womenItemsView, womenIconView)
     }
     
-    private fun setupMenuItemClickListeners() {
-        // Opción TODO - muestra todos los productos
+    private fun setupMenuItemClickListeners(
+        menItemsView: View?,
+        menIconView: android.widget.ImageView?,
+        womenItemsView: View?,
+        womenIconView: android.widget.ImageView?
+    ) {
+        // Opción TODO - muestra todos los productos y cierra los menús expandidos
         view?.findViewById<View>(R.id.menu_all_products)?.setOnClickListener {
+            // Cerrar ambos menús
+            menItemsView?.visibility = View.GONE
+            menIconView?.rotation = 0f
+            womenItemsView?.visibility = View.GONE
+            womenIconView?.rotation = 0f
+            
             clearFilter()
         }
         
-        // Items de Hombre
+        // Items de Hombre (por ahora no hay productos de hombre en la BD)
         view?.findViewById<View>(R.id.menu_men_shirts)?.setOnClickListener {
-            applyFilterToggle(listOf("Hombre", "Camisas"), "Filtrando: Hombre - Camisas")
+            applyFilterToggle(listOf("Hombre", "Camisas"), getString(R.string.filter_men_shirts))
         }
         view?.findViewById<View>(R.id.menu_men_jackets)?.setOnClickListener {
-            applyFilterToggle(listOf("Hombre", "Chaqueta"), "Filtrando: Hombre - Chaquetas")
+            applyFilterToggle(listOf("Hombre", "Chaquetas"), getString(R.string.filter_men_jackets))
         }
         view?.findViewById<View>(R.id.menu_men_pants)?.setOnClickListener {
-            applyFilterToggle(listOf("Hombre", "Pantalones"), "Filtrando: Hombre - Pantalones")
+            applyFilterToggle(listOf("Hombre", "Pantalones"), getString(R.string.filter_men_pants))
         }
         view?.findViewById<View>(R.id.menu_men_shoes)?.setOnClickListener {
-            applyFilterToggle(listOf("Hombre", "Zapatos"), "Filtrando: Hombre - Zapatos")
+            applyFilterToggle(listOf("Hombre", "Zapatos"), getString(R.string.filter_men_shoes))
         }
         view?.findViewById<View>(R.id.menu_men_accessories)?.setOnClickListener {
-            applyFilterToggle(listOf("Hombre", "Accesorios"), "Filtrando: Hombre - Accesorios")
+            applyFilterToggle(listOf("Hombre", "Accesorios"), getString(R.string.filter_men_accessories))
         }
         view?.findViewById<View>(R.id.menu_men_jerseys)?.setOnClickListener {
-            applyFilterToggle(listOf("Hombre", "Jersey"), "Filtrando: Hombre - Jerseys")
+            applyFilterToggle(listOf("Hombre", "Suéteres"), getString(R.string.filter_men_jerseys))
         }
         view?.findViewById<View>(R.id.menu_men_sacos)?.setOnClickListener {
-            applyFilterToggle(listOf("Hombre", "Saco"), "Filtrando: Hombre - Sacos")
+            applyFilterToggle(listOf("Hombre", "Chaquetas"), getString(R.string.filter_men_sacos))
         }
         
-        // Items de Mujer
+        // Items de Mujer (categorías según datos reales en Supabase)
         view?.findViewById<View>(R.id.menu_women_dresses)?.setOnClickListener {
-            applyFilterToggle(listOf("Mujer", "Vestido"), "Filtrando: Mujer - Vestidos")
+            applyFilterToggle(listOf("Mujer", "Vestidos"), getString(R.string.filter_women_dresses))
         }
         view?.findViewById<View>(R.id.menu_women_pants)?.setOnClickListener {
-            applyFilterToggle(listOf("Mujer", "Pantalones"), "Filtrando: Mujer - Pantalones")
+            applyFilterToggle(listOf("Mujer", "Pantalones"), getString(R.string.filter_women_pants))
         }
         view?.findViewById<View>(R.id.menu_women_shoes)?.setOnClickListener {
-            applyFilterToggle(listOf("Mujer", "Zapatos"), "Filtrando: Mujer - Zapatos")
+            applyFilterToggle(listOf("Mujer", "Zapatos"), getString(R.string.filter_women_shoes))
         }
         view?.findViewById<View>(R.id.menu_women_accessories)?.setOnClickListener {
-            applyFilterToggle(listOf("Mujer", "Accesorios"), "Filtrando: Mujer - Accesorios")
+            applyFilterToggle(listOf("Mujer", "Accesorios"), getString(R.string.filter_women_accessories))
         }
         view?.findViewById<View>(R.id.menu_women_bags)?.setOnClickListener {
-            applyFilterToggle(listOf("Mujer", "Bolsos"), "Filtrando: Mujer - Bolsos")
+            applyFilterToggle(listOf("Mujer", "Bolsos"), getString(R.string.filter_women_bags))
         }
         view?.findViewById<View>(R.id.menu_women_suits)?.setOnClickListener {
-            applyFilterToggle(listOf("Mujer", "Conjunto"), "Filtrando: Mujer - Conjuntos")
+            applyFilterToggle(listOf("Mujer", "Conjuntos"), getString(R.string.filter_women_suits))
+        }
+    }
+
+    private fun setupSwipeRefresh() {
+        // Configurar colores del SwipeRefreshLayout
+        swipeRefresh.setColorSchemeResources(
+            R.color.color_primary,
+            R.color.color_primary_dark,
+            R.color.accent_red
+        )
+        
+        // Configurar el listener para el gesto de pull-to-refresh
+        swipeRefresh.setOnRefreshListener {
+            refreshProducts()
         }
     }
 
     private fun setupToolbar() {
+        // Configurar el botón de navegación (hamburguesa) para abrir el drawer
         toolbarStore.setNavigationOnClickListener {
-            // Abrir el drawer
             drawerLayout.openDrawer(android.view.Gravity.START)
         }
+        
+        // Inflar el menú en la toolbar
+        toolbarStore.inflateMenu(R.menu.menu_store_toolbar)
+        
+        // Configurar listener para el botón de refresh
+        toolbarStore.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_refresh -> {
+                    refreshProducts()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+    
+    private fun refreshProducts() {
+        // Mostrar indicador de carga
+        swipeRefresh.isRefreshing = true
+        
+        lifecycleScope.launch {
+            try {
+                // Recargar productos desde Supabase
+                val products = ServiceLocator.provideGetProductCatalogUseCase(requireContext())()
+                fullProductList = products
+                
+                // Si hay un filtro activo, reaplicarlo
+                if (lastFilterTags != null) {
+                    val filtered = fullProductList.filter { productMatchesAllTags(it, lastFilterTags!!) }
+                    
+                    if (filtered.isEmpty()) {
+                        recyclerProducts.visibility = View.GONE
+                        emptyCategoryState.visibility = View.VISIBLE
+                    } else {
+                        emptyCategoryState.visibility = View.GONE
+                        recyclerProducts.visibility = View.VISIBLE
+                        updateRecyclerAdapter(filtered)
+                    }
+                } else {
+                    // Sin filtro, mostrar todos
+                    emptyCategoryState.visibility = View.GONE
+                    recyclerProducts.visibility = View.VISIBLE
+                    updateRecyclerAdapter(fullProductList)
+                }
+                
+                requireView().showStyledSnackbar(getString(R.string.products_updated_success))
+            } catch (e: Exception) {
+                requireView().showStyledSnackbar(getString(R.string.products_updated_error))
+            } finally {
+                // Ocultar indicador de carga
+                swipeRefresh.isRefreshing = false
+            }
+        }
+    }
+    
+    private fun updateRecyclerAdapter(products: List<Product>) {
+        recyclerProducts.adapter = ProductListAdapter(
+            items = products,
+            addToFavoritesUseCase = ServiceLocator.provideAddProductToFavoritesUseCase(requireContext()),
+            removeFromFavoritesUseCase = ServiceLocator.provideRemoveProductFromFavoritesUseCase(requireContext()),
+            isProductFavoriteUseCase = ServiceLocator.provideIsProductFavoriteUseCase(requireContext()),
+            addToCartUseCase = ServiceLocator.provideAddToCartUseCase(requireContext()),
+            isProductInCartUseCase = ServiceLocator.provideIsProductInCartUseCase(requireContext()),
+            isGuestMode = sessionManager.isGuestMode(),
+            onNavigateToFavorites = { findNavController().navigate(R.id.action_storeFragment_to_favoritesFragment) },
+            onNavigateToCart = { findNavController().navigate(R.id.action_storeFragment_to_cartFragment) }
+        )
     }
     
     override fun onResume() {
@@ -422,6 +544,13 @@ class StoreFragment : Fragment() {
     private fun setupBackPressHandler() {
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                // Si hay un filtro activo, volver a "TODO" en lugar de salir
+                if (lastFilterTags != null) {
+                    clearFilter()
+                    return
+                }
+                
+                // Si no hay filtro, mostrar diálogo de salida
                 EliteCoutureDialog.create(requireContext())
                     .setTitle(R.string.store_exit_dialog_title)
                     .setMessage(R.string.store_exit_dialog_message)

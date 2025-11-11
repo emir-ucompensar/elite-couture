@@ -22,5 +22,8 @@
         
         <!-- Estilo de la Toolbar -->
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
+        
+        <!-- Color del ripple/hover para todos los elementos interactivos -->
+        <item name="colorControlHighlight">#1A560E2D</item>
     </style>
 </resources>

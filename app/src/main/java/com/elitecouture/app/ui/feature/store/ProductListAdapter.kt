@@ -219,10 +219,10 @@ class ProductListAdapter(
                             android.util.Log.d(TAG, "Remove result: $success")
                             if (success) {
                                 updateFavoriteIcon(false)
-                                itemView.showStyledSnackbar("Eliminado de favoritos")
+                                itemView.showStyledSnackbar(itemView.context.getString(R.string.favorites_item_removed))
                             } else {
                                 // Error: no se pudo eliminar
-                                itemView.showStyledSnackbar("Error al eliminar de favoritos")
+                                itemView.showStyledSnackbar(itemView.context.getString(R.string.favorites_error_remove))
                             }
                         } else {
                             // Añadir a favoritos
@@ -241,7 +241,7 @@ class ProductListAdapter(
                                 )
                             } else {
                                 // Error: no se pudo añadir (puede que ya exista o usuario no esté logueado)
-                                itemView.showStyledSnackbar("Error al añadir a favoritos")
+                                itemView.showStyledSnackbar(itemView.context.getString(R.string.favorites_error_add))
                             }
                         }
                     }
@@ -253,7 +253,7 @@ class ProductListAdapter(
                     
                     // Validar que haya stock disponible
                     if (product.stock <= 0) {
-                        itemView.showStyledSnackbar("Producto sin stock disponible")
+                        itemView.showStyledSnackbar(itemView.context.getString(R.string.cart_out_of_stock))
                         return@launch
                     }
                     
@@ -269,14 +269,14 @@ class ProductListAdapter(
                         itemView.showStyledSnackbar(
                             message = itemView.context.getString(R.string.cart_item_added, product.name),
                             duration = com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,
-                            actionText = "Ver carrito",
+                            actionText = itemView.context.getString(R.string.cart_action_view),
                             actionCallback = {
                                 onNavigateToCart()
                             }
                         )
                     } else {
                         // Error: usuario no logueado o error en DB
-                        itemView.showStyledSnackbar("Error al añadir al carrito")
+                        itemView.showStyledSnackbar(itemView.context.getString(R.string.cart_error_add))
                     }
                 }
             }

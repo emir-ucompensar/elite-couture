@@ -214,7 +214,7 @@ class FavoritesFragment : Fragment() {
                 }
             } catch (e: Exception) {
                 android.util.Log.e(TAG, "Error loading favorites", e)
-                requireView().showStyledSnackbar("Error al cargar favoritos")
+                requireView().showStyledSnackbar(getString(R.string.favorites_error_load))
             }
         }
     }
