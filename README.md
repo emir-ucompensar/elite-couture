@@ -69,7 +69,7 @@ app/
 
 **[Ver Diagrama ERD completo →](design/DATABASE_SCHEMA.md)**
 
-![ERD](design/database_erd.png)
+![ERD](testing/supabase/database_erd.png)
 
 ## 🛠️ Herramientas de Desarrollo
 
