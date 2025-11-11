@@ -173,15 +173,42 @@ def optimize_image(image_path: Path, max_size_kb: int = 500) -> BytesIO:
 # FUNCIONES DE SUBIDA
 # =============================================================================
 
+def list_existing_files_in_bucket(supabase: Client) -> set:
+    """Lista todos los archivos existentes en el bucket"""
+    try:
+        print_step("Consultando archivos existentes en Supabase...")
+        existing_files = set()
+        
+        # Listar archivos en el bucket
+        response = supabase.storage.from_(BUCKET_NAME).list("products")
+        
+        # Recorrer cada carpeta de producto
+        for folder in response:
+            if folder.get('name') and folder.get('name').startswith('product_'):
+                folder_name = folder['name']
+                # Listar archivos dentro de cada carpeta
+                files = supabase.storage.from_(BUCKET_NAME).list(f"products/{folder_name}")
+                for file in files:
+                    if file.get('name'):
+                        file_path = f"products/{folder_name}/{file['name']}"
+                        existing_files.add(file_path)
+        
+        print_success(f"Encontrados {len(existing_files)} archivos en Supabase")
+        return existing_files
+    except Exception as e:
+        print_warning(f"No se pudo listar archivos existentes: {str(e)}")
+        print_info("Se procederá asumiendo que no hay archivos previos")
+        return set()
+
 def upload_image_to_supabase(supabase: Client, image_buffer: BytesIO, 
                              remote_path: str) -> str:
-    """Sube una imagen al bucket de Supabase"""
+    """Sube una imagen al bucket de Supabase (sin sobreescribir)"""
     try:
-        # Subir archivo
+        # Subir archivo SIN upsert (no sobreescribir)
         supabase.storage.from_(BUCKET_NAME).upload(
             path=remote_path,
             file=image_buffer.getvalue(),
-            file_options={"content-type": "image/jpeg", "upsert": "true"}
+            file_options={"content-type": "image/jpeg"}
         )
         
         # Obtener URL pública
@@ -256,8 +283,31 @@ def main():
     
     print()
     
+    # Listar archivos existentes en el bucket
+    existing_files = list_existing_files_in_bucket(supabase)
+    print()
+    
+    # Calcular cuántas imágenes son nuevas
+    new_images_count = 0
+    for product_name, product_data in products.items():
+        for img_idx in range(1, len(product_data['images']) + 1):
+            remote_path = f"products/{product_name}/image_{img_idx}.jpg"
+            if remote_path not in existing_files:
+                new_images_count += 1
+    
+    existing_images_count = total_images - new_images_count
+    
+    print_info(f"Imágenes ya en Supabase: {existing_images_count}")
+    print_info(f"Imágenes nuevas a subir: {new_images_count}")
+    print()
+    
+    if new_images_count == 0:
+        print(f"{Colors.GREEN}¡Todas las imágenes ya están en Supabase!{Colors.RESET}")
+        print(f"{Colors.GREEN}No hay nada que subir.{Colors.RESET}")
+        sys.exit(0)
+    
     # Confirmar antes de proceder
-    print(f"{Colors.YELLOW}{Colors.BOLD}¿Deseas continuar con la subida de {total_images} imágenes?{Colors.RESET}")
+    print(f"{Colors.YELLOW}{Colors.BOLD}¿Deseas continuar con la subida de {new_images_count} imágenes nuevas?{Colors.RESET}")
     response = input("Escribe 'SI' para continuar: ").strip().upper()
     
     if response != 'SI':
@@ -275,6 +325,7 @@ def main():
     upload_stats = {
         'success': 0,
         'failed': 0,
+        'skipped': 0,
         'total_size': 0
     }
     
@@ -299,6 +350,22 @@ def main():
                 
                 print(f"  [{img_idx}/{len(product_data['images'])}] {image_name} → {remote_path}", end=" ")
                 
+                # Verificar si el archivo ya existe
+                if remote_path in existing_files:
+                    # Obtener URL pública del archivo existente
+                    public_url = supabase.storage.from_(BUCKET_NAME).get_public_url(remote_path)
+                    
+                    product_urls.append({
+                        'original_name': image_name,
+                        'remote_path': remote_path,
+                        'url': public_url,
+                        'status': 'existing'
+                    })
+                    
+                    upload_stats['skipped'] += 1
+                    print(f"{Colors.YELLOW}⊙{Colors.RESET} Ya existe")
+                    continue
+                
                 # Procesar imagen
                 if file_ext == '.avif':
                     image_buffer = convert_avif_to_jpg(image_path)
@@ -315,7 +382,8 @@ def main():
                     'original_name': image_name,
                     'remote_path': remote_path,
                     'url': public_url,
-                    'size_kb': round(size_kb, 2)
+                    'size_kb': round(size_kb, 2),
+                    'status': 'uploaded'
                 })
                 
                 upload_stats['success'] += 1
@@ -342,6 +410,7 @@ def main():
             'total_products': total_products,
             'total_images': total_images,
             'uploaded_successfully': upload_stats['success'],
+            'skipped_existing': upload_stats['skipped'],
             'failed': upload_stats['failed'],
             'total_size_mb': round(upload_stats['total_size'] / 1024, 2),
             'duration_seconds': round(duration, 2)
@@ -361,14 +430,18 @@ def main():
     print("=" * 80)
     print()
     print(f"  Productos procesados:    {total_products}")
-    print(f"  Imágenes exitosas:       {Colors.GREEN}{upload_stats['success']}{Colors.RESET}")
+    print(f"  Imágenes nuevas subidas: {Colors.GREEN}{upload_stats['success']}{Colors.RESET}")
+    print(f"  Imágenes ya existentes:  {Colors.YELLOW}{upload_stats['skipped']}{Colors.RESET}")
     print(f"  Imágenes fallidas:       {Colors.RED if upload_stats['failed'] > 0 else Colors.GREEN}{upload_stats['failed']}{Colors.RESET}")
-    print(f"  Tamaño total:            {upload_stats['total_size'] / 1024:.2f} MB")
+    print(f"  Tamaño total subido:     {upload_stats['total_size'] / 1024:.2f} MB")
     print(f"  Tiempo transcurrido:     {duration:.2f} segundos")
     print()
     
     if upload_stats['failed'] == 0:
-        print(f"{Colors.GREEN}{Colors.BOLD}TODAS LAS IMÁGENES SE SUBIERON EXITOSAMENTE{Colors.RESET}")
+        if upload_stats['success'] > 0:
+            print(f"{Colors.GREEN}{Colors.BOLD}✓ TODAS LAS IMÁGENES NUEVAS SE SUBIERON EXITOSAMENTE{Colors.RESET}")
+        if upload_stats['skipped'] > 0:
+            print(f"{Colors.YELLOW}⊙ {upload_stats['skipped']} imágenes ya existían (no se sobreescribieron){Colors.RESET}")
     else:
         print(f"{Colors.YELLOW}Se completó con {upload_stats['failed']} errores{Colors.RESET}")
     

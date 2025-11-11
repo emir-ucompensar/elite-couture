@@ -90,4 +90,16 @@ dependencies {
     
     // Coroutines (para operaciones asíncronas)
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+
+    // Lifecycle (para lifecycleScope en fragments)
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
+    
+    // Geolocalización - Google Play Services Location
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    
+    // Mapas - Google Maps (opcional)
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    
+    // Mapas - OSMDroid (alternativa libre)
+    implementation 'org.osmdroid:osmdroid-android:6.1.14'
 }

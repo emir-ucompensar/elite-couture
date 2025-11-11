@@ -309,4 +309,29 @@
     <string name="toast_profile_changes_saved">Cambios guardados</string>
     <string name="toast_menu_in_progress">Función de menú en progreso...</string>
     <string name="toast_checkout_under_construction">Funcionalidad de compra no disponible</string>
+
+    <!-- ============================================ -->
+    <!-- GEOLOCALIZACIÓN -->
+    <!-- ============================================ -->
+    <string name="location_button_description">Obtener ubicación actual</string>
+    <string name="location_permission_rationale">Necesitamos acceso a tu ubicación para completar automáticamente tu dirección</string>
+    <string name="location_obtaining">Obteniendo ubicación...</string>
+    <string name="location_success">Ubicación obtenida correctamente</string>
+    <string name="location_error">No se pudo obtener la ubicación</string>
+    <string name="location_permission_denied">Permiso de ubicación denegado</string>
+    <string name="location_timeout">Tiempo de espera agotado para obtener ubicación</string>
+    <string name="location_geocoding_error">No se pudo convertir la ubicación en dirección</string>
+
+    <!-- ============================================ -->
+    <!-- MAPA DE TIENDAS -->
+    <!-- ============================================ -->
+    <string name="menu_store_map">Conoce nuestras tiendas físicas</string>
+    <string name="store_map_title">Mapa de Tiendas</string>
+    <string name="store_map_loading">Cargando mapa...</string>
+    <string name="store_info_how_to_get">Cómo llegar</string>
+    <string name="store_info_phone">Teléfono:</string>
+    <string name="store_info_hours">Horario:</string>
+    <string name="store_center_nearest">Centrar en tienda más cercana</string>
+        <string name="store_list_title">Todas nuestras tiendas</string>
 </resources>
+

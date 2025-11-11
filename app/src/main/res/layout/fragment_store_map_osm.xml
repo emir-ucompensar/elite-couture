@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenedor principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/surface_light"
+            android:elevation="4dp"
+            app:navigationIcon="@drawable/keyboard_backspace"
+            app:navigationIconTint="@color/color_primary"
+            app:title="@string/store_map_title"
+            app:titleTextColor="@color/color_primary"
+            app:titleCentered="true" />
+
+        <!-- Contenedor del mapa OSM -->
+        <FrameLayout
+            android:id="@+id/map_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <org.osmdroid.views.MapView
+                android:id="@+id/osm_map_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+    <!-- Controles superpuestos en la esquina superior izquierda del mapa -->
+    <LinearLayout
+        android:id="@+id/map_controls_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="top|start"
+        android:padding="12dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="12dp"
+        android:background="@android:color/transparent">
+
+        <!-- Botón zoom in -->
+        <ImageButton
+            android:id="@+id/btn_zoom_in"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/white"
+            android:src="@drawable/plus"
+            android:contentDescription="Zoom in"
+            app:tint="@color/brand_color"
+            android:elevation="2dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Botón zoom out -->
+        <ImageButton
+            android:id="@+id/btn_zoom_out"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/white"
+            android:src="@drawable/minus"
+            android:contentDescription="Zoom out"
+            app:tint="@color/brand_color"
+            android:elevation="2dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Botón localizar tienda más cercana -->
+        <ImageButton
+            android:id="@+id/btn_center_nearest_store"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/white"
+            android:src="@drawable/crosshairs"
+            android:contentDescription="@string/store_center_nearest"
+            app:tint="@color/brand_color"
+            android:elevation="2dp" />
+    </LinearLayout>
+
+    <!-- Bottom Sheet con lista de tiendas -->
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_sheet_background"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="120dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <!-- Handle del Bottom Sheet -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bottom_sheet_handle" />
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/elite_sans_semibold"
+            android:text="@string/store_list_title"
+            android:textColor="@color/color_primary"
+            android:textSize="20sp"
+            android:gravity="center" />
+
+        <!-- Lista de tiendas -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/store_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="16dp" />
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

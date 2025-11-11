@@ -59,6 +59,9 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/storeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_storeFragment_to_storeMapFragment"
+            app:destination="@id/storeMapFragment" />
     </fragment>
 
     <fragment
@@ -124,6 +127,18 @@
             android:id="@+id/action_editProfileFragment_to_profileFragment"
             app:destination="@id/profileFragment"
             app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/storeMapFragment"
+        android:name="com.elitecouture.app.ui.feature.store.StoreMapFragment"
+        android:label="@string/store_map_title"
+        tools:layout="@layout/fragment_store_map">
+        <action
+            android:id="@+id/action_storeMapFragment_to_storeFragment"
+            app:destination="@id/storeFragment"
+            app:popUpTo="@id/storeFragment"
             app:popUpToInclusive="false" />
     </fragment>
 

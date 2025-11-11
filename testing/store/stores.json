@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "name": "Elite Couture - Centro Andino",
+        "address": "Carrera 11 # 82-71, Centro Comercial Andino, Local 205, Bogotá",
+        "phone": "+57 (1) 555-0101",
+        "hours": "Lun-Sáb: 10:00 AM - 8:00 PM\nDom: 11:00 AM - 7:00 PM",
+        "latitude": 4.6669011,
+        "longitude": -74.0531311
+    },
+    {
+        "id": 2,
+        "name": "Elite Couture - Unicentro",
+        "address": "Avenida 15 # 124-30, Centro Comercial Unicentro, Piso 2, Bogotá",
+        "phone": "+57 (1) 555-0102",
+        "hours": "Lun-Sáb: 10:00 AM - 9:00 PM\nDom: 11:00 AM - 8:00 PM",
+        "latitude": 4.7067989,
+        "longitude": -74.0543708
+    },
+    {
+        "id": 3,
+        "name": "Elite Couture - Santafé",
+        "address": "Calle 185 # 45-03, Centro Comercial Santafé, Local 312, Bogotá",
+        "phone": "+57 (1) 555-0103",
+        "hours": "Lun-Sáb: 10:00 AM - 9:00 PM\nDom: 11:00 AM - 8:00 PM",
+        "latitude": 4.762209,
+        "longitude": -74.0462959
+    },
+    {
+        "id": 4,
+        "name": "Elite Couture - Titán Plaza",
+        "address": "Autopista Sur # 1-60, Centro Comercial Titán Plaza, Local 145, Bogotá",
+        "phone": "+57 (1) 555-0104",
+        "hours": "Lun-Sáb: 9:00 AM - 8:00 PM\nDom: 10:00 AM - 7:00 PM",
+        "latitude": 4.6947939,
+        "longitude": -74.0863841
+    },
+    {
+        "id": 5,
+        "name": "Elite Couture - Centro Mayor",
+        "address": "Calle 38A Sur # 34D-51, Centro Comercial Centro Mayor, Local 1-120, Bogotá",
+        "phone": "+57 (1) 555-0105",
+        "hours": "Lun-Sáb: 10:00 AM - 9:00 PM\nDom: 11:00 AM - 8:00 PM",
+        "latitude": 4.5918678,
+        "longitude": -74.1242838
+    }
+]

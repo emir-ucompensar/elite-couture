@@ -1,5 +1,6 @@
 package com.elitecouture.app.ui.feature.profile
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.elitecouture.app.R
+import com.elitecouture.app.data.service.LocationService
 import com.elitecouture.app.di.ServiceLocator
 import com.elitecouture.app.domain.model.User
 import com.elitecouture.app.ui.common.EliteCoutureDialog
+import com.elitecouture.app.ui.common.extension.showStyledSnackbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -32,6 +35,7 @@ class EditProfileFragment : Fragment() {
     private lateinit var emailInput: TextInputEditText
     private lateinit var addressLayout: TextInputLayout
     private lateinit var addressInput: TextInputEditText
+    private lateinit var locationButton: MaterialButton
     
     // Vistas - Seguridad
     private lateinit var currentPasswordLayout: TextInputLayout
@@ -92,6 +96,7 @@ class EditProfileFragment : Fragment() {
         emailInput = view.findViewById(R.id.edit_profile_email_input)
         addressLayout = view.findViewById(R.id.edit_profile_address_layout)
         addressInput = view.findViewById(R.id.edit_profile_address_input)
+        locationButton = view.findViewById(R.id.edit_profile_location_button)
         
         // Seguridad
         currentPasswordLayout = view.findViewById(R.id.edit_profile_current_password_layout)
@@ -105,6 +110,9 @@ class EditProfileFragment : Fragment() {
         backButton = view.findViewById(R.id.edit_profile_back_button)
         saveButton = view.findViewById(R.id.edit_profile_save_button)
         cancelButton = view.findViewById(R.id.edit_profile_cancel_button)
+        
+        // Configurar listeners de botones
+        setupLocationButtonListener()
     }
     
     private fun loadUserData() {
@@ -147,6 +155,101 @@ class EditProfileFragment : Fragment() {
         hasUnsavedChanges = firstNameChanged || lastNameChanged || 
                            emailChanged || addressChanged || 
                            passwordFieldsFilled
+    }
+    
+    /**
+     * Configurar el listener del botón de geolocalización
+     */
+    private fun setupLocationButtonListener() {
+        locationButton.setOnClickListener {
+            handleLocationButtonClick()
+        }
+    }
+    
+    /**
+     * Maneja el clic en el botón de ubicación
+     */
+    private fun handleLocationButtonClick() {
+        // Verificar si tenemos permisos
+        if (LocationService.checkLocationPermissions(requireContext())) {
+            // Tenemos permisos, obtener ubicación
+            obtainCurrentLocation()
+        } else {
+            // No tenemos permisos, solicitarlos
+            LocationService.requestLocationPermissions(requireActivity())
+        }
+    }
+    
+    /**
+     * Obtiene la ubicación actual y actualiza el campo de dirección
+     */
+    private fun obtainCurrentLocation() {
+        // Deshabilitar botón mientras se obtiene la ubicación
+        locationButton.isEnabled = false
+        
+        // Mostrar mensaje de carga
+        requireView().showStyledSnackbar(getString(R.string.location_obtaining))
+        
+        // Lanzar coroutine para obtener ubicación
+        lifecycleScope.launch {
+            try {
+                // Obtener coordenadas (solo para convertir a dirección)
+                val coordinates = LocationService.getCurrentLocation(requireContext())
+                
+                if (coordinates != null) {
+                    val (latitude, longitude) = coordinates
+                    
+                    // Obtener dirección desde coordenadas (NO guardamos las coordenadas por seguridad)
+                    val address = LocationService.getAddressFromCoordinates(
+                        requireContext(),
+                        latitude,
+                        longitude
+                    )
+                    
+                    if (address != null) {
+                        // Actualizar campo de dirección
+                        addressInput.setText(address)
+                        
+                        // Mostrar mensaje de éxito
+                        requireView().showStyledSnackbar(getString(R.string.location_success))
+                    } else {
+                        // No se pudo obtener la dirección
+                        requireView().showStyledSnackbar(getString(R.string.location_geocoding_error))
+                    }
+                } else {
+                    // No se pudo obtener la ubicación
+                    requireView().showStyledSnackbar(getString(R.string.location_error))
+                }
+            } catch (e: Exception) {
+                // Error al obtener ubicación
+                requireView().showStyledSnackbar(getString(R.string.location_error))
+            } finally {
+                // Rehabilitar botón
+                locationButton.isEnabled = true
+            }
+        }
+    }
+    
+    /**
+     * Callback para el resultado de la solicitud de permisos
+     */
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        
+        if (requestCode == LocationService.getLocationRequestCode()) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permiso concedido, obtener ubicación
+                obtainCurrentLocation()
+            } else {
+                // Permiso denegado
+                requireView().showStyledSnackbar(getString(R.string.location_permission_denied))
+            }
+        }
     }
     
     private fun setupClickListeners() {

@@ -399,6 +399,12 @@ class StoreFragment : Fragment() {
         view?.findViewById<View>(R.id.menu_women_suits)?.setOnClickListener {
             applyFilterToggle(listOf("Mujer", "Conjuntos"), getString(R.string.filter_women_suits))
         }
+        
+        // Opción: Mapa de Tiendas
+        view?.findViewById<View>(R.id.menu_store_map)?.setOnClickListener {
+            drawerLayout.closeDrawers()
+            findNavController().navigate(R.id.action_storeFragment_to_storeMapFragment)
+        }
     }
 
     private fun setupSwipeRefresh() {
