@@ -67,9 +67,9 @@ app/
 - **cart_items:** Carrito de compras
 - **favorites:** Productos favoritos
 
-**[Ver Diagrama ERD completo →](design/DATABASE_SCHEMA.md)**
+**[Ver Diagrama ERD completo →](testing/supabase/DATABASE_SCHEMA.md)**
 
-![ERD](design/database_erd.png)
+![ERD](testing/supabase/database_erd.png)
 
 ## 🛠️ Herramientas de Desarrollo
 
