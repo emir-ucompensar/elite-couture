@@ -237,6 +237,7 @@
     <string name="profile_quick_action_favorites">Mis Favoritos</string>
     <string name="profile_quick_action_purchases">Historial de Compras</string>
     <string name="profile_quick_action_settings">Configuración</string>
+    <string name="profile_quick_action_camera">Abrir cámara</string>
     <string name="profile_save_changes">Guardar cambios</string>
     <string name="profile_logout">Cerrar sesión</string>
     <string name="profile_logout_dialog_title">¿Cerrar sesión?</string>
@@ -333,5 +334,22 @@
     <string name="store_info_hours">Horario:</string>
     <string name="store_center_nearest">Centrar en tienda más cercana</string>
         <string name="store_list_title">Todas nuestras tiendas</string>
+
+    <!-- ============================================ -->
+    <!-- CAMERA PERMISSION -->
+    <!-- ============================================ -->
+    <string name="camera_permission_dialog_title">Permiso de cámara requerido</string>
+    <string name="camera_permission_dialog_message">Para usar esta funcionalidad, concede acceso a la cámara.</string>
+    <string name="action_grant_permission">Conceder</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="camera_permission_denied_message">No se concedió el permiso para la cámara.</string>
+
+    <!-- ============================================ -->
+    <!-- LOCATION PERMISSION -->
+    <!-- ============================================ -->
+    <string name="location_permission_dialog_title">Permiso de ubicación requerido</string>
+    <string name="location_permission_dialog_message">Para usar esta funcionalidad, concede acceso a la ubicación.</string>
+    <string name="location_permission_granted_message">Permiso de ubicación concedido.</string>
+    <string name="location_permission_denied_message">No se concedió el permiso para la ubicación.</string>
 </resources>
 

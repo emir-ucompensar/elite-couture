@@ -40,29 +40,29 @@ object SupabaseUserService {
      * Converts domain model to DTO for Supabase operations.
      */
     private fun User.toDto(password: String? = null): UserDto = UserDto(
-        id = if (id == 0L) null else id,
-        uuid = uuid,
-        email = email,
-        password = password,
-        first_name = firstName,
-        last_name = lastName,
-        address = address,
-        is_guest = isGuest,
-        created_at = createdAt
+    id = if (id == 0L) null else id,
+    uuid = uuid,
+    email = email,
+    password = password,
+    first_name = firstName,
+    last_name = lastName,
+    address = address?.let { com.elitecouture.app.util.CryptoUtil.encrypt(it) },
+    is_guest = isGuest,
+    created_at = createdAt
     )
     
     /**
      * Converts DTO to domain model.
      */
     private fun UserDto.toDomain(): User = User(
-        id = id ?: 0L,
-        uuid = uuid,
-        email = email,
-        firstName = first_name,
-        lastName = last_name,
-        address = address,
-        isGuest = is_guest,
-        createdAt = created_at
+    id = id ?: 0L,
+    uuid = uuid,
+    email = email,
+    firstName = first_name,
+    lastName = last_name,
+    address = address?.let { com.elitecouture.app.util.CryptoUtil.decrypt(it) },
+    isGuest = is_guest,
+    createdAt = created_at
     )
     
     // ======================================================================

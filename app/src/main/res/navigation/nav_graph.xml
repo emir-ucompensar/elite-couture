@@ -119,6 +119,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.elitecouture.app.ui.feature.profile.CameraFragment"
+        android:label="Camera"
+        tools:layout="@layout/fragment_camera" />
+
+    <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.elitecouture.app.ui.feature.profile.EditProfileFragment"
         android:label="@string/edit_profile_section_personal_info"

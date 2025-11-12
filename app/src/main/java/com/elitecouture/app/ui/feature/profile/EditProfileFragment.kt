@@ -1,5 +1,6 @@
 package com.elitecouture.app.ui.feature.profile
 
+import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -176,7 +177,28 @@ class EditProfileFragment : Fragment() {
             obtainCurrentLocation()
         } else {
             // No tenemos permisos, solicitarlos
-            LocationService.requestLocationPermissions(requireActivity())
+            // Si debemos mostrar rationale, usar el diálogo estilizado
+            if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+                EliteCoutureDialog.create(requireContext())
+                    .setTitle(R.string.location_permission_dialog_title)
+                    .setMessage(R.string.location_permission_dialog_message)
+                    .setPositiveButton(R.string.action_grant_permission) {
+                        // Solicitar permisos desde el Fragment para recibir el callback aquí
+                        requestPermissions(
+                            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                            LocationService.getLocationRequestCode()
+                        )
+                    }
+                    .setNegativeButton(R.string.action_cancel)
+                    .setCancelable(true)
+                    .show()
+            } else {
+                // Solicitar permisos desde el Fragment para recibir el callback aquí
+                requestPermissions(
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    LocationService.getLocationRequestCode()
+                )
+            }
         }
     }
     

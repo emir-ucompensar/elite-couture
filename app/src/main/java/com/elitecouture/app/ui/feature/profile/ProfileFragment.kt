@@ -1,6 +1,7 @@
 package com.elitecouture.app.ui.feature.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class ProfileFragment : Fragment() {
     private lateinit var purchaseHistoryButton: MaterialButton
     private lateinit var settingsButton: MaterialButton
     private lateinit var logoutButton: MaterialButton
+    private lateinit var cameraButton: MaterialButton
     private lateinit var bottomNavigation: com.google.android.material.bottomnavigation.BottomNavigationView
 
     override fun onCreateView(
@@ -48,6 +50,7 @@ class ProfileFragment : Fragment() {
         purchaseHistoryButton = view.findViewById(R.id.purchase_history_button)
         settingsButton = view.findViewById(R.id.settings_button)
         logoutButton = view.findViewById(R.id.logout_button)
+        cameraButton = view.findViewById(R.id.camera_button)
         bottomNavigation = view.findViewById(R.id.bottom_navigation)
 
         // Configurar Bottom Navigation
@@ -76,6 +79,15 @@ class ProfileFragment : Fragment() {
 
         logoutButton.setOnClickListener {
             showLogoutConfirmationDialog()
+        }
+
+        cameraButton.setOnClickListener {
+            requestCameraPermission()
+        }
+
+        // Hacer que al tocar la dirección se soliciten permisos de ubicación
+        profileAddress.setOnClickListener {
+            requestLocationPermission()
         }
 
         // Cargar datos del usuario desde la sesión
@@ -169,6 +181,107 @@ class ProfileFragment : Fragment() {
                 else -> false
             }
         }
+    }
+
+    private fun requestCameraPermission() {
+        Log.d(TAG, "requestCameraPermission called")
+        if (shouldShowRequestPermissionRationale(android.Manifest.permission.CAMERA)) {
+            EliteCoutureDialog.create(requireContext())
+                .setTitle(R.string.camera_permission_dialog_title)
+                .setMessage(R.string.camera_permission_dialog_message)
+                .setPositiveButton(R.string.action_grant_permission) {
+                    requestPermissions(arrayOf(android.Manifest.permission.CAMERA), CAMERA_PERMISSION_REQUEST_CODE)
+                }
+                .setNegativeButton(R.string.action_cancel)
+                .setCancelable(true)
+                .show()
+        } else {
+            Log.d(TAG, "Requesting CAMERA permission directly")
+            requestPermissions(arrayOf(android.Manifest.permission.CAMERA), CAMERA_PERMISSION_REQUEST_CODE)
+        }
+    }
+
+    private fun requestLocationPermission() {
+        if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+            EliteCoutureDialog.create(requireContext())
+                .setTitle(R.string.location_permission_dialog_title)
+                .setMessage(R.string.location_permission_dialog_message)
+                .setPositiveButton(R.string.action_grant_permission) {
+                    requestPermissions(
+                        arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                        LOCATION_PERMISSION_REQUEST_CODE
+                    )
+                }
+                .setNegativeButton(R.string.action_cancel)
+                .setCancelable(true)
+                .show()
+        } else {
+            requestPermissions(
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED)) {
+                Log.d(TAG, "CAMERA permission granted")
+                openCamera()
+            } else {
+                requireView().showStyledSnackbar(getString(R.string.camera_permission_denied_message))
+            }
+        } else if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED)) {
+                // Location permission granted
+                requireView().showStyledSnackbar(getString(R.string.location_permission_granted_message))
+            } else {
+                requireView().showStyledSnackbar(getString(R.string.location_permission_denied_message))
+            }
+        }
+    }
+
+    private fun openCamera() {
+        // Primero navegamos al CameraFragment que usa CameraX (fallback interno)
+        try {
+            findNavController().navigate(R.id.cameraFragment)
+            return
+        } catch (e: Exception) {
+            Log.e(TAG, "Navigation to CameraFragment failed", e)
+        }
+
+        // Si la navegación falla, intentamos con la app de cámara externa como fallback
+        val intent = android.content.Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+        // Verificar que exista una Activity que resuelva el intent
+        val resolveInfo = requireActivity().packageManager.resolveActivity(intent, android.content.pm.PackageManager.MATCH_DEFAULT_ONLY)
+        if (resolveInfo == null) {
+            Log.e(TAG, "No activity found to handle camera intent")
+            requireView().showStyledSnackbar("No se encontró una aplicación de cámara en el dispositivo.")
+            return
+        } else {
+            val activityName = resolveInfo.activityInfo?.packageName + "/" + resolveInfo.activityInfo?.name
+            Log.d(TAG, "Camera intent will be handled by: $activityName")
+        }
+
+        try {
+            Log.d(TAG, "Starting external camera intent as fallback")
+            startActivity(intent)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error starting external camera intent", e)
+            // Mostrar feedback al usuario y evitar que la app crashee
+            requireView().showStyledSnackbar("Error al abrir la cámara: ${e.message}")
+        }
+    }
+
+    companion object {
+        private const val CAMERA_PERMISSION_REQUEST_CODE = 1001
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1002
+        private const val TAG = "EliteCoutureCamera"
     }
 
     override fun onResume() {
