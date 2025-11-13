@@ -1,0 +1,40 @@
+type,table_name,column_name,data_type,is_nullable,column_default,referenced_table,referenced_column
+COLUMN,cart_items,id,bigint,NO,nextval('cart_items_id_seq'::regclass),null,null
+COLUMN,cart_items,user_uuid,uuid,NO,null,null,null
+COLUMN,cart_items,product_uuid,uuid,NO,null,null,null
+COLUMN,cart_items,quantity,integer,NO,1,null,null
+COLUMN,cart_items,added_at,bigint,NO,((EXTRACT(epoch FROM now()) * (1000)::numeric))::bigint,null,null
+COLUMN,favorites,id,bigint,NO,nextval('favorites_id_seq'::regclass),null,null
+COLUMN,favorites,user_uuid,uuid,NO,null,null,null
+COLUMN,favorites,product_uuid,uuid,NO,null,null,null
+COLUMN,favorites,created_at,bigint,NO,((EXTRACT(epoch FROM now()) * (1000)::numeric))::bigint,null,null
+COLUMN,products,id,bigint,NO,nextval('products_id_seq'::regclass),null,null
+COLUMN,products,uuid,uuid,NO,gen_random_uuid(),null,null
+COLUMN,products,name,text,NO,null,null,null
+COLUMN,products,type,text,YES,null,null,null
+COLUMN,products,gender,text,YES,null,null,null
+COLUMN,products,description,text,YES,null,null,null
+COLUMN,products,price,double precision,NO,null,null,null
+COLUMN,products,stock,integer,NO,0,null,null
+COLUMN,products,images,ARRAY,NO,'{}'::text[],null,null
+COLUMN,products,tags,ARRAY,NO,'{}'::text[],null,null
+COLUMN,products,is_visible_to_guest,boolean,NO,true,null,null
+COLUMN,products,created_at,bigint,NO,((EXTRACT(epoch FROM now()) * (1000)::numeric))::bigint,null,null
+COLUMN,stores,id,integer,NO,nextval('stores_id_seq'::regclass),null,null
+COLUMN,stores,name,character varying,NO,null,null,null
+COLUMN,stores,address,character varying,NO,null,null,null
+COLUMN,stores,phone,character varying,YES,null,null,null
+COLUMN,stores,hours,character varying,YES,null,null,null
+COLUMN,stores,latitude,double precision,NO,null,null,null
+COLUMN,stores,longitude,double precision,NO,null,null,null
+COLUMN,stores,created_at,timestamp with time zone,YES,now(),null,null
+COLUMN,stores,updated_at,timestamp with time zone,YES,now(),null,null
+COLUMN,users,id,bigint,NO,nextval('users_id_seq'::regclass),null,null
+COLUMN,users,uuid,uuid,NO,gen_random_uuid(),null,null
+COLUMN,users,email,text,NO,null,null,null
+COLUMN,users,password,text,YES,null,null,null
+COLUMN,users,first_name,text,NO,null,null,null
+COLUMN,users,last_name,text,YES,null,null,null
+COLUMN,users,address,text,YES,null,null,null
+COLUMN,users,is_guest,boolean,NO,false,null,null
+COLUMN,users,created_at,bigint,NO,((EXTRACT(epoch FROM now()) * (1000)::numeric))::bigint,null,null

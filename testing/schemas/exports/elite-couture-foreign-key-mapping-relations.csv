@@ -1,0 +1,5 @@
+type,table_name,column_name,data_type,is_nullable,column_default,referenced_table,referenced_column
+FK,cart_items,product_uuid,null,null,null,products,uuid
+FK,cart_items,user_uuid,null,null,null,users,uuid
+FK,favorites,product_uuid,null,null,null,products,uuid
+FK,favorites,user_uuid,null,null,null,users,uuid

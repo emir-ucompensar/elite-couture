@@ -1,0 +1,42 @@
+[
+  {
+    "type": "FK",
+    "table_name": "cart_items",
+    "column_name": "product_uuid",
+    "data_type": null,
+    "is_nullable": null,
+    "column_default": null,
+    "referenced_table": "products",
+    "referenced_column": "uuid"
+  },
+  {
+    "type": "FK",
+    "table_name": "cart_items",
+    "column_name": "user_uuid",
+    "data_type": null,
+    "is_nullable": null,
+    "column_default": null,
+    "referenced_table": "users",
+    "referenced_column": "uuid"
+  },
+  {
+    "type": "FK",
+    "table_name": "favorites",
+    "column_name": "product_uuid",
+    "data_type": null,
+    "is_nullable": null,
+    "column_default": null,
+    "referenced_table": "products",
+    "referenced_column": "uuid"
+  },
+  {
+    "type": "FK",
+    "table_name": "favorites",
+    "column_name": "user_uuid",
+    "data_type": null,
+    "is_nullable": null,
+    "column_default": null,
+    "referenced_table": "users",
+    "referenced_column": "uuid"
+  }
+]

@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 # ======================================================================
 
 # Cargar .env desde la raíz de testing/
-env_path = os.path.join(os.path.dirname(__file__), '..', '.env')
+env_path = os.path.join(os.path.dirname(__file__), '../../', '.env')
 load_dotenv(env_path)
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")

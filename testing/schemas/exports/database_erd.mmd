@@ -1,0 +1,60 @@
+erDiagram
+
+    CART_ITEMS {
+        bigint id "NOT NULL"
+        uuid user_uuid "NOT NULL"
+        uuid product_uuid "NOT NULL"
+        int quantity "NOT NULL"
+        bigint added_at "NOT NULL"
+    }
+
+    FAVORITES {
+        bigint id "NOT NULL"
+        uuid user_uuid "NOT NULL"
+        uuid product_uuid "NOT NULL"
+        bigint created_at "NOT NULL"
+    }
+
+    PRODUCTS {
+        bigint id "NOT NULL"
+        uuid uuid "NOT NULL"
+        string name "NOT NULL"
+        string type
+        string gender
+        string description
+        double precision price "NOT NULL"
+        int stock "NOT NULL"
+        array images "NOT NULL"
+        array tags "NOT NULL"
+        int is_visible_to_guest "NOT NULL"
+        bigint created_at "NOT NULL"
+    }
+
+    STORES {
+        int id "NOT NULL"
+        character varying name "NOT NULL"
+        character varying address "NOT NULL"
+        character varying phone
+        character varying hours
+        double precision latitude "NOT NULL"
+        double precision longitude "NOT NULL"
+        timestamp with time zone created_at
+        timestamp with time zone updated_at
+    }
+
+    USERS {
+        bigint id "NOT NULL"
+        uuid uuid "NOT NULL"
+        string email "NOT NULL"
+        string password
+        string first_name "NOT NULL"
+        string last_name
+        string address
+        int is_guest "NOT NULL"
+        bigint created_at "NOT NULL"
+    }
+
+    PRODUCTS ||--o{ CART_ITEMS : "has"
+    USERS ||--o{ CART_ITEMS : "has"
+    PRODUCTS ||--o{ FAVORITES : "has"
+    USERS ||--o{ FAVORITES : "has"
