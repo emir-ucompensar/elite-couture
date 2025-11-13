@@ -168,4 +168,4 @@ Almacena información de usuarios registrados y usuarios invitados.
 - Las relaciones tienen `ON DELETE CASCADE` para integridad referencial
 
 ---
-*Generado automáticamente con `generate_erd.py`*
+*Generado automáticamente con `generate_erd_diagram.py`*
