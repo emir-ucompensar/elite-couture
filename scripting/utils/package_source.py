@@ -59,6 +59,9 @@ EXCLUDE_DIRS = {
     # Testing outputs
     '.pytest_cache',
     
+    # Excluir .venv correctamente
+    '.venv',
+    
     # Archivos de release
     '*.zip',
     'RELEASE_INSTRUCTIONS.md',
@@ -102,32 +105,39 @@ def should_exclude(path: Path, project_root: Path) -> bool:
     Determina si un archivo o directorio debe ser excluido
     """
     relative_path = str(path.relative_to(project_root))
-    
+
+    # Incluir explícitamente cualquier cosa bajo 'design/'
+    try:
+        if 'design' in path.relative_to(project_root).parts:
+            return False
+    except ValueError:
+        pass
+
     # Verificar si es un directorio excluido
     for part in path.parts:
         if part in EXCLUDE_DIRS:
             return True
-    
+
     # Verificar patrones de exclusión
     for pattern in EXCLUDE_DIRS:
         if pattern.startswith('*'):
             if relative_path.endswith(pattern[1:]):
                 return True
-    
+
     # Si es archivo, verificar extensión
     if path.is_file():
         # Archivos que siempre se incluyen
         if path.name in ALWAYS_INCLUDE:
             return False
-        
+
         # Verificar extensión
         if path.suffix not in INCLUDE_EXTENSIONS and path.suffix != '':
             return True
-        
+
         # Excluir archivos muy grandes (>10MB)
         if path.stat().st_size > 10 * 1024 * 1024:
             return True
-    
+
     return False
 
 def get_directory_size(path: Path) -> int:
@@ -209,12 +219,11 @@ def create_source_package(project_root: Path, output_name: str = None) -> Path:
 def main():
     print_header()
     
-    # Detectar raíz del proyecto
-    script_dir = Path(__file__).parent
-    project_root = script_dir.parent
+    # Detectar raíz del proyecto como el directorio actual desde donde se ejecuta el script
+    project_root = Path.cwd()
     
-    print(f"📂 Proyecto: {project_root}")
-    print(f"📊 Calculando tamaño del proyecto...\n")
+    print(f"Proyecto: {project_root}")
+    print(f"Calculando tamaño del proyecto...\n")
     
     # Crear paquete
     output_path, included, excluded, size = create_source_package(project_root)
@@ -222,12 +231,12 @@ def main():
     # Mostrar estadísticas
     print(f"{Colors.CYAN}{'─' * 60}{Colors.RESET}")
     print(f"{Colors.BOLD}Estadísticas del Empaquetado:{Colors.RESET}\n")
-    print(f"  ✅ Archivos incluidos:  {Colors.GREEN}{included}{Colors.RESET}")
-    print(f"  ❌ Archivos excluidos:  {Colors.YELLOW}{excluded}{Colors.RESET}")
-    print(f"  📦 Tamaño del ZIP:      {Colors.CYAN}{format_size(output_path.stat().st_size)}{Colors.RESET}")
-    print(f"  📊 Tamaño original:     {Colors.MAGENTA}{format_size(size)}{Colors.RESET}")
-    print(f"  💾 Compresión:          {Colors.GREEN}{(1 - output_path.stat().st_size / size) * 100:.1f}%{Colors.RESET}")
-    print(f"\n  📄 Archivo generado:    {Colors.BOLD}{output_path.name}{Colors.RESET}")
+    print(f"Archivos incluidos:  {Colors.GREEN}{included}{Colors.RESET}")
+    print(f"Archivos excluidos:  {Colors.YELLOW}{excluded}{Colors.RESET}")
+    print(f"Tamaño del ZIP:      {Colors.CYAN}{format_size(output_path.stat().st_size)}{Colors.RESET}")
+    print(f"Tamaño original:     {Colors.MAGENTA}{format_size(size)}{Colors.RESET}")
+    print(f"Compresión:          {Colors.GREEN}{(1 - output_path.stat().st_size / size) * 100:.1f}%{Colors.RESET}")
+    print(f"\nArchivo generado:    {Colors.BOLD}{output_path.name}{Colors.RESET}")
     print(f"{Colors.CYAN}{'─' * 60}{Colors.RESET}\n")
     
     # Listar algunos directorios excluidos importantes
@@ -245,7 +254,7 @@ def main():
     
     print(f"\n{Colors.GREEN}¡Código fuente empaquetado exitosamente!{Colors.RESET}")
     print(f"{Colors.CYAN}Ubicación: releases/pending_review/{output_path.name}{Colors.RESET}")
-    print(f"{Colors.CYAN}Listo para compartir o subir a GitHub Releases 🚀{Colors.RESET}\n")
+    print(f"{Colors.CYAN}Listo para compartir o subir a GitHub Releases{Colors.RESET}\n")
 
 if __name__ == "__main__":
     import sys
