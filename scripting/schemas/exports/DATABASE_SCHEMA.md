@@ -61,10 +61,10 @@ erDiagram
         bigint created_at
     }
 
-    CART_ITEMS ||--o| PRODUCTS : product_uuid -> uuid
-    CART_ITEMS ||--o| USERS : user_uuid -> uuid
-    FAVORITES ||--o| PRODUCTS : product_uuid -> uuid
-    FAVORITES ||--o| USERS : user_uuid -> uuid
+    CART_ITEMS ||--o| PRODUCTS : contains
+    CART_ITEMS ||--o| USERS : belongs_to
+    FAVORITES ||--o| PRODUCTS : marks
+    FAVORITES ||--o| USERS : belongs_to
 ```
 
 ## Descripción de Tablas
