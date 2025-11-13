@@ -70,8 +70,8 @@ app/
 
 ## 🛠️ Herramientas de Desarrollo
 
-### Scripts Python (testing/)
-- `generate_erd.py` - Genera diagrama ERD automáticamente
+### Scripts Python (scripting/)
+- `export_erd_from_md.py` - Genera diagrama ERD automáticamente
 - `export_erd_to_png.py` - Exporta ERD a imagen PNG
 - `copy_product_images_v1.py` - Procesa imágenes de productos
 - `test_favorites.py` - Monitorea logs en tiempo real
