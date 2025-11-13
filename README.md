@@ -37,12 +37,9 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 - **Catálogo:** 25 productos con imágenes, filtrado por categorías y tags
 - **Sistema de Tags:** Etiquetas visuales para clasificación de productos
 - **Menú Lateral:** Navegación por categorías (Hombre/Mujer)
-- **Base de Datos:** SQLite con 4 tablas relacionadas ([Ver ERD](scripting/schemas/exports/DATABASE_SCHEMA.md))
-
-### 🔄 Próximamente
-- Historial de pedidos
-- Búsqueda de productos
-- Sistema de reseñas
+- **Base de Datos:** PostgreSQL con 5 tablas relacionadas ([Ver ERD](scripting/schemas/exports/DATABASE_SCHEMA.md))
+- **Sistema de ubicación completo:** Permite conocer las tiendas más cercanas o fijar tu ubicación para elegir tu dirección.
+- **Uso de cámara** Permite activar la cámara del dispositivo y capturar imagenes.
 
 ---
 
