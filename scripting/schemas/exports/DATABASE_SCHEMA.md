@@ -8,63 +8,63 @@ Este documento fue generado automáticamente a partir de los datos en Supabase.
 erDiagram
 
     CART_ITEMS {
-        bigint id "NOT NULL"
-        uuid user_uuid "NOT NULL"
-        uuid product_uuid "NOT NULL"
-        int quantity "NOT NULL"
-        bigint added_at "NOT NULL"
+        bigint id
+        uuid user_uuid
+        uuid product_uuid
+        int quantity
+        bigint added_at
     }
 
     FAVORITES {
-        bigint id "NOT NULL"
-        uuid user_uuid "NOT NULL"
-        uuid product_uuid "NOT NULL"
-        bigint created_at "NOT NULL"
+        bigint id
+        uuid user_uuid
+        uuid product_uuid
+        bigint created_at
     }
 
     PRODUCTS {
-        bigint id "NOT NULL"
-        uuid uuid "NOT NULL"
-        string name "NOT NULL"
+        bigint id
+        uuid uuid
+        string name
         string type
         string gender
         string description
-        double precision price "NOT NULL"
-        int stock "NOT NULL"
-        array images "NOT NULL"
-        array tags "NOT NULL"
-        int is_visible_to_guest "NOT NULL"
-        bigint created_at "NOT NULL"
+        double_precision price
+        int stock
+        array images
+        array tags
+        boolean is_visible_to_guest
+        bigint created_at
     }
 
     STORES {
-        int id "NOT NULL"
-        character varying name "NOT NULL"
-        character varying address "NOT NULL"
-        character varying phone
-        character varying hours
-        double precision latitude "NOT NULL"
-        double precision longitude "NOT NULL"
-        timestamp with time zone created_at
-        timestamp with time zone updated_at
+        int id
+        character_varying name
+        character_varying address
+        character_varying phone
+        character_varying hours
+        double_precision latitude
+        double_precision longitude
+        timestamp_with_time_zone created_at
+        timestamp_with_time_zone updated_at
     }
 
     USERS {
-        bigint id "NOT NULL"
-        uuid uuid "NOT NULL"
-        string email "NOT NULL"
+        bigint id
+        uuid uuid
+        string email
         string password
-        string first_name "NOT NULL"
+        string first_name
         string last_name
         string address
-        int is_guest "NOT NULL"
-        bigint created_at "NOT NULL"
+        boolean is_guest
+        bigint created_at
     }
 
-    PRODUCTS ||--o{ CART_ITEMS : "has"
-    USERS ||--o{ CART_ITEMS : "has"
-    PRODUCTS ||--o{ FAVORITES : "has"
-    USERS ||--o{ FAVORITES : "has"
+    CART_ITEMS ||--o| PRODUCTS : product_uuid -> uuid
+    CART_ITEMS ||--o| USERS : user_uuid -> uuid
+    FAVORITES ||--o| PRODUCTS : product_uuid -> uuid
+    FAVORITES ||--o| USERS : user_uuid -> uuid
 ```
 
 ## Descripción de Tablas
