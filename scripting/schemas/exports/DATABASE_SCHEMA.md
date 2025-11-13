@@ -8,6 +8,7 @@ Este documento fue generado automáticamente a partir de los datos en Supabase.
 erDiagram
 
     CART_ITEMS {
+<<<<<<< HEAD
         bigint id "NOT NULL"
         uuid user_uuid "NOT NULL"
         uuid product_uuid "NOT NULL"
@@ -65,6 +66,66 @@ erDiagram
     USERS ||--o{ CART_ITEMS : "has"
     PRODUCTS ||--o{ FAVORITES : "has"
     USERS ||--o{ FAVORITES : "has"
+=======
+        bigint id_NOT_NULL
+        uuid user_uuid_NOT_NULL
+        uuid product_uuid_NOT_NULL
+        int quantity_NOT_NULL
+        bigint added_at_NOT_NULL
+    }
+
+    FAVORITES {
+        bigint id_NOT_NULL
+        uuid user_uuid_NOT_NULL
+        uuid product_uuid_NOT_NULL
+        bigint created_at_NOT_NULL
+    }
+
+    PRODUCTS {
+        bigint id_NOT_NULL
+        uuid uuid_NOT_NULL
+        string name_NOT_NULL
+        string type_NULLABLE
+        string gender_NULLABLE
+        string description_NULLABLE
+        double price_NOT_NULL
+        int stock_NOT_NULL
+        string[] images_NOT_NULL
+        string[] tags_NOT_NULL
+        int is_visible_to_guest_NOT_NULL
+        bigint created_at_NOT_NULL
+    }
+
+    STORES {
+        int id_NOT_NULL
+        string name_NOT_NULL
+        string address_NOT_NULL
+        string phone_NULLABLE
+        string hours_NULLABLE
+        double latitude_NOT_NULL
+        double longitude_NOT_NULL
+        timestamp created_at_NULLABLE
+        timestamp updated_at_NULLABLE
+    }
+
+    USERS {
+        bigint id_NOT_NULL
+        uuid uuid_NOT_NULL
+        string email_NOT_NULL
+        string password_NULLABLE
+        string first_name_NOT_NULL
+        string last_name_NULLABLE
+        string address_NULLABLE
+        int is_guest_NOT_NULL
+        bigint created_at_NOT_NULL
+    }
+
+    CART_ITEMS ||--o| PRODUCTS : contains
+    CART_ITEMS ||--o| USERS    : belongs_to
+    FAVORITES  ||--o| PRODUCTS : marks
+    FAVORITES  ||--o| USERS    : belongs_to
+
+>>>>>>> 92c459ed09b13885dbcd80726ede72b35bebf183
 ```
 
 ## Descripción de Tablas
@@ -167,4 +228,4 @@ Almacena información de usuarios registrados y usuarios invitados.
 - Las relaciones tienen `ON DELETE CASCADE` para integridad referencial
 
 ---
-*Generado automáticamente con `generate_erd.py`*
+*Generado automáticamente con `generate_erd_diagram.py`*
