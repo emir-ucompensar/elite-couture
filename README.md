@@ -37,7 +37,7 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 - **Catálogo:** 25 productos con imágenes, filtrado por categorías y tags
 - **Sistema de Tags:** Etiquetas visuales para clasificación de productos
 - **Menú Lateral:** Navegación por categorías (Hombre/Mujer)
-- **Base de Datos:** SQLite con 4 tablas relacionadas ([Ver ERD](design/DATABASE_SCHEMA.md))
+- **Base de Datos:** SQLite con 4 tablas relacionadas ([Ver ERD](scripting/schemas/exports/DATABASE_SCHEMA.md))
 
 ### 🔄 Próximamente
 - Historial de pedidos
@@ -67,9 +67,9 @@ app/
 - **cart_items:** Carrito de compras
 - **favorites:** Productos favoritos
 
-**[Ver Diagrama ERD completo →](testing/supabase/DATABASE_SCHEMA.md)**
+**[Ver Diagrama ERD completo →](scripting/schemas/exports/DATABASE_SCHEMA.md)**
 
-![ERD](testing/supabase/database_erd.png)
+![ERD](scripting/schemas/exports/database_erd_from_md.png)
 
 ## 🛠️ Herramientas de Desarrollo
 
@@ -82,7 +82,7 @@ app/
 - `helper.py` - Info del dispositivo y comandos útiles
 
 **Requisitos:** Python 3.7+ y ADB instalado  
-**[Ver documentación completa →](testing/README.md)**
+**[Ver documentación completa →](scripting/README.md)**
 
 ---
 
