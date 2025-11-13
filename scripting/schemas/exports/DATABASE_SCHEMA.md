@@ -26,37 +26,37 @@ erDiagram
         bigint id_NOT_NULL
         uuid uuid_NOT_NULL
         string name_NOT_NULL
-        string type
-        string gender
-        string description
-        double_precision price_NOT_NULL
+        string type_NULLABLE
+        string gender_NULLABLE
+        string description_NULLABLE
+        double price_NOT_NULL
         int stock_NOT_NULL
-        array images_NOT_NULL
-        array tags_NOT_NULL
-        boolean is_visible_to_guest_NOT_NULL
+        string[] images_NOT_NULL
+        string[] tags_NOT_NULL
+        int is_visible_to_guest_NOT_NULL
         bigint created_at_NOT_NULL
     }
 
     STORES {
         int id_NOT_NULL
-        character_varying name_NOT_NULL
-        character_varying address_NOT_NULL
-        character_varying phone
-        character_varying hours
-        double_precision latitude_NOT_NULL
-        double_precision longitude_NOT_NULL
-        timestamp_with_time_zone created_at
-        timestamp_with_time_zone updated_at
+        string name_NOT_NULL
+        string address_NOT_NULL
+        string phone_NULLABLE
+        string hours_NULLABLE
+        double latitude_NOT_NULL
+        double longitude_NOT_NULL
+        timestamp created_at_NULLABLE
+        timestamp updated_at_NULLABLE
     }
 
     USERS {
         bigint id_NOT_NULL
         uuid uuid_NOT_NULL
         string email_NOT_NULL
-        string password
+        string password_NULLABLE
         string first_name_NOT_NULL
-        string last_name
-        string address
+        string last_name_NULLABLE
+        string address_NULLABLE
         int is_guest_NOT_NULL
         bigint created_at_NOT_NULL
     }
@@ -65,6 +65,7 @@ erDiagram
     CART_ITEMS ||--o| USERS    : belongs_to
     FAVORITES  ||--o| PRODUCTS : marks
     FAVORITES  ||--o| USERS    : belongs_to
+
 ```
 
 ## Descripción de Tablas
