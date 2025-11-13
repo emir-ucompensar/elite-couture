@@ -57,12 +57,13 @@ app/
 
 **Patrones aplicados:** Repository, Use Case, Service Locator, MVVM ligero
 
-### 📊 Base de Datos (v7)
+### 📊 Base de Datos (v8)
 
 - **users:** Autenticación y perfiles
 - **products:** Catálogo con tags e imágenes
 - **cart_items:** Carrito de compras
 - **favorites:** Productos favoritos
+- **store:** Tiendas fisicas disponibles
 
 **[Ver Diagrama ERD completo →](scripting/schemas/exports/DATABASE_SCHEMA.md)**
 
