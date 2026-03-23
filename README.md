@@ -1,108 +1,106 @@
-# Elite Couture 👔
+# Elite Couture
 
-Aplicación Android de e-commerce de moda desarrollada con Kotlin. Proyecto académico que implementa autenticación, catálogo de productos, carrito de compras, favoritos y sistema de filtrado por categorías.
+An Android e-commerce app for fashion, built with Kotlin. Academic project implementing authentication, product catalog, shopping cart, favorites, and category filtering.
 
-## 🚀 Stack Tecnológico
+---
 
-- **Lenguaje:** Kotlin
-- **Build:** Gradle 9.1.0
-- **SDK:** Android 10+ (API 29-34)
-- **IDE:** Visual Studio Code
-- **Base de Datos:** SQLite
-- **UI:** Material Design 3 + Coil 2.5.0
+## Tech Stack
 
-## 📦 Instalación
+| Area | Technology |
+|---|---|
+| Language | Kotlin |
+| Build | Gradle 9.1.0 |
+| SDK | Android 10+ (API 29–34) |
+| IDE | Visual Studio Code |
+| Database | SQLite |
+| UI | Material Design 3 + Coil 2.5.0 |
+
+---
+
+## Installation
 
 ```bash
-# Clonar repositorio
+# Clone the repository
 git clone https://github.com/emir-ucompensar/elite-couture.git
 cd elite-couture
 
-# Compilar APK
+# Build APK
 gradle assembleDebug
 
-# Instalar en dispositivo/emulador
+# Install on device/emulator
 adb install app/build/outputs/apk/debug/app-debug.apk
 ```
 
----
-
-## ✨ Funcionalidades
-
-### ✅ Implementadas
-- **Autenticación:** Login, registro y modo invitado
-- **Perfil de Usuario:** Edición con validación y cifrado AES-256
-- **Carrito de Compras:** Añadir/eliminar items, modificar cantidades
-- **Favoritos:** Swipe-to-delete con opción de deshacer
-- **Catálogo:** 25 productos con imágenes, filtrado por categorías y tags
-- **Sistema de Tags:** Etiquetas visuales para clasificación de productos
-- **Menú Lateral:** Navegación por categorías (Hombre/Mujer)
-- **Base de Datos:** PostgreSQL con 5 tablas relacionadas ([Ver ERD](scripting/schemas/exports/DATABASE_SCHEMA.md))
-- **Sistema de ubicación completo:** Permite conocer las tiendas más cercanas o fijar tu ubicación para elegir tu dirección.
-- **Uso de cámara** Permite activar la cámara del dispositivo y capturar imagenes.
+> **Requirements:** Python 3.7+ and ADB installed.
 
 ---
 
-## 🏗️ Arquitectura
+## Features
+
+- **Authentication:** Login, registration, and guest mode
+- **User Profile:** Editable profile with validation and AES-256 encryption
+- **Shopping Cart:** Add/remove items, adjust quantities
+- **Favorites:** Swipe-to-delete with undo option
+- **Catalog:** 25 products with images, filterable by category and tags
+- **Tag System:** Visual labels for product classification
+- **Side Menu:** Navigation by category (Men / Women)
+- **Database:** SQLite with 5 related tables ([View ERD](scripting/schemas/exports/DATABASE_SCHEMA.md))
+- **Location System:** Find nearby stores or set a delivery address
+- **Camera Support:** Capture images directly from the device camera
+
+---
+
+## Architecture
 
 ```
 app/
-├── data/              # Capa de datos (DAOs, entidades, repositorios)
-├── domain/            # Lógica de negocio (modelos, casos de uso)
-├── ui/                # Interfaz de usuario (fragments, adapters)
-│   ├── common/        # Componentes compartidos
-│   └── feature/       # Módulos por funcionalidad
-└── util/              # Utilidades y helpers
+├── data/              # Data layer (DAOs, entities, repositories)
+├── domain/            # Business logic (models, use cases)
+├── ui/                # User interface (fragments, adapters)
+│   ├── common/        # Shared components
+│   └── feature/       # Feature modules
+└── util/              # Utilities and helpers
 ```
 
-**Patrones aplicados:** Repository, Use Case, Service Locator, MVVM ligero
+**Patterns used:** Repository, Use Case, Service Locator, lightweight MVVM
 
-### 📊 Base de Datos (v8)
+### Database (v8)
 
-- **users:** Autenticación y perfiles
-- **products:** Catálogo con tags e imágenes
-- **cart_items:** Carrito de compras
-- **favorites:** Productos favoritos
-- **store:** Tiendas fisicas disponibles
+- **users** — Authentication and profiles
+- **products** — Catalog with tags and images
+- **cart_items** — Shopping cart
+- **favorites** — Saved products
+- **store** — Physical store locations
 
-**[Ver Diagrama ERD completo →](scripting/schemas/exports/DATABASE_SCHEMA.md)**
+[View full ERD diagram](scripting/schemas/exports/DATABASE_SCHEMA.md)
 
 ![ERD](scripting/schemas/exports/database_erd_from_md.png)
 
-## 🛠️ Herramientas de Desarrollo
+---
 
-### Scripts Python (scripting/)
-- `export_erd_from_md.py` - Genera diagrama ERD automáticamente
-- `export_erd_to_png.py` - Exporta ERD a imagen PNG
-- `copy_product_images_v1.py` - Procesa imágenes de productos
-- `test_favorites.py` - Monitorea logs en tiempo real
-- `check_favorites_db.py` - Consulta base de datos
-- `helper.py` - Info del dispositivo y comandos útiles
+## Dev Scripts (scripting/)
 
-**Requisitos:** Python 3.7+ y ADB instalado  
-**[Ver documentación completa →](scripting/README.md)**
+| Script | Description |
+|---|---|
+| `export_erd_from_md.py` | Auto-generates the ERD diagram |
+| `export_erd_to_png.py` | Exports ERD to PNG |
+| `copy_product_images_v1.py` | Processes product images |
+| `test_favorites.py` | Real-time log monitor |
+| `check_favorites_db.py` | Database query tool |
+| `helper.py` | Device info and useful commands |
+
+[View full scripting docs](scripting/README.md)
 
 ---
 
-## 💡 Decisiones de Diseño
+## Design Decisions
 
-**¿Por qué VS Code en lugar de Android Studio?**
-- Comprender la mecánica del sistema de build de Gradle
-- Desarrollo por línea de comandos sin dependencia del IDE
-- Mayor control sobre la configuración del proyecto
+**Why VS Code instead of Android Studio?**
 
----
-
-## 📝 Licencia
-
-MIT License - Proyecto académico libre para uso educativo
-
-## 👨‍💻 Autor
-
-**Emir** - UCompensar
+To better understand Gradle's build system mechanics, develop through the command line without IDE dependency, and maintain full control over project configuration.
 
 ---
 
-<div align="center">
-  <strong>Elite Couture</strong> - Desarrollo Android Moderno 🚀
-</div>
+## License
+
+MIT License — Academic project, free for educational use.
